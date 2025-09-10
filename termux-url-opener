@@ -1,0 +1,316 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# Project name : Fam-Hacker-Pit-Kit
+# Coded by: tthatgguy1 (You dont become a coder by just changing the credits
+# Github: https://github.com/tthatgguy1/Fam-Hacker-Pit-Kit
+# Date : 12/04/2024
+# Updated 09/09/2025
+URL="$1"
+
+                 # <───── Directory Escapes ─────> #
+NFS_HOME="$HOME/storage/shared/Fam-Hacker-Pit-Kit" # ${NFS_HOME}
+YT_VIDEO_PIT="$HOME/storage/shared/Fam-Hacker-Pit-Kit/YouTube-Video-Pit" # ${YT_VIDEO_PIT}
+YT_AUDIO_PIT="$HOME/storage/shared/Fam-Hacker-Pit-Kit/YouTube-Audio-Pit" # ${YT_AUDIO_PIT}
+YouTube_Work="$HOME/downloads" # ${YouTube_Work}
+
+                 # <───── Sound Effect Escsapes ─────> #
+TXS="/.NFS-Data/sfx/TXS.mp3"        # ${TXS}
+MSTART="/.NFS-Data/sfx/MDLD.mp3"    # ${MSTART}
+CMP="/.NFS-Data/sfx/c.mp3"          # ${CMP}
+MDATA="/.NFS-Data/sfx/MDATA.mp3"    # ${MDATA}
+FHS="/.NFS-Data/sfx/FHS.mp3"        # ${FHS}
+YTSU="/.NFS-Data/sfx/YTSU.mp3"      # ${YTSU}
+TB="/.NFS-Data/sfx/TB.mp3"          # ${TB}
+MFGTA="/.NFS-Data/sfx/MFGTA.mp3"    # ${MFGTA}
+SKL="/.NFS-Data/sfx/SKL.mp3"        # ${SKL}
+MUSIC_SLAVE="mpv"                   # ${MUSIC_SLAVE}
+
+                   # <───── Color Setup ─────> #
+ESC=$'\e'
+GRN="${ESC}[38;2;51;255;0m"       # ${GRN}   $GRN  - Lime Green
+PNK="${ESC}[38;2;255;16;240m"     # ${PNK}   $PNK  - Bright Magenta
+BLU="${ESC}[38;2;0;102;255m"      # ${BLU}   $BLU  - Medium Blue
+BONG="${ESC}[38;2;255;140;0m"     # ${BONG}  $BONG - Pumpkin Orange
+NONG="${ESC}[38;2;255;95;0m"      # ${NONG}  $NONG - Neon Orange
+
+BCYN="${ESC}[38;2;0;255;255m"     # ${BCYN}  $BCYN - Cyan
+ACID="${ESC}[38;2;204;255;0m"     # ${ACID}  $ACID - Acid Green
+VBLU="${ESC}[38;2;138;43;226m"    # ${VBLU}  $VBLU - Violet Blue
+NPPL="${ESC}[38;2;188;19;254m"    # ${NPPL}  $NPPL - Neon Purple
+BWHT="${ESC}[38;2;255;255;255m"   # ${BWHT}  #BWHT - Bright White
+RESET="${ESC}[0m"                 # ${RESET} $RESET
+
+		    # <───── Redirect Termux ─────> #
+cd $YouTube_Work
+		     # <───── Intro Banner ─────> #
+echo " "
+toilet -k -o -f smslant -F metal "Fam-Hacker"
+echo " "
+  cowsay -r "Welcome To Fam-Hacker Tube Client, Written By Nah-Fam_Studios (Seth J. Nelson). This Script Will Download Any Shared YouTube URL to Termux." | lolcat
+    "${MUSIC_SLAVE}" "${NFS_HOME}/${SKL}" >/dev/null 2>&1
+    "${MUSIC_SLAVE}" "${NFS_HOME}/${YTSU}" >/dev/null 2>&1 # 57
+sleep 2.0
+    "${MUSIC_SLAVE}" "${NFS_HOME}/${MDATA}" >/dev/null 2>&1
+
+		    # <───── Channel Strings ─────> #
+DELIM=$'\x1f'
+FMT=$'%(title)s\x1f%(uploader)s\x1f%(channel_follower_count)s\x1f%(like_count)s\x1f%(upload_date)s'
+IFS=$DELIM read -r TITLE CHANNEL SUBS LIKES UPLOAD_DATE < <(
+  yt-dlp -q --no-warnings --print "$FMT" "$URL"
+)
+	       # <───── Upload Date Format To US Engish ─────> #
+if [[ "$UPLOAD_DATE" =~ ^[0-9]{8}$ ]]; then
+  UPLOAD_DATE_FMT="${BCYN}${UPLOAD_DATE:4:2}${RESET}${PNK}-${RESET}${BCYN}${UPLOAD_DATE:6:2}${RESET}${PNK}-${RESET}${BCYN}${UPLOAD_DATE:0:4}${RESET}"
+else
+  UPLOAD_DATE_FMT="${UPLOAD_DATE}"
+fi
+
+                    # <───── Download Options ─────> #
+OPTION_VIDEO="${VBLU}Download${RESET} \
+${VBLU}Video${RESET} \
+${VBLU}In the${RESET} \
+${BCYN}Best${RESET} \
+${VBLU}Quality For Video${RESET} \
+${ACID}+${RESET} \
+${VBLU}Audio${RESET}"
+
+OPTION_AUDIO="${VBLU}Extract${RESET} \
+${ACID}&${RESET} \
+${VBLU}Download${RESET} \
+${BCYN}Audio${RESET} \
+${VBLU}Only${RESET} \
+${VBLU}MP3${RESET}"
+
+OPTION_1080="${VBLU}Download Video In${RESET} \
+${PNK}1080p${RESET} \
+${BCYN}+${RESET} \
+${PNK}Best${RESET} \
+${VBLU}Audio${RESET}"
+
+OPTION_QUIT="${ACID}Quit${RESET}"
+
+                 # <───── Download Options Comand ─────> #
+OPT_VIDEO_CMD=(
+  yt-dlp
+   -f "bestvideo+bestaudio"
+   -o "${YouTube_Work}/%(uploader)s - %(title)s.mkv"
+	--progress --quiet
+	--console-title --no-warnings
+	--merge-output-format mkv
+	--embed-thumbnail --embed-chapters
+	--embed-subs --no-check-formats
+	--progress-template "download: ${PNK}DL${BCYN}:%(progress._percent_str)s ${PNK}ETA${BCYN}: %(progress._eta_str)s ${PNK}Speed${BCYN}:%(progress._speed_str)s"
+	  "$URL")
+
+OPT_AUDIO_CMD=(
+  yt-dlp
+   -x --audio-format mp3
+   -f "bestaudio"
+   -o "${YouTube_Work}/%(uploader)s - %(title)s.mp3"
+	--progress --quiet
+	--console-title --no-warnings
+	--no-check-formats
+	--progress-template "download: ${PNK}DL${BCYN}:%(progress._percent_str)s ${PNK}ETA${BCYN}: %(progress._eta_str)s ${PNK}Speed${BCYN}:%(progress._speed_str)s"
+	  "$URL")
+
+OPT_1080_CMD=(
+  yt-dlp
+    -f "bestvideo[height<=1080]+bestaudio/best[height<=1080]"
+    -o "${YouTube_Work}/%(uploader)s - %(title)s.mkv"
+	--progress --quiet
+	--console-title --no-warnings
+	--no-check-formats
+	--progress-template "download: ${PNK}DL${BCYN}:%(progress._percent_str)s ${PNK}ETA${BCYN}: %(progress._eta_str)s ${PNK}Speed${BCYN}:%(progress._speed_str)s"
+  "$URL")
+
+	         # <───── Default Option With Timeout ─────> #
+DEFAULT="4"
+
+		       # <───── Decision Time ─────> #
+  clear
+    echo " "
+    toilet -k -o -f smslant -F gay "Download Options For"
+    cowsay -f stan "${TITLE}" | lolcat
+      echo " "
+      echo " "
+      echo " "
+      printf " ${VBLU}├──────────────────────────────────────────────┤\n${RESET}"
+      printf " ${ACID}[${VBLU}1${ACID}] %s\n" "$OPTION_VIDEO"
+      printf " ${ACID}[${VBLU}2${ACID}] %s\n" "$OPTION_AUDIO"
+      printf " ${ACID}[${VBLU}3${ACID}] %s\n" "$OPTION_1080"
+      printf " ${ACID}[${VBLU}4${ACID}] %s\n" "$OPTION_QUIT"
+      printf " ${ACID}[${VBLU}E${ACID}] ${VBLU}Press ${BWHT}[${NONG}Enter${BWHT}] ${VBLU}For Default Option ${BWHT}[${NONG}%d${BWHT}]${RESET}\n" "$DEFAULT"
+      echo " "
+      echo " "
+      printf "${BCYN}┌──${PNK}Please${BCYN}─${PNK}Press${BCYN}─${PNK}Any${BCYN}─${PNK}Button${BCYN}──┐${RESET}\n${BCYN}└─${PNK}>${PNK}: "
+      read -n1 -r -t120 DECISION
+    clear
+    echo " "
+  DECISION=${DECISION:-$DEFAULT}
+  rc=2
+  case "${DECISION}" in
+	      # <───── Choice Number 1) Best Video and Audio ─────> #
+    1)
+      date +"%l:%M:%S %p" | lolcat -a
+      "${MUSIC_SLAVE}" "${NFS_HOME}/${MSTART}" >/dev/null 2>&1
+        echo " "
+       cowsay -r "${TITLE}" | lolcat
+        echo " "
+        printf    "${VBLU}┌───────────────────────────────────────────────┐\n${RESET}"
+        printf    "${VBLU}├────────────👽─${PNK}[${BCYN}Nah${VBLU}─${BCYN}Fam${VBLU}─${BCYN}Studios${PNK}]${VBLU}─👽────────────${VBLU}┤\n${RESET}"
+        printf    "${VBLU}├───────────────────────────────────────────────┤\n${RESET}"
+        printf    "${VBLU}│  ${BCYN}──${PNK}> 📺    ${PNK}Chl${BCYN}:  	${PNK}[${BCYN}$CHANNEL${PNK}]${RESET}\n"
+        printf    "${VBLU}│  ${BCYN}─-${PNK}> 🙋    ${PNK}Sbs${BCYN}:  	${PNK}[${BCYN}$SUBS${PNK}]${RESET}\n"
+        printf    "${VBLU}│  ${BCYN}──${PNK}> 👍    ${PNK}Lks${BCYN}:  	${PNK}[${BCYN}$LIKES${PNK}]${RESET}\n"
+        printf    "${VBLU}│  ${BCYN}──${PNK}> 📆    ${PNK}Upd${BCYN}:  	${PNK}[${BCYN}$UPLOAD_DATE_FMT${RESET}${PNK}]${RESET}\n"
+        printf    "${VBLU}└───────────────────────────────────────────────┘${RESET}"
+        echo " "
+        echo " "
+        printf "       ${BCYN}┌───────────────────────────────┐\n"
+        printf " ${BCYN}──────┤  ${PNK}Running${ACID}: ${VBLU}Best Video${PNK}+${VBLU}Audio${BCYN}    ├───────${RESET}\n"
+        printf "       ${BCYN}└───────────────────────────────┘\n"
+	sleep 2.0
+                    # <───── Actual YT-DLP Command ─────> #
+	"${OPT_VIDEO_CMD[@]}";
+       rc=$?
+                  # <───── Fail Safe Download Status ─────> #
+    if [ $rc -eq 0 ]; then
+      "${MUSIC_SLAVE}" "${NFS_HOME}/${CMP}" >/dev/null 2>&1
+       "${MUSIC_SLAVE}" "${NFS_HOME}/${FHS}" >/dev/null 2>&1
+      cowsay -r "Your MKV File Has Downloaded Successfully!" | lolcat
+	sleep 4.0
+       "${MUSIC_SLAVE}" "${NFS_HOME}/${TXS}" >/dev/null 2>&1
+	clear
+    else
+      "${MUSIC_SLAVE}" "${NFS_HOME}/${MFGTA}" >/dev/null 2>&1
+      cowsay -r "Your Video Download Has Failed, Please Try Again." | lolcat
+      printf "${BCYN}┌──${PNK}Please${BCYN}─${PNK}Press${BCYN}─${PNK}Any${BCYN}─${PNK}Button${BCYN}──┐${RESET}\n${BCYN}└─${PNK}>${PNK}: "
+	read -n1 -r
+	clear
+    fi
+                # <───── Fail Safe File Transfer Status ─────> #
+newf=$(ls -t -- *.mkv 2>/dev/null | head -n1)
+if [ -n "$newf" ]; then
+  mv -- "$newf" "$YT_VIDEO_PIT" >/dev/null 2>&1
+    cowsay -f cube "Your MKV File Has Been Transferred To YT_VIDEO_PIT, Successfully!" | lolcat
+     "${MUSIC_SLAVE}" "${NFS_HOME}/${FHS}" >/dev/null 2>&1
+    sleep 1.0
+    printf "${BCYN}┌──${PNK}Please${BCYN}─${PNK}Press${BCYN}─${PNK}Any${BCYN}─${PNK}Button${BCYN}──┐${RESET}\n${BCYN}└─${PNK}>${PNK}: "
+  read -n1 -r
+else
+     "${MUSIC_SLAVE}" "${NFS_HOME}/${MFGTA}" >/dev/null 2>&1
+    printf "Your MKV File Has Failed To Transfer.\n"
+   printf "${BCYN}┌──${PNK}Please${BCYN}─${PNK}Press${BCYN}─${PNK}Any${BCYN}─${PNK}Button${BCYN}──┐${RESET}\n${BCYN}└─${PNK}>${PNK}: "
+  read -n1 -r
+fi
+;;
+  2)
+              # <───── Choice Number 2) Best Audio .mp3 ─────> #
+   date +"%l:%M:%S %p" | lolcat -a
+   echo " "
+   cowsay -r "${TITLE}" | lolcat
+      echo " "
+      printf    "${VBLU}┌───────────────────────────────────────────────┐\n${RESET}"
+      printf    "${VBLU}├────────────👽─${PNK}[${BCYN}Nah${VBLU}─${BCYN}Fam${VBLU}─${BCYN}Studios${PNK}]${VBLU}─👽────────────${VBLU}┤\n${RESET}"
+      printf    "${VBLU}├───────────────────────────────────────────────┤\n${RESET}"
+      printf    "${VBLU}│  ${BCYN}──${PNK}> 📺    ${PNK}Chl${BCYN}:  	${PNK}[${BCYN}${CHANNEL}${PNK}]${RESET}\n"
+      printf    "${VBLU}│  ${BCYN}─-${PNK}> 🙋    ${PNK}Sbs${BCYN}:  	${PNK}[${BCYN}${SUBS}${PNK}]${RESET}\n"
+      printf    "${VBLU}│  ${BCYN}──${PNK}> 👍    ${PNK}Lks${BCYN}:  	${PNK}[${BCYN}${LIKES}${PNK}]${RESET}\n"
+      printf    "${VBLU}│  ${BCYN}──${PNK}> 📆    ${PNK}Upd${BCYN}:  	${PNK}[${BCYN}${UPLOAD_DATE_FMT}${RESET}${PNK}]${RESET}\n"
+      printf    "${VBLU}└───────────────────────────────────────────────┘${RESET}"
+      echo " "
+      echo " "
+      printf "       ${BCYN}┌───────────────────────────┐\n"
+      printf " ${BCYN}──────┤  ${PNK}Running${ACID}: ${VBLU}Best Audio${BCYN}    ├───────${RESET}\n"
+      printf "       ${BCYN}└───────────────────────────┘\n"
+      sleep 2.0
+    "${OPT_AUDIO_CMD[@]}";
+    rc=$?
+                 # <───── Fail Safe Audio Download Status ─────> #
+    if [ $rc -eq 0 ]; then
+      cowsay -r "Your MP3 File Has Downloaded Successfully!" | lolcat
+      sleep 5.0
+    else
+      printf "${BCYN}┌──${PNK}Please${BCYN}─${PNK}Press${BCYN}─${PNK}Any${BCYN}─${PNK}Button${BCYN}──┐${RESET}\n ${BCYN}└─${PNK}>${PNK}: "
+      read -n1 -r
+    fi
+ clear
+              # <───── Fail Safe Audio File Transfer Status ─────> #
+newf=$(ls -t -- *.mp3 2>/dev/null | head -n1)
+ if [ -n "$newf" ]; then
+  mv -- "$newf" "$YT_AUDIO_PIT" >/dev/null 2>&1
+  cowsay -f cube "Your MP3 File Has Been Transferred To YT_AUDIO_PIT, Successfully!" | lolcat
+  "${MUSIC_SLAVE}" "${NFS_HOME}/${FHS}" >/dev/null 2>&1
+  printf "${VBLU}┌──${ACID}Please${VBLU}─${ACID}Press${VBLU}─${ACID}Any${RESET}"
+  read -n1 -r
+ else
+  "${MUSIC_SLAVE}" "${NFS_HOME}/${MFGTA}" >/dev/null 2>&1
+  printf "Your MP3 File Has Failed To Transfer.\n"
+  printf "${VBLU}┌──${ACID}Please${VBLU}─${ACID}Press${VBLU}─${ACID}Any${RESET}"
+  read -n1 -r
+ fi
+;;
+            # <───── Choice Number 3) 1080p Video and Audio ─────> #
+    3)
+      date +"%l:%M:%S %p" | lolcat -a
+      "${MUSIC_SLAVE}" "${NFS_HOME}/${MSTART}" >/dev/null 2>&1
+        echo " "
+       cowsay -r "${TITLE}" | lolcat
+        echo " "
+        printf    "${VBLU}┌───────────────────────────────────────────────┐\n${RESET}"
+        printf    "${VBLU}├────────────👽─${PNK}[${BCYN}Nah${VBLU}─${BCYN}Fam${VBLU}─${BCYN}Studios${PNK}]${VBLU}─👽────────────${VBLU}┤\n${RESET}"
+        printf    "${VBLU}├───────────────────────────────────────────────┤\n${RESET}"
+        printf    "${VBLU}│  ${BCYN}──${PNK}> 📺    ${PNK}Chl${BCYN}:  	${PNK}[${BCYN}$CHANNEL${PNK}]${RESET}\n"
+        printf    "${VBLU}│  ${BCYN}─-${PNK}> 🙋    ${PNK}Sbs${BCYN}:  	${PNK}[${BCYN}$SUBS${PNK}]${RESET}\n"
+        printf    "${VBLU}│  ${BCYN}──${PNK}> 👍    ${PNK}Lks${BCYN}:  	${PNK}[${BCYN}$LIKES${PNK}]${RESET}\n"
+        printf    "${VBLU}│  ${BCYN}──${PNK}> 📆    ${PNK}Upd${BCYN}:  	${PNK}[${BCYN}$UPLOAD_DATE_FMT${RESET}${PNK}]${RESET}\n"
+        printf    "${VBLU}└───────────────────────────────────────────────┘${RESET}"
+        echo " "
+        echo " "
+        printf "       ${BCYN}┌───────────────────────────────┐\n"
+        printf " ${BCYN}──────┤  ${PNK}Running${ACID}: ${VBLU}1080p Video${PNK}+${VBLU}Audio${BCYN}   ├───────${RESET}\n"
+        printf "       ${BCYN}└───────────────────────────────┘\n"
+	sleep 2.0
+                    # <───── Actual YT-DLP Command ─────> #
+	"${OPT_1080_CMD[@]}";
+       rc=$?
+                  # <───── Fail Safe Download Status ─────> #
+    if [ $rc -eq 0 ]; then
+      "${MUSIC_SLAVE}" "${NFS_HOME}/${CMP}" >/dev/null 2>&1
+       "${MUSIC_SLAVE}" "${NFS_HOME}/${FHS}" >/dev/null 2>&1
+      cowsay -r "Your MKV File Has Downloaded Successfully!" | lolcat
+	sleep 4.0
+       "${MUSIC_SLAVE}" "${NFS_HOME}/${TXS}" >/dev/null 2>&1
+	clear
+    else
+      "${MUSIC_SLAVE}" "${NFS_HOME}/${MFGTA}" >/dev/null 2>&1
+      cowsay -r "Your Video Download Has Failed, Please Try Again." | lolcat
+      printf "${BCYN}┌──${PNK}Please${BCYN}─${PNK}Press${BCYN}─${PNK}Any${BCYN}─${PNK}Button${BCYN}──┐${RESET}\n${BCYN}└─${PNK}>${PNK}: "
+	read -n1 -r
+	clear
+    fi
+                # <───── Fail Safe File Transfer Status ─────> #
+newf=$(ls -t -- *.mkv 2>/dev/null | head -n1)
+if [ -n "$newf" ]; then
+  mv -- "$newf" "$YT_VIDEO_PIT" >/dev/null 2>&1
+    cowsay -f cube "Your MKV File Has Been Transferred To YT_VIDEO_PIT, Successfully!" | lolcat
+     "${MUSIC_SLAVE}" "${NFS_HOME}/${FHS}" >/dev/null 2>&1
+    sleep 1.0
+    printf "${BCYN}┌──${PNK}Please${BCYN}─${PNK}Press${BCYN}─${PNK}Any${BCYN}─${PNK}Button${BCYN}──┐${RESET}\n${BCYN}└─${PNK}>${PNK}: "
+  read -n1 -r
+else
+     "${MUSIC_SLAVE}" "${NFS_HOME}/${MFGTA}" >/dev/null 2>&1
+    printf "Your MKV File Has Failed To Transfer.\n"
+   printf "${BCYN}┌──${PNK}Please${BCYN}─${PNK}Press${BCYN}─${PNK}Any${BCYN}─${PNK}Button${BCYN}──┐${RESET}\n${BCYN}└─${PNK}>${PNK}: "
+  read -n1 -r
+fi
+;;
+  4)
+   rc=2
+     exit
+;;
+  *)
+    rc=2
+      printf "${BCYN}┌──${PNK}Please${BCYN}─${PNK}Press${BCYN}─${PNK}Any${BCYN}─${PNK}Button${BCYN}──┐${RESET}\n ${BCYN}└─${PNK}>${PNK}: "
+      read -n1 -r
+;;
+esac
