@@ -1,0 +1,540 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# Project Name: Fam-Hacker-Pit-Kit
+# Coded by: tthatgguy1 (You dont become a coder by just changing the credits
+# Github: https://github.com/tthatgguy1/Fam-Hacker-Pit-Kit
+# Date : 12/04/2024
+# Updated 09/12/2025
+
+URL="$1"
+
+ESC=$'\e'
+NGRN="${ESC}[38;2;51;255;0m"      # ${NGRN}  $NGRN - Lime Green
+BMGT="${ESC}[38;2;255;16;240m"    # ${BMGT}  $BMGT - Bright Magenta
+NONG="${ESC}[38;2;255;95;0m"      # ${NONG}  $NONG - Neon Orange
+BCYN="${ESC}[38;2;0;255;255m"     # ${BCYN}  $BCYN - Cyan
+ACID="${ESC}[38;2;204;255;0m"     # ${ACID}  $ACID - Acid Green
+VBLU="${ESC}[38;2;138;43;226m"    # ${VBLU}  $VBLU - Violet Blue
+MMDB="${ESC}[38;2;25;25;112m"     # ${MMDB}  $MMDB - Midnight Blue
+NPPL="${ESC}[38;2;188;19;254m"    # ${NPPL}  $NPPL - Neon Purple
+BWHT="${ESC}[38;2;255;255;255m"   # ${BWHT}  #BWHT - Bright White
+RESET="${ESC}[0m"                 # ${RESET} $RESET
+
+YT_WRK="$HOME/downloads" 	                                        # ${YT_WRK}
+NFS_HOME="$HOME/storage/shared/Fam-Hacker-Pit-Kit"                # ${NFS_HOME}
+VPIT="$HOME/storage/shared/Fam-Hacker-Pit-Kit/YouTube-Video-Pit"  # ${VPIT}
+APIT="$HOME/storage/shared/Fam-Hacker-Pit-Kit/YouTube-Audio-Pit"  # ${APIT}
+
+TXS="/.NFS-Data/sfx/TXS.mp3"        # ${TXS}
+MSTART="/.NFS-Data/sfx/MDLD.mp3"    # ${MSTART}
+CMP="/.NFS-Data/sfx/c.mp3"          # ${CMP}
+MDATA="/.NFS-Data/sfx/MDATA.mp3"    # ${MDATA}
+FHS="/.NFS-Data/sfx/FHS.mp3"        # ${FHS}
+MFGTA="/.NFS-Data/sfx/MFGTA.mp3"    # ${MFGTA}
+SKL="/.NFS-Data/sfx/SKL.mp3"        # ${SKL}
+
+cd downloads
+printf "\n\n\n"
+
+mpv $NFS_HOME/$SKL >/dev/null 2>&1
+mpv $NFS_HOME/$MDATA >/dev/null 2>&1
+DELIM=$'\x1f'
+FMT=$'%(playlist_title)s\x1f%(title)s\x1f%(uploader)s\x1f%(channel_follower_count)s\x1f%(like_count)s\x1f%(upload_date)s\x1f%(width)s\x1f%(height)s'
+IFS=$DELIM read -r PTITLE TITLE CHANNEL SUBS LIKES UPLOAD_DATE QLTYW QLTYH < <(
+    yt-dlp -q --no-warnings --print "${FMT}" "${URL}"
+)
+if [[ "$UPLOAD_DATE" =~ ^[0-9]{8}$ ]]; then
+  UPLOAD_DATE_FMT="${UPLOAD_DATE:4:2}-${UPLOAD_DATE:6:2}-${UPLOAD_DATE:0:4}"
+else
+  UPLOAD_DATE_FMT="${UPLOAD_DATE}"
+fi
+
+OPTION_MP3LST="${VBLU}Download An Entire${RESET} \
+${BCYN}MP3${RESET} \
+${VBLU}Playlist${RESET}"
+
+OPTION_BMKV="${VBLU}Download${RESET} \
+${BCYN}Video${RESET} \
+${VBLU}In The${RESET} \
+${BCYN}Highest${RESET} \
+${VBLU}Resolution${RESET}\
+${BMGT},${RESET} \
+${VBLU}And${RESET} \
+${BCYN}Best Audio${RESET} \
+${VBLU}Available${RESET}"
+
+OPTION_TWOK="${VBLU}Download${RESET} \
+${BCYN}Video${RESET} \
+${VBLU}In${RESET} \
+${BCYN}1440p${RESET}\
+${BMGT}+${RESET}\
+${BCYN}Best${RESET} \
+${VBLU}Audio${RESET}"
+
+OPTION_FULL="${VBLU}Download${RESET} \
+${BCYN}Video${RESET} \
+${VBLU}In${RESET} \
+${BCYN}1080p${RESET}\
+${BMGT}+${RESET}\
+${BCYN}Best${RESET} \
+${VBLU}Audio${RESET}"
+
+OPTION_B3="${VBLU}Download An${RESET} \
+${BCYN}MP3${RESET} \
+${VBLU}File${RESET}"
+
+OPT_PLMP3_CMD=(
+  yt-dlp
+    -x --audio-format mp3
+    -f bestaudio
+    -o "%(playlist_title,replace=\"/\",\"﹨\")s/%(title)s - %(uploader)s.%(ext)s"
+    --yes-playlist
+    --ignore-errors
+    --no-warnings
+    --progress
+    --quiet
+    --progress-template "download: ${VBLU}DL${BCYN}:%(progress._percent_str)s ${BMGT}ETA${BCYN}:%(progress._eta_str)s ${VBLU}Speed${BCYN}:%(progress._speed_str)s"
+    "$URL"
+)
+
+OPT_BMKV_CMD=(
+  yt-dlp
+    -f "bestvideo+bestaudio"
+    -o "%(uploader)s - %(title)s [%(height)sp]{Best-Resolution+Audio}.mkv"
+    --progress
+    --quiet
+    --no-playlist
+    --console-title
+    --no-check-formats
+    --no-warnings
+    --ignore-errors
+    --write-subs
+    --embed-thumbnail
+    --embed-chapters
+    --embed-subs
+    --sub-format srt
+    --convert-subs srt
+    --merge-output-format mkv
+    --progress-template "download: ${VBLU}DL${BCYN}:%(progress._percent_str)s ${BMGT}ETA${BCYN}:%(progress._eta_str)s ${VBLU}Speed${BCYN}:%(progress._speed_str)s"
+    "$URL"
+)
+
+OPT_TWOK_CMD=(
+  yt-dlp
+    -f "bestvideo[height<=2560]+bestaudio/best[height<=2560]"
+    -o "a%(title)s - %(uploader)s [%(height)sp].mkv"
+    --embed-subs
+    --no-warnings --ignore-errors
+    --progress --quiet
+    --write-subs --no-playlist
+    --console-title --no-check-formats
+    --embed-thumbnail --embed-chapters
+    --merge-output-format mkv
+    --progress-template "download: ${VBLU}DL${BCYN}:%(progress._percent_str)s ${BMGT}ETA${BCYN}:%(progress._eta_str)s ${VBLU}Speed${BCYN}:%(progress._speed_str)s"
+    "$URL"
+)
+
+OPT_MKFUL_CMD=(
+  yt-dlp
+    -f "bestvideo[height<=1080]+bestaudio/best[height<=1080]"
+    -o "%(uploader)s - %(title)s [%(height)sp].mkv"
+    --progress
+    --no-playlist
+    --quiet
+    --no-warnings
+    --ignore-errors
+    --write-subs
+    --console-title
+    --no-check-formats
+    --embed-thumbnail
+    --embed-chapters
+    --embed-subs
+    --sub-format srt
+    --convert-subs srt
+    --merge-output-format mkv
+    --progress-template "download: ${VBLU}DL${BCYN}:%(progress._percent_str)s ${BMGT}ETA${BCYN}:%(progress._eta_str)s ${VBLU}Speed${BCYN}:%(progress._speed_str)s"
+    "$URL"
+)
+
+OPT_BMP3_CMD=(
+  yt-dlp
+    -x --audio-format mp3
+    -f "bestaudio"
+    -o "%(uploader)s - %(title)s.mp3"
+    --quiet
+    --progress
+    --ignore-errors
+    --console-title
+    --no-warnings
+    --no-check-formats
+    --progress-template "download: ${VBLU}DL${BCYN}:%(progress._percent_str)s ${BMGT}ETA${BCYN}:%(progress._eta_str)s ${VBLU}Speed${BCYN}:%(progress._speed_str)s"
+    "$URL"
+)
+
+DEFAULT="2"
+clear
+sleep 1.0
+printf "\n\n\n"
+printf "   ${VBLU}┌───────────────────────────────────────────────────────────┐\n"
+printf "   ${VBLU}│ ${BCYN}[${BMGT}1${BCYN}] %s	${VBLU}│\n" "$OPTION_MP3LST"
+printf "   ${VBLU}├───────────────────────────────────────────────────────────┤\n"
+printf "   ${VBLU}│ ${BCYN}[${BMGT}2${BCYN}] %s	${VBLU}│\n" "$OPTION_BMKV"
+printf "   ${VBLU}├───────────────────────────────────────────────────────────┤\n"
+printf "   ${VBLU}│ ${BCYN}[${BMGT}3${BCYN}] %s	${VBLU}│\n" "$OPTION_TWOK"
+printf "   ${VBLU}├───────────────────────────────────────────────────────────┤\n"
+printf "   ${VBLU}│ ${BCYN}[${BMGT}4${BCYN}] %s	${VBLU}│\n" "$OPTION_FULL"
+printf "   ${VBLU}├───────────────────────────────────────────────────────────┤\n"
+printf "   ${VBLU}│ ${BCYN}[${BMGT}5${BCYN}] %s	${VBLU}│\n" "$OPTION_B3"
+printf "   ${VBLU}├───────────────────────────────────────────────────────────┤\n"
+printf "   ${VBLU}│ ${BWHT}[${NONG}E${BWHT}] ${MMDB}Press ${BWHT}[${NONG}Enter${BWHT}] ${MMDB}For ${BMGT}Default ${MMDB}Option [%d] ${VBLU}│\n" "$DEFAULT"
+printf "   ${VBLU}└───────────────────────────────────────────────────────────┘\n\n\n"
+
+printf "   ${VBLU}┌──${BCYN}Press${VBLU}─${ACID}Any${VBLU}─${BCYN}Button${VBLU}─${BCYN}To${VBLU}─${BCYN}Move${VBLU}─${BCYN}On${VBLU}──┐\n"
+printf "   ${VBLU}└──${BMGT}>${ACID}:"
+read -r -t 100 DECISION
+clear
+
+DECISION=${DECISION:-$DEFAULT}
+rc=2
+case "${DECISION}" in
+1)
+echo '
+   ─███████╗╔█████╗─███╗───███╗─██╗──██╗╔█████╗─╔██████╗██╗──██╗██████╗─
+   ─██╔════╝██╔══██╗████╗─████║─██║──██║██╔══██╗██╔════╝██║─██╔╝██╔══██╗
+   ─█████╗──███████║██╔████╔██║─███████║███████║██║─────█████╔╝─██████╔╝
+   ─██╔══╝──██╔══██║██║╚██╔╝██║─██╔══██║██╔══██║██║─────██╔═██╗─██╔══██╗
+   ─██║─────██║──██║██║─╚═╝─██║─██║──██║██║──██║╚██████╗██║──██╗██║──██║
+   ─╚═╝─────╚═╝──╚═╝╚═╝─────╚═╝─╚═╝──╚═╝╚═╝──╚═╝─╚═════╝╚═╝──╚═╝╚═╝──╚═╝
+   ──────────╔██████╗██╗─────██╗███████╗███╗───██╗████████╗─────────────
+   ──────────██╔════╝██║─────██║██╔════╝████╗──██║╚══██╔══╝─────────────
+   ──────────██║─────██║─────██║█████╗──██╔██╗─██║───██║────────────────
+   ──────────██║─────██║─────██║██╔══╝──██║╚██╗██║───██║────────────────
+   ──────────╚██████╗███████╗██║███████╗██║─╚████║───██║────────────────
+   ───────────╚═════╝╚══════╝╚═╝╚══════╝╚═╝──╚═══╝───╚═╝────────────────
+   ------------------------[Nah-Fam_Studios]----------------------------' | lolcat --seed 88
+printf "\n\n\n"
+printf "     ┌───────────────────────────────────────────────────────────────┐\n"
+printf "     ├─────────────────────👽─[Nah─Fam─Studios]─👽──────────────────┤\n"
+printf "     ├───────────────────────────────────────────────────────────────┘\n"
+printf "     │  ────>  📜   Ply: [%s]\n" "$PTITLE"
+printf "     │  ────>  📺   Chl: [%s]\n" "$CHANNEL"
+printf "     │  ────>  🙋   Sbs: [%s]\n" "$SUBS"
+printf "     │  ────>  👍   Lks: [%s]\n" "$LIKES"
+printf "     │  ────>  📆   Upd: [%s]\n" "$UPLOAD_DATE_FMT"
+printf "     └───────────────────────────────────────────────────────────────┘\n\n\n"
+printf "                      ┌────────────────────────────┐\n"
+printf "       <──────────────┤ [Running]:> Playlist Audio ├──────────────>\n"
+printf "                      └────────────────────────────┘\n"
+sleep 1.0
+"${OPT_PLMP3_CMD[@]}"
+rc=$?
+  if [ "$rc" -eq 0 ]; then
+    mpv "${NFS_HOME}${CMP}" >/dev/null 2>&1
+    mpv "${NFS_HOME}${FHS}" >/dev/null 2>&1
+    cowsay -r "Your MP3 Playlist Has Downloaded Successfully!"
+    sleep 1.0
+    mpv "${NFS_HOME}${TXS}" >/dev/null 2>&1
+    clear
+  else
+    mpv "${NFS_HOME}${MFGTA}" >/dev/null 2>&1
+    printf "Your Audio Playlist Extract Has Failed Please Try Again\n"
+    printf "\n"
+    printf "┌──Press─Any─Button─To─Move─On──┐\n"
+    printf "└──>"
+    read -r -n1 -t 10
+    clear
+  fi
+newdi=$(ls -td -- */ 2>/dev/null | head -n1)
+  if [ -n "$newdi" ]; then
+    mv -- "$newdi" "$APIT" >/dev/null 2>&1
+    cowsay -r "Your MP3 Playlist Has Been Transferred To Audio_PIT Successfully"
+    mpv "${NFS_HOME}${FHS}" >/dev/null 2>&1
+    sleep 1.0
+    printf "\n"
+    printf "┌──Press─Any─Button─To─Move─On──┐\n"
+    printf "└──>"
+    read -r -n1 -t 4
+  else
+    mpv "${NFS_HOME}${MFGTA}" >/dev/null 2>&1
+    printf "Your MP3 Playlist Has Failed To Transfer\n"
+    printf "\n"
+    printf "┌──Press─Any─Button─To─Move─On──┐\n"
+    printf "└──>"
+    read -r -n1 -t 10
+  fi
+  ;;
+2)
+  mpv "${NFS_HOME}/${MSTART}" >/dev/null 2>&1
+echo '
+   ─███████╗╔█████╗─███╗───███╗─██╗──██╗╔█████╗─╔██████╗██╗──██╗██████╗─
+   ─██╔════╝██╔══██╗████╗─████║─██║──██║██╔══██╗██╔════╝██║─██╔╝██╔══██╗
+   ─█████╗──███████║██╔████╔██║─███████║███████║██║─────█████╔╝─██████╔╝
+   ─██╔══╝──██╔══██║██║╚██╔╝██║─██╔══██║██╔══██║██║─────██╔═██╗─██╔══██╗
+   ─██║─────██║──██║██║─╚═╝─██║─██║──██║██║──██║╚██████╗██║──██╗██║──██║
+   ─╚═╝─────╚═╝──╚═╝╚═╝─────╚═╝─╚═╝──╚═╝╚═╝──╚═╝─╚═════╝╚═╝──╚═╝╚═╝──╚═╝
+   ──────────╔██████╗██╗─────██╗███████╗███╗───██╗████████╗─────────────
+   ──────────██╔════╝██║─────██║██╔════╝████╗──██║╚══██╔══╝─────────────
+   ──────────██║─────██║─────██║█████╗──██╔██╗─██║───██║────────────────
+   ──────────██║─────██║─────██║██╔══╝──██║╚██╗██║───██║────────────────
+   ──────────╚██████╗███████╗██║███████╗██║─╚████║───██║────────────────
+   ───────────╚═════╝╚══════╝╚═╝╚══════╝╚═╝──╚═══╝───╚═╝────────────────
+   ------------------------[Nah-Fam_Studios]----------------------------' | lolcat --seed=78
+printf "\n\n\n"
+printf "   ┌───────────────────────────────────────────────────────────────┐\n"
+printf "   ├─────────────────────👽─[Nah─Fam─Studios]─👽──────────────────┤\n"
+printf "   ├───────────────────────────────────────────────────────────────┘\n"
+printf "   │  ───>  📺   Chl:    [%s]\n"     "$CHANNEL"
+printf "   │  ───>  🙋   Sbs:    [%s]\n"     "$SUBS"
+printf "   │  ───>  👍   Lks:    [%s]\n"     "$LIKES"
+printf "   │  ───>  📹   Res:    [%sx%s]\n"  "$QLTYW" "$QLTYH"
+printf "   │  ───>  📆   Upd:    [%s]\n"     "$UPLOAD_DATE_FMT"
+printf "   └───────────────────────────────────────────────────────────────┘\n\n\n"
+printf "           ┌──────────────────────────────────────────────┐\n"
+printf "     <─────┤ [Running]:≡≡> Highest Quality Video Download ├───────>\n"
+printf "           └──────────────────────────────────────────────┘\n\n\n"
+sleep 1.0
+"${OPT_BMKV_CMD[@]}"
+rc=$?
+  if [ "$rc" -eq 0 ]; then
+    mpv "${NFS_HOME}/${CMP}"  >/dev/null 2>&1
+    mpv "${NFS_HOME}/${FHS}"  >/dev/null 2>&1
+    cowsay -r "Your MKV File Has Downloaded Successfully"
+    sleep 1.0
+    mpv "${NFS_HOME}/${TXS}"  >/dev/null 2>&1
+    printf "┌──Press─Any─Button─To─Move─On──┐\n"
+    printf "└──>"
+    read -r -n1 -t 10
+    clear
+  else
+    mpv "${NFS_HOME}/${MFGTA}" >/dev/null 2>&1
+    clear
+  fi
+newfox=$(ls -t -- *.mkv 2>/dev/null | head -n1)
+  if [ -n "$newfox" ]; then
+    mv -- "$newfox" "$VPIT" >/dev/null 2>&1
+    cowsay -r "Your MKV File Has Been Transferred To VPIT Successfully"
+    mpv "${NFS_HOME}/${FHS}" >/dev/null 2>&1
+    sleep 1.0
+    printf "┌──Press─Any─Button─To─Move─On──┐\n"
+    printf "└──>"
+    read -r -n1 -t 4
+    clear
+  else
+    mpv "${NFS_HOME}/${MFGTA}" >/dev/null 2>&1
+    printf "Your MKV File Has Failed To Transfer\n\n"
+    printf "┌──Press─Any─Button─To─Move─On──┐\n"
+    printf "└──>"
+    read -r -n1 -t 10
+    clear
+  fi
+  ;;
+3)
+mpv "${NFS_HOME}/${MSTART}" >/dev/null 2>&1
+echo '
+   ─███████╗╔█████╗─███╗───███╗─██╗──██╗╔█████╗─╔██████╗██╗──██╗██████╗─
+   ─██╔════╝██╔══██╗████╗─████║─██║──██║██╔══██╗██╔════╝██║─██╔╝██╔══██╗
+   ─█████╗──███████║██╔████╔██║─███████║███████║██║─────█████╔╝─██████╔╝
+   ─██╔══╝──██╔══██║██║╚██╔╝██║─██╔══██║██╔══██║██║─────██╔═██╗─██╔══██╗
+   ─██║─────██║──██║██║─╚═╝─██║─██║──██║██║──██║╚██████╗██║──██╗██║──██║
+   ─╚═╝─────╚═╝──╚═╝╚═╝─────╚═╝─╚═╝──╚═╝╚═╝──╚═╝─╚═════╝╚═╝──╚═╝╚═╝──╚═╝
+   ──────────╔██████╗██╗─────██╗███████╗███╗───██╗████████╗─────────────
+   ──────────██╔════╝██║─────██║██╔════╝████╗──██║╚══██╔══╝─────────────
+   ──────────██║─────██║─────██║█████╗──██╔██╗─██║───██║────────────────
+   ──────────██║─────██║─────██║██╔══╝──██║╚██╗██║───██║────────────────
+   ──────────╚██████╗███████╗██║███████╗██║─╚████║───██║────────────────
+   ───────────╚═════╝╚══════╝╚═╝╚══════╝╚═╝──╚═══╝───╚═╝────────────────
+   ------------------------[Nah-Fam_Studios]----------------------------' | lolcat
+    printf "\n\n\n" 
+    printf "   ┌───────────────────────────────────────────────────────────────┐\n"
+    printf "   ├─────────────────────👽─[Nah─Fam─Studios]─👽──────────────────┤\n"
+    printf "   ├───────────────────────────────────────────────────────────────┘\n"
+    printf "   │  ───>  📺   Chl:    [%s]\n"     "$CHANNEL"
+    printf "   │  ───>  🙋   Sbs:    [%s]\n"     "$SUBS"
+    printf "   │  ───>  👍   Lks:    [%s]\n"     "$LIKES"
+    printf "   │  ───>  📹   Res:    [%sx%s]\n"  "$QLTYW" "$QLTYH"
+    printf "   │  ───>  📆   Upd:    [%s]\n"     "$UPLOAD_DATE_FMT"
+    printf "   └───────────────────────────────────────────────────────────────┘\n\n\n"
+    printf "             ┌───────────────────────────────────────┐\n"
+    printf "      <──────┤ [Running]: 2K Video Resolution To MKV ├────────>\n"
+    printf "             └───────────────────────────────────────┘\n\n\n"
+sleep 2.0
+"${OPT_TWOK_CMD[@]}"
+rc=$?
+  if [ "$rc" -eq 0 ]; then
+    mpv "${NFS_HOME}/${CMP}" >/dev/null 2>&1
+    mpv "${NFS_HOME}/${FHS}" >/dev/null 2>&1
+    cowsay -r "Your MKV File Has Downloaded Successfully!"
+    sleep 1.0
+    mpv "${NFS_HOME}/${TXS}" >/dev/null 2>&1
+    clear
+  else
+    mpv "${NFS_HOME}/${MFGTA}" >/dev/null 2>&1
+    printf "Your Video Download Has Failed To Download.\nPlease Try Again At A Different Time.\n"
+    printf "\n"
+    printf "┌──Press─Any─Button─To─Move─On──┐\n"
+    printf "└──>"
+    read -r -n1 -t 10
+    clear
+  fi
+newfart=$(ls -t -- *.mkv 2>/dev/null | head -n1)
+  if [ -n "$newfart" ]; then
+    mv -- "$newfart" "$VPIT" >/dev/null 2>&1
+    cowsay -r "Your MKV File Has Been Transferred To VPIT, Successfully!"
+    mpv "${NFS_HOME}/${FHS}" >/dev/null 2>&1
+    printf "\n"
+    printf "┌──Press─Any─Button─To─Move─On──┐\n"
+    printf "└──>"
+    read -r -n1 -t 4
+    clear
+  else
+    mpv "${NFS_HOME}/${MFGTA}" >/dev/null 2>&1
+    printf "Your MKV File Has Failed To Transfer\n"
+    printf "\n"
+    printf "┌──Press─Any─Button─To─Move─On──┐\n"
+    printf "└──>"
+    read -r -n1 -t 10
+    clear
+  fi
+  ;;
+4)
+mpv "${NFS_HOME}/${MSTART}" >/dev/null 2>&1
+echo '
+  ─███████╗╔█████╗─███╗───███╗─██╗──██╗╔█████╗─╔██████╗██╗──██╗██████╗─
+  ─██╔════╝██╔══██╗████╗─████║─██║──██║██╔══██╗██╔════╝██║─██╔╝██╔══██╗
+  ─█████╗──███████║██╔████╔██║─███████║███████║██║─────█████╔╝─██████╔╝
+  ─██╔══╝──██╔══██║██║╚██╔╝██║─██╔══██║██╔══██║██║─────██╔═██╗─██╔══██╗
+  ─██║─────██║──██║██║─╚═╝─██║─██║──██║██║──██║╚██████╗██║──██╗██║──██║
+  ─╚═╝─────╚═╝──╚═╝╚═╝─────╚═╝─╚═╝──╚═╝╚═╝──╚═╝─╚═════╝╚═╝──╚═╝╚═╝──╚═╝
+  ──────────╔██████╗██╗─────██╗███████╗███╗───██╗████████╗─────────────
+  ──────────██╔════╝██║─────██║██╔════╝████╗──██║╚══██╔══╝─────────────
+  ──────────██║─────██║─────██║█████╗──██╔██╗─██║───██║────────────────
+  ──────────██║─────██║─────██║██╔══╝──██║╚██╗██║───██║────────────────
+  ──────────╚██████╗███████╗██║███████╗██║─╚████║───██║────────────────
+  ───────────╚═════╝╚══════╝╚═╝╚══════╝╚═╝──╚═══╝───╚═╝────────────────
+  ------------------------[Nah-Fam_Studios]----------------------------' | lolcat
+printf "\n\n\n"
+printf "   ┌───────────────────────────────────────────────────────────────┐\n"
+printf "   ├─────────────────────👽─[Nah─Fam─Studios]─👽──────────────────┤\n"
+printf "   ├───────────────────────────────────────────────────────────────┘\n"
+printf "   │  ───>  📺   Chl:    [%s]\n"     "$CHANNEL"
+printf "   │  ───>  🙋   Sbs:    [%s]\n"     "$SUBS"
+printf "   │  ───>  👍   Lks:    [%s]\n"     "$LIKES"
+printf "   │  ───>  📹   Res:    [%sx%s]\n"  "$QLTYW" "$QLTYH"
+printf "   │  ───>  📆   Upd:    [%s]\n"     "$UPLOAD_DATE_FMT"
+printf "   └───────────────────────────────────────────────────────────────┘\n\n\n"
+printf "                  ┌──────────────────────────────┐\n"
+printf "     <────────────┤ [Running]: 1080p Video+Audio ├─────────────>\n"
+printf "                  └──────────────────────────────┘\n\n\n"
+sleep 1.0
+"${OPT_MKFUL_CMD[@]}"
+rc=$?
+  if [ "$rc" -eq 0 ]; then
+    mpv "${NFS_HOME}/${CMP}"  >/dev/null 2>&1
+    mpv "${NFS_HOME}/${FHS}"  >/dev/null 2>&1
+    cowsay -r "Your MKV File Has Downloaded Successfully"
+    sleep 1.0
+    mpv "${NFS_HOME}/${TXS}"  >/dev/null 2>&1
+    clear
+  else
+    mpv "${NFS_HOME}/${MFGTA}" >/dev/null 2>&1
+    printf "Your Video Download Has Failed\nPlease Try Again Sometime In The Far\nFar Future So I Am Not Here For It\n"
+    printf "\n"
+    printf "┌──Press─Any─Button─To─Move─On──┐\n"
+    printf "└──>"
+    read -r -n1 -t 10
+    clear
+  fi
+new_faggot_mid=$(ls -t -- *.mkv 2>/dev/null | head -n1)
+  if [ -n "$new_faggot_mid" ]; then
+    mv -- "$new_faggot_mid" "$VPIT" >/dev/null 2>&1
+    cowsay -r "Your MKV File Has Been Transferred To Video_PIT Successfully"
+    mpv "${NFS_HOME}/${FHS}" >/dev/null 2>&1
+    sleep 1.0
+    printf "\n"
+    printf "┌──Press─Any─Button─To─Move─On──┐\n"
+    printf "└──>"
+    read -r -n1 -t 4
+    clear
+  else
+    mpv "${NFS_HOME}/${MFGTA}" >/dev/null 2>&1
+    printf "Your MKV File Has Failed To Transfer\n"
+    printf "\n"
+    printf "┌──Press─Any─Button─To─Move─On──┐\n"
+    printf "└──>"
+    read -r -n1 -t 10
+    clear
+  fi
+  ;;
+5)
+echo '
+   ─███████╗╔█████╗─███╗───███╗─██╗──██╗╔█████╗─╔██████╗██╗──██╗██████╗─
+   ─██╔════╝██╔══██╗████╗─████║─██║──██║██╔══██╗██╔════╝██║─██╔╝██╔══██╗
+   ─█████╗──███████║██╔████╔██║─███████║███████║██║─────█████╔╝─██████╔╝
+   ─██╔══╝──██╔══██║██║╚██╔╝██║─██╔══██║██╔══██║██║─────██╔═██╗─██╔══██╗
+   ─██║─────██║──██║██║─╚═╝─██║─██║──██║██║──██║╚██████╗██║──██╗██║──██║
+   ─╚═╝─────╚═╝──╚═╝╚═╝─────╚═╝─╚═╝──╚═╝╚═╝──╚═╝─╚═════╝╚═╝──╚═╝╚═╝──╚═╝
+   ──────────╔██████╗██╗─────██╗███████╗███╗───██╗████████╗─────────────
+   ──────────██╔════╝██║─────██║██╔════╝████╗──██║╚══██╔══╝─────────────
+   ──────────██║─────██║─────██║█████╗──██╔██╗─██║───██║────────────────
+   ──────────██║─────██║─────██║██╔══╝──██║╚██╗██║───██║────────────────
+   ──────────╚██████╗███████╗██║███████╗██║─╚████║───██║────────────────
+   ───────────╚═════╝╚══════╝╚═╝╚══════╝╚═╝──╚═══╝───╚═╝────────────────
+   ------------------------[Nah-Fam_Studios]----------------------------' | lolcat
+printf "\n\n\n"
+printf "   ┌───────────────────────────────────────────────────────────────┐\n"
+printf "   ├─────────────────────👽─[Nah─Fam─Studios]─👽──────────────────┤\n"
+printf "   ├───────────────────────────────────────────────────────────────┘\n"
+printf "   │  ───>  📺   Chl:  [%s]\n" "$CHANNEL"
+printf "   │  ───>  🙋   Sbs:  [%s]\n" "$SUBS"
+printf "   │  ───>  👍   Lks:  [%s]\n" "$LIKES"
+printf "   │  ───>  📆   Upd:  [%s]\n" "$UPLOAD_DATE_FMT"
+printf "   └───────────────────────────────────────────────────────────────┘\n\n\n"
+printf "                   ┌───────────────────────────┐\n"
+printf "    <──────────────┤ [Running]: Best Audio FMT ├─────────────────>\n"
+printf "                   └───────────────────────────┘\n"
+printf "\n\n"
+sleep 1.0
+"${OPT_BMP3_CMD[@]}"
+rc=$?
+  if [ "$rc" -eq 0 ]; then
+    mpv "${NFS_HOME}/${CMP}"  >/dev/null 2>&1
+    mpv "${NFS_HOME}/${FHS}"  >/dev/null 2>&1
+    cowsay -r "Your MP3 File Has Downloaded Successfully!"
+    sleep 1.0
+    mpv "${NFS_HOME}/${TXS}"  >/dev/null 2>&1
+    clear
+  else
+    mpv "${NFS_HOME}/${MFGTA}" >/dev/null 2>&1
+    printf "Your Audio File Extract Has Failed, Please Try Again\n"
+    printf "\n"
+    printf "┌──Press─Any─Button─To─Move─On──┐\n"
+    printf "└──>"
+    read -r -n1 -t 10
+    clear
+  fi
+freshfish=$(ls -t -- *.mp3 2>/dev/null | head -n1)
+  if [ -n "$freshfish" ]; then
+    mv -- "$freshfish" "$APIT" >/dev/null 2>&1
+    cowsay -f cube "Your MP3 File Has Been Transferred To APIT, Successfully!"
+    mpv "${NFS_HOME}/${FHS}" >/dev/null 2>&1
+    sleep 1.0
+    printf "\n"
+    printf "┌──Press─Any─Button─To─Move─On──┐\n"
+    printf "└──>"
+    read -r -n1 -t 4
+  else
+    mpv "${NFS_HOME}/${MFGTA}" >/dev/null 2>&1
+    printf "Your MP3 File Has Failed To Transfer\n"
+    printf "\n"
+    printf "┌──Press─Any─Button─To─Move─On──┐\n"
+    printf "└──>"
+    read -r -n1 -t 10
+  fi
+  ;;
+*)
+rc=2
+printf "\n"
+printf "┌──Press─Any─Button─To─Move─On──┐\n"
+printf "└──>"
+read -r -n1 -t 60
+  ;;
+esac
