@@ -4,6 +4,7 @@
 # Github: https://github.com/tthatgguy1/Fam-Hacker-Pit-Kit
 # Date : 12/04/2024
 # Updated 09/12/2025
+URL="$1"
 
 VIDEO_OUT="$HOME/storage/shared/Fam-Hacker-Pit-Kit/YouTube-Video-Pit"
 AUDIO_OUT="$HOME/storage/shared/Fam-Hacker-Pit-Kit/YouTube-Audio-Pit"
@@ -36,17 +37,6 @@ echo '
    ───────────╚═════╝╚══════╝╚═╝╚══════╝╚═╝──╚═══╝───╚═╝────────────────
    ------------------------[Nah-Fam_Studios]----------------------------' | lolcat --seed 92
 printf "\n\n"
-
-# ---- Manual URL entry -----------------------------------------------
-printf "${VBLU}┌──${BCYN}Enter${VBLU}─${BCYN}Any${VBLU}─${BCYN}YouTube${VBLU}─${BMGT}URL${VBLU}─${BCYN}Here${VBLU}──┐${RESET}\n"
-printf "${VBLU}└──${BCYN}>${BMGT}:${ACID} "
-read -r URL
-
-if [[ -z "$URL" ]]; then
-echo "${BWHT}No ${NONG}URL ${BWHT}Has Been ${NONG}Entered${BMGT}, ${BWHT}Now Exiting${NONG}. ${RESET}"
-  exit 2
-fi
-clear
 
 # <─────────────────── Intro Sounds ───────────────────> #
 mpv "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/SKL.mp3" >/dev/null 2>&1
