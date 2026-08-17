@@ -1,62 +1,63 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
-# <── Manual URL Entry ──> #
-#printf '%b\n' "${VBLU}┌──${BCYN}Enter${VBLU}─${BCYN}Any${VBLU}─${BCYN}YouTube${VBLU}─${BMGT}URL${VBLU}─${BCYN}Here${VBLU}──┐${RESET}"
-#printf '%b'   "${VBLU}└──${BCYN}>${BMGT}:${ACID} "
-#IFS= read -r URL
-#URL="${URL#"${URL%%[![:space:]]*}"}"; URL="${URL%"${URL##*[![:space:]]}"}"  # trim
-#
-#if [[ -z "$URL" ]]; then
-#  printf '%b\n' "${BWHT}No ${NONG}URL ${BWHT}entered. Exiting.${RESET}"
-#  exit 2
-#fi
-#clear
-#
-# <── Nah-Fam_Studies ──> #
-#echo '
-#   ─███████╗╔█████╗─███╗───███╗─██╗──██╗╔█████╗─╔██████╗██╗──██╗██████╗─
-#   ─██╔════╝██╔══██╗████╗─████║─██║──██║██╔══██╗██╔════╝██║─██╔╝██╔══██╗
-#   ─█████╗──███████║██╔████╔██║─███████║███████║██║─────█████╔╝─██████╔╝
-#   ─██╔══╝──██╔══██║██║╚██╔╝██║─██╔══██║██╔══██║██║─────██╔═██╗─██╔══██╗
-#   ─██║─────██║──██║██║─╚═╝─██║─██║──██║██║──██║╚██████╗██║──██╗██║──██║
-#   ─╚═╝─────╚═╝──╚═╝╚═╝─────╚═╝─╚═╝──╚═╝╚═╝──╚═╝─╚═════╝╚═╝──╚═╝╚═╝──╚═╝
-#   ──────────╔██████╗██╗─────██╗███████╗███╗───██╗████████╗─────────────
-#   ──────────██╔════╝██║─────██║██╔════╝████╗──██║╚══██╔══╝─────────────
-#   ──────────██║─────██║─────██║█████╗──██╔██╗─██║───██║────────────────
-#   ──────────██║─────██║─────██║██╔══╝──██║╚██╗██║───██║────────────────
-#   ──────────╚██████╗███████╗██║███████╗██║─╚████║───██║────────────────
-#   ───────────╚═════╝╚══════╝╚═╝╚══════╝╚═╝──╚═══╝───╚═╝────────────────
-#   ------------------------[Nah-Fam_Studios]----------------------------' | lolcat --seed 94
+# <── Manual URL Entry (Not in Use) ──> #
+  #printf '%b\n' "${VBLU}┌──${BCYN}Enter${VBLU}─${BCYN}Any${VBLU}─${BCYN}YouTube${VBLU}─${BMGT}URL${VBLU}─${BCYN}Here${VBLU}──┐${RESET}"
+  #printf '%b'   "${VBLU}└──${BCYN}>${BMGT}:${ACID} "
+  #IFS= read -r URL
+  #URL="${URL#"${URL%%[![:space:]]*}"}"; URL="${URL%"${URL##*[![:space:]]}"}"  # trim
+  #
+  #if [[ -z "$URL" ]]; then
+  #  printf '%b\n' "${BWHT}No ${NONG}URL ${BWHT}entered. Exiting.${RESET}"
+  #  exit 2
+  #fi
+  #clear
+  #
+  # <── Nah-Fam_Studies ──> #
+  #echo '
+  #   ─███████╗╔█████╗─███╗───███╗─██╗──██╗╔█████╗─╔██████╗██╗──██╗██████╗─
+  #   ─██╔════╝██╔══██╗████╗─████║─██║──██║██╔══██╗██╔════╝██║─██╔╝██╔══██╗
+  #   ─█████╗──███████║██╔████╔██║─███████║███████║██║─────█████╔╝─██████╔╝
+  #   ─██╔══╝──██╔══██║██║╚██╔╝██║─██╔══██║██╔══██║██║─────██╔═██╗─██╔══██╗
+  #   ─██║─────██║──██║██║─╚═╝─██║─██║──██║██║──██║╚██████╗██║──██╗██║──██║
+  #   ─╚═╝─────╚═╝──╚═╝╚═╝─────╚═╝─╚═╝──╚═╝╚═╝──╚═╝─╚═════╝╚═╝──╚═╝╚═╝──╚═╝
+  #   ──────────╔██████╗██╗─────██╗███████╗███╗───██╗████████╗─────────────
+  #   ──────────██╔════╝██║─────██║██╔════╝████╗──██║╚══██╔══╝─────────────
+  #   ──────────██║─────██║─────██║█████╗──██╔██╗─██║───██║────────────────
+  #   ──────────██║─────██║─────██║██╔══╝──██║╚██╗██║───██║────────────────
+  #   ──────────╚██████╗███████╗██║███████╗██║─╚████║───██║────────────────
+  #   ───────────╚═════╝╚══════╝╚═╝╚══════╝╚═╝──╚═══╝───╚═╝────────────────
+  #   ------------------------[Nah-Fam_Studios]----------------------------' | lolcat --seed 94
 
 # <── URL Share ──> #
-URL="${1:-}"
-set -euo pipefail
+  URL="${1:-}"
+  set -euo pipefail
 
-# <── Paths ──> #
-VIDEO_OUT="$HOME/storage/shared/Fam-Hacker-Pit-Kit/YouTube-Video-Pit"
-AUDIO_OUT="$HOME/storage/shared/Fam-Hacker-Pit-Kit/YouTube-Audio-Pit"
-COOKIES_FILE="$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/Cookies"
-LOG_DIR="$HOME/storage/shared/Fam-Hacker-Pit-Kit/.cache/YouTube_Single-Downloads"
+# <── Set Paths ──> #
+  VIDEO_OUT="$HOME/storage/shared/Fam-Hacker-Pit-Kit/YouTube-Video-Pit"
+  AUDIO_OUT="$HOME/storage/shared/Fam-Hacker-Pit-Kit/YouTube-Audio-Pit"
+  COOKIES_FILE="$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/Cookies"
+  LOG_DIR="$HOME/storage/shared/Fam-Hacker-Pit-Kit/.cache/YouTube_Single-Downloads"
 
-mkdir -p "$VIDEO_OUT" "$LOG_DIR"
-mkdir -p "$AUDIO_OUT" "$LOG_DIR"
+# <── Make Necessary Paths ──> #
+  mkdir -p "$VIDEO_OUT" "$LOG_DIR"
+  mkdir -p "$AUDIO_OUT" "$LOG_DIR"
 
 # <── Colors ──> #
-ESC=$'\e'
-NGRN="${ESC}[38;2;51;255;0m"       # ${NGRN}        $NGRN      - Lime Green
-BMGT="${ESC}[38;2;255;16;240m"     # ${BMGT}        $BMGT      - Bright Magenta
-NONG="${ESC}[38;2;255;95;0m"       # ${NONG}        $NONG      - Neon Orange
-BCYN="${ESC}[38;2;0;255;255m"      # ${BCYN}        $BCYN      - Cyan
-ACID="${ESC}[38;2;204;255;0m"      # ${ACID}        $ACID      - Acid Green
-VBLU="${ESC}[38;2;138;43;226m"     # ${VBLU}        $VBLU      - Violet Blue
-MMDB="${ESC}[38;2;25;25;112m"      # ${MMDB}        $MMDB      - Midnight Blue
-NPPL="${ESC}[38;2;188;19;254m"     # ${NPPL}        $NPPL      - Neon Purple
-BWHT="${ESC}[38;2;255;255;255m"    # ${BWHT}        #BWHT      - Bright White
-RESET="${ESC}[0m"                  # ${RESET}       $RESET     - Color Reset
+  ESC=$'\e'
+  NGRN="${ESC}[38;2;51;255;0m"       # ${NGRN}        $NGRN      - Lime Green
+  BMGT="${ESC}[38;2;255;16;240m"     # ${BMGT}        $BMGT      - Bright Magenta
+  NONG="${ESC}[38;2;255;95;0m"       # ${NONG}        $NONG      - Neon Orange
+  BCYN="${ESC}[38;2;0;255;255m"      # ${BCYN}        $BCYN      - Cyan
+  ACID="${ESC}[38;2;204;255;0m"      # ${ACID}        $ACID      - Acid Green
+  VBLU="${ESC}[38;2;138;43;226m"     # ${VBLU}        $VBLU      - Violet Blue
+  MMDB="${ESC}[38;2;25;25;112m"      # ${MMDB}        $MMDB      - Midnight Blue
+  NPPL="${ESC}[38;2;188;19;254m"     # ${NPPL}        $NPPL      - Neon Purple
+  BWHT="${ESC}[38;2;255;255;255m"    # ${BWHT}        #BWHT      - Bright White
+  RESET="${ESC}[0m"                  # ${RESET}       $RESET     - Color Reset
 
-clear
+  clear
 # <── Nah-Fam_Studies ──> #
-echo '
+  echo '
    ─███████╗╔█████╗─███╗───███╗─██╗──██╗╔█████╗─╔██████╗██╗──██╗██████╗─
    ─██╔════╝██╔══██╗████╗─████║─██║──██║██╔══██╗██╔════╝██║─██╔╝██╔══██╗
    ─█████╗──███████║██╔████╔██║─███████║███████║██║─────█████╔╝─██████╔╝
@@ -71,181 +72,182 @@ echo '
    ───────────╚═════╝╚══════╝╚═╝╚══════╝╚═╝──╚═══╝───╚═╝────────────────
    ------------------------[Nah-Fam_Studios]----------------------------' | lolcat --seed 92
 
-printf '\n\n'
+  printf '\n\n'
 
-# <── Intro Sounds (Best-Effort) ──> #
-mpv "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/SKL.mp3" >/dev/null 2>&1 || true
-mpv "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/MDATA.mp3" >/dev/null 2>&1 || true
-printf '\n\n'
+# <── Intro Sounds (Nah-Fam_Studios) ──> #
+  mpv "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/SKL.mp3" >/dev/null 2>&1 || true
+  mpv "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/MDATA.mp3" >/dev/null 2>&1 || true
+  printf '\n\n'
 
 # <── Channel Strings (Robust) ──> #
-DELIM=$'\x1f'
-FMT=$'%(title)s\x1f'
-FMT+=$'%(playlist_title)s\x1f'
-FMT+=$'%(uploader)s\x1f'
-FMT+=$'%(channel_follower_count)s\x1f'
-FMT+=$'%(like_count)s\x1f'
-FMT+=$'%(upload_date)s\x1f'
-FMT+=$'%(width)s\x1f'
-FMT+=$'%(height)s'
+  DELIM=$'\x1f'
+  FMT=$'%(title)s\x1f'
+  FMT+=$'%(playlist_title)s\x1f'
+  FMT+=$'%(uploader)s\x1f'
+  FMT+=$'%(channel_follower_count)s\x1f'
+  FMT+=$'%(like_count)s\x1f'
+  FMT+=$'%(upload_date)s\x1f'
+  FMT+=$'%(width)s\x1f'
+  FMT+=$'%(height)s'
 
-if ! IFS=$DELIM read -r \
-  TITLE \
-  PTITLE \
-  CHANNEL \
-  SUBS \
-  LIKES \
-  UPLOAD_DATE \
-  QLTYW \
-  QLTYH \
-  < <(
-  yt-dlp \
-  -q \
-  --cookies "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/Cookies/cookies.txt" \
-  --no-warnings \
-  --print "$FMT" "$URL"
+  if ! IFS=$DELIM read -r \
+    TITLE \
+    PTITLE \
+    CHANNEL \
+    SUBS \
+    LIKES \
+    UPLOAD_DATE \
+    QLTYW \
+    QLTYH \
+    < <(
+    yt-dlp \
+    -q \
+    --cookies "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/Cookies/cookies.txt" \
+    --no-warnings \
+    --print "$FMT" "$URL"
 
-); then
-  echo "Failed to fetch metadata from yt-dlp for: $URL"
-  exit 1
-fi
+  ); then
+    echo "Failed to fetch metadata from yt-dlp for: $URL"
+    exit 1
+  fi
 
-if [[ "$UPLOAD_DATE" =~ ^[0-9]{8}$ ]]; then
-  UPLOAD_DATE_FMT="${BCYN}${UPLOAD_DATE:4:2}"
-  UPLOAD_DATE_FMT+="${BMGT}-"
-  UPLOAD_DATE_FMT+="${BCYN}${UPLOAD_DATE:6:2}"
-  UPLOAD_DATE_FMT+="${BMGT}-"
-  UPLOAD_DATE_FMT+="${BCYN}${UPLOAD_DATE:0:4}"
-  UPLOAD_DATE_FMT+="${RESET}"
-else
-  UPLOAD_DATE_FMT="${UPLOAD_DATE}${RESET}"
-fi
+# <── Time & Date Formate ──> #
+  if [[ "$UPLOAD_DATE" =~ ^[0-9]{8}$ ]]; then
+    UPLOAD_DATE_FMT="${BCYN}${UPLOAD_DATE:4:2}"
+    UPLOAD_DATE_FMT+="${BMGT}-"
+    UPLOAD_DATE_FMT+="${BCYN}${UPLOAD_DATE:6:2}"
+    UPLOAD_DATE_FMT+="${BMGT}-"
+    UPLOAD_DATE_FMT+="${BCYN}${UPLOAD_DATE:0:4}"
+    UPLOAD_DATE_FMT+="${RESET}"
+  else
+    UPLOAD_DATE_FMT="${UPLOAD_DATE}${RESET}"
+  fi
 
 # <── Progress Template Setup ──> #
-PROGRESS_TEMPLATE=$'\033[2K'"${BCYN}            ┌               ${BMGT}DL${BCYN}:        %(progress._percent_str)s"$'\n'
-PROGRESS_TEMPLATE+=$'\033[2K'"${BCYN}            ├───────────────────────────────────────────────┤"$'\n'
-PROGRESS_TEMPLATE+=$'\033[2K'"${BCYN}            |              ${BMGT}ETA${BCYN}:         %(progress._eta_str)s"$'\n'
-PROGRESS_TEMPLATE+=$'\033[2K'"${BCYN}            ├───────────────────────────────────────────────┤"$'\n'
-PROGRESS_TEMPLATE+=$'\033[2K'"${BCYN}            └            ${BMGT}Speed${BCYN}:       %(progress._speed_str)s"$'\033[4A\r'
+  PROGRESS_TEMPLATE=$'\033[2K'"${BCYN}            ┌               ${BMGT}DL${BCYN}:        %(progress._percent_str)s"$'\n'
+  PROGRESS_TEMPLATE+=$'\033[2K'"${BCYN}            ├───────────────────────────────────────────────┤"$'\n'
+  PROGRESS_TEMPLATE+=$'\033[2K'"${BCYN}            |              ${BMGT}ETA${BCYN}:         %(progress._eta_str)s"$'\n'
+  PROGRESS_TEMPLATE+=$'\033[2K'"${BCYN}            ├───────────────────────────────────────────────┤"$'\n'
+  PROGRESS_TEMPLATE+=$'\033[2K'"${BCYN}            └            ${BMGT}Speed${BCYN}:       %(progress._speed_str)s"$'\033[4A\r'
 
 # <── Highest Quality Available ──> #
-OPT_BMKV_CMD=(
-  yt-dlp
-    -f "bv*+ba/b"
-    -o "$VIDEO_OUT/%(uploader)s/%(uploader)s - %(title)s [%(height)sp].mkv"
-    --progress
-    --quiet
-    --no-playlist
-    --cookies "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/Cookies/cookies.txt"
-    --console-title
-    --no-check-formats
-    --no-warnings
-    --ignore-errors
-    --write-subs
-    --embed-subs
-    --sub-format srt
-    --convert-subs srt
-    --embed-thumbnail
-    --embed-chapters
-    --merge-output-format mkv
-    --progress-template "$PROGRESS_TEMPLATE"
-    "$URL"
-)
+  OPT_BMKV_CMD=(
+    yt-dlp
+      -f "bv*+ba/b"
+      -o "$VIDEO_OUT/%(uploader)s/%(uploader)s - %(title)s [%(height)sp].mkv"
+      --progress
+      --quiet
+      --no-playlist
+      --cookies "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/Cookies/cookies.txt"
+      --console-title
+      --no-check-formats
+      --no-warnings
+      --ignore-errors
+      --write-subs
+      --embed-subs
+      --sub-format srt
+      --convert-subs srt
+      --embed-thumbnail
+      --embed-chapters
+      --merge-output-format mkv
+      --progress-template "$PROGRESS_TEMPLATE"
+      "$URL"
+  )
 
 # <── Cap At 2560p (2K-UHD) ──> #
-OPT_2K_CAP_CMD=(
-  yt-dlp
-    -f "bv*[height<=1440]+ba/b[height<=1440]"
-    -o "$VIDEO_OUT/%(uploader)s/%(uploader)s - %(title)s [%(height)sp].mkv"
-    --progress
-    --quiet
-    --no-playlist
-    --cookies "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/Cookies/cookies.txt"
-    --console-title
-    --no-check-formats
-    --no-warnings
-    --ignore-errors
-    --write-subs
-    --embed-subs
-    --sub-format srt
-    --convert-subs srt
-    --embed-thumbnail
-    --embed-chapters
-    --merge-output-format mkv
-    --progress-template "$PROGRESS_TEMPLATE"
-    "$URL"
-)
+  OPT_2K_CAP_CMD=(
+    yt-dlp
+      -f "bv*[height<=1440]+ba/b[height<=1440]"
+      -o "$VIDEO_OUT/%(uploader)s/%(uploader)s - %(title)s [%(height)sp].mkv"
+      --progress
+      --quiet
+      --no-playlist
+      --cookies "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/Cookies/cookies.txt"
+      --console-title
+      --no-check-formats
+      --no-warnings
+      --ignore-errors
+      --write-subs
+      --embed-subs
+      --sub-format srt
+      --convert-subs srt
+      --embed-thumbnail
+      --embed-chapters
+      --merge-output-format mkv
+      --progress-template "$PROGRESS_TEMPLATE"
+      "$URL"
+  )
 
-# <── Cap At 1080p ──> #
-OPT_1080p_CAP_CMD=(
-  yt-dlp
-    -f "bv*[height<=1080]+ba/b[height<=1080]"
-    -o "$VIDEO_OUT/%(uploader)s/%(uploader)s - %(title)s [%(height)sp].mkv"
-    --progress
-    --quiet
-    --no-playlist
-    --cookies "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/Cookies/cookies.txt"
-    --console-title
-    --no-check-formats
-    --no-warnings
-    --ignore-errors
-    --write-subs
-    --embed-subs
-    --sub-format srt
-    --convert-subs srt
-    --embed-thumbnail
-    --embed-chapters
-    --merge-output-format mkv
-    --progress-template "$PROGRESS_TEMPLATE"
-    "$URL"
-)
+# <── Cap At 1080p (Full HD)──> #
+  OPT_1080p_CAP_CMD=(
+    yt-dlp
+      -f "bv*[height<=1080]+ba/b[height<=1080]"
+      -o "$VIDEO_OUT/%(uploader)s/%(uploader)s - %(title)s [%(height)sp].mkv"
+      --progress
+      --quiet
+      --no-playlist
+      --cookies "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/Cookies/cookies.txt"
+      --console-title
+      --no-check-formats
+      --no-warnings
+      --ignore-errors
+      --write-subs
+      --embed-subs
+      --sub-format srt
+      --convert-subs srt
+      --embed-thumbnail
+      --embed-chapters
+      --merge-output-format mkv
+      --progress-template "$PROGRESS_TEMPLATE"
+      "$URL"
+  )
 
 # <── Best Audio → MP3 ──> #
-OPT_BMP3_CMD=(
-  yt-dlp
-    -x --audio-format mp3
-    -f "ba"
-    -o "$AUDIO_OUT/%(uploader)s/%(uploader)s - %(title)s.mp3"
-    --quiet
-    --progress
-    --cookies "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/Cookies/cookies.txt"
-    --no-playlist
-    --console-title
-    --no-check-formats
-    --no-warnings
-    --ignore-errors
-    --progress-template "$PROGRESS_TEMPLATE"
-    "$URL"
-)
+  OPT_BMP3_CMD=(
+    yt-dlp
+      -x --audio-format mp3
+      -f "ba"
+      -o "$AUDIO_OUT/%(uploader)s/%(uploader)s - %(title)s.mp3"
+      --quiet
+      --progress
+      --cookies "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/Cookies/cookies.txt"
+      --no-playlist
+      --console-title
+      --no-check-formats
+      --no-warnings
+      --ignore-errors
+      --progress-template "$PROGRESS_TEMPLATE"
+      "$URL"
+  )
 
 # <── Menu Options ──> #
-OPTION_BMKV="${VBLU}Download${RESET} \
-${BCYN}Video${RESET} \
-${VBLU}In${RESET} \
-${BCYN}Highest${RESET} \
-${VBLU}Resolution${RESET}"
+  OPTION_BMKV="${VBLU}Download${RESET} \
+    ${BCYN}Video${RESET} \
+    ${VBLU}In${RESET} \
+    ${BCYN}Highest${RESET} \
+    ${VBLU}Resolution${RESET}"
 
-OPTION_2K_CAP="${VBLU}Download${RESET} \
-${BCYN}Video${RESET} \
-${VBLU}In${RESET} \
-${BCYN}2K${RESET} \
-${VBLU}Resolution${RESET}"
+  OPTION_2K_CAP="${VBLU}Download${RESET} \
+    ${BCYN}Video${RESET} \
+    ${VBLU}In${RESET} \
+    ${BCYN}2K${RESET} \
+    ${VBLU}Resolution${RESET}"
 
-OPTION_1080p_CAP="${VBLU}Download${RESET} \
-${BCYN}Video${RESET} \
-${VBLU}In${RESET} \
-${BCYN}1080p${RESET} \
-${VBLU}Resolution${RESET}"
+  OPTION_1080p_CAP="${VBLU}Download${RESET} \
+    ${BCYN}Video${RESET} \
+    ${VBLU}In${RESET} \
+    ${BCYN}1080p${RESET} \
+    ${VBLU}Resolution${RESET}"
 
-OPTION_B3="${VBLU}Download An${RESET} \
-${BCYN}MP3${RESET} \
-${VBLU}File${RESET}"
+  OPTION_B3="${VBLU}Download An${RESET} \
+    ${BCYN}MP3${RESET} \
+    ${VBLU}File${RESET}"
 
-clear
-DEFAULT="1"
+  clear
+  DEFAULT="1"
 
-# <── Nah-Fam_Studies ──> #
-echo '
+# <── Nah-Fam_Studies 2 ──> #
+  echo '
    ─███████╗╔█████╗─███╗───███╗─██╗──██╗╔█████╗─╔██████╗██╗──██╗██████╗─
    ─██╔════╝██╔══██╗████╗─████║─██║──██║██╔══██╗██╔════╝██║─██╔╝██╔══██╗
    ─█████╗──███████║██╔████╔██║─███████║███████║██║─────█████╔╝─██████╔╝
@@ -259,28 +261,31 @@ echo '
    ──────────╚██████╗███████╗██║███████╗██║─╚████║───██║────────────────
    ───────────╚═════╝╚══════╝╚═╝╚══════╝╚═╝──╚═══╝───╚═╝────────────────
    ------------------------[Nah-Fam_Studios]----------------------------' | lolcat --seed 92
-printf "\n\n"
-printf "  ${VBLU}┌───────────────────────────────────────────────────────────┐\n"
-printf "  ${VBLU}│ ${BMGT}[${BCYN}1${BMGT}] %s        ${VBLU}│\n" "$OPTION_BMKV"
-printf "  ${VBLU}├───────────────────────────────────────────────────────────┤\n"
-printf "  ${VBLU}│ ${BMGT}[${BCYN}2${BMGT}] %s        ${VBLU}│\n" "$OPTION_2K_CAP"
-printf "  ${VBLU}├───────────────────────────────────────────────────────────┤\n"
-printf "  ${VBLU}│ ${BMGT}[${BCYN}3${BMGT}] %s        ${VBLU}│\n" "$OPTION_1080p_CAP"
-printf "  ${VBLU}├───────────────────────────────────────────────────────────┤\n"
-printf "  ${VBLU}│ ${BMGT}[${BCYN}4${BMGT}] %s        ${VBLU}│\n" "$OPTION_B3"
-printf "  ${VBLU}├───────────────────────────────────────────────────────────┤\n"
-printf "  ${VBLU}│ ${BWHT}[${NONG}E${BWHT}] ${BCYN}Press ${BWHT}[${NONG}Enter${BWHT}] ${BCYN}For ${BMGT}Default ${BCYN}Option [%d] ${VBLU}│\n" "$DEFAULT"
-printf "  ${VBLU}└───────────────────────────────────────────────────────────┘${RESET}\n\n"
 
-printf "  ${VBLU}┌──${BCYN}Press${VBLU}─${BCYN}Any${VBLU}─${BCYN}Button${VBLU}─${BCYN}To${VBLU}─${BCYN}Choose${VBLU}──┐${RESET}\n"
-printf "  ${VBLU}└──${BMGT}>${ACID}:${RESET} "
-read -r DECISION
-echo
+# <── Menue Select ──> #
+  printf "\n\n"
+  printf "  ${VBLU}┌───────────────────────────────────────────────────────────┐\n"
+  printf "  ${VBLU}│ ${BMGT}[${BCYN}1${BMGT}] %s        ${VBLU}│\n" "$OPTION_BMKV"
+  printf "  ${VBLU}├───────────────────────────────────────────────────────────┤\n"
+  printf "  ${VBLU}│ ${BMGT}[${BCYN}2${BMGT}] %s        ${VBLU}│\n" "$OPTION_2K_CAP"
+  printf "  ${VBLU}├───────────────────────────────────────────────────────────┤\n"
+  printf "  ${VBLU}│ ${BMGT}[${BCYN}3${BMGT}] %s        ${VBLU}│\n" "$OPTION_1080p_CAP"
+  printf "  ${VBLU}├───────────────────────────────────────────────────────────┤\n"
+  printf "  ${VBLU}│ ${BMGT}[${BCYN}4${BMGT}] %s        ${VBLU}│\n" "$OPTION_B3"
+  printf "  ${VBLU}├───────────────────────────────────────────────────────────┤\n"
+  printf "  ${VBLU}│ ${BWHT}[${NONG}E${BWHT}] ${BCYN}Press ${BWHT}[${NONG}Enter${BWHT}] ${BCYN}For ${BMGT}Default ${BCYN}Option [%d] ${VBLU}│\n" "$DEFAULT"
+  printf "  ${VBLU}└───────────────────────────────────────────────────────────┘${RESET}\n\n"
 
-DECISION=${DECISION:-$DEFAULT}
-rc=2
-case "${DECISION}" in
+  printf "  ${VBLU}┌──${BCYN}Press${VBLU}─${BCYN}Any${VBLU}─${BCYN}Button${VBLU}─${BCYN}To${VBLU}─${BCYN}Choose${VBLU}──┐${RESET}\n"
+  printf "  ${VBLU}└──${BMGT}>${ACID}:${RESET} "
+  read -r DECISION
+  echo
 
+  DECISION=${DECISION:-$DEFAULT}
+  rc=2
+  case "${DECISION}" in
+
+# <── String Display for Best MKV ──> #
   1)
     clear
     OUT_TPL='%(playlist_title,replace="/","﹨")s/%(title)s - %(uploader)s.%(ext)s'
@@ -331,6 +336,7 @@ case "${DECISION}" in
     fi
   ;;
 
+# <── String Display for 1440p Cap ──> #
   2)
     clear
     OUT_TPL='%(playlist_title,replace="/","﹨")s/%(title)s - %(uploader)s.%(ext)s'
@@ -383,6 +389,7 @@ case "${DECISION}" in
     fi
   ;;
 
+# <── String Display for 1080p Cap ──> #
   3)
     clear
     OUT_TPL='%(playlist_title,replace="/","﹨")s/%(title)s - %(uploader)s.%(ext)s'
@@ -433,6 +440,7 @@ case "${DECISION}" in
     fi
   ;;
 
+# <── String Display for Best Audio MP3 ──> #
   4)
     clear
     OUT_TPL='%(playlist_title,replace="/","﹨")s/%(title)s - %(uploader)s.%(ext)s'
@@ -484,9 +492,11 @@ case "${DECISION}" in
       clear
     fi
   ;;
-*)
-  rc=2
-  printf "┌──Press─Any─Button─To─Move─On──┐\n"
-  printf "└──>"
-  read -r -n1
-esac
+
+# <── End ──> #
+  *)
+    rc=2
+    printf "┌──Press─Any─Button─To─Move─On──┐\n"
+    printf "└──>"
+    read -r -n1
+  esac
