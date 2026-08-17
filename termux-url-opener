@@ -96,8 +96,8 @@ else
 fi
 
 # <── Progress Template Setup ──> #
-PROGRESS_TEMPLATE="download: ${VBLU}DL${BCYN}: %(progress._percent_str)s"$'\n'
-PROGRESS_TEMPLATE+="${BMGT}ETA${BCYN}: %(progress._eta_str)s"$'\n'
+PROGRESS_TEMPLATE="download: ${VBLU}DL${BCYN}: %(progress._percent_str)s"
+PROGRESS_TEMPLATE+="${BMGT}ETA${BCYN}: %(progress._eta_str)s"
 PROGRESS_TEMPLATE+="${VBLU}Speed${BCYN}: %(progress._speed_str)s"
 
 # <── Highest Available (With Fallback) ──> #
