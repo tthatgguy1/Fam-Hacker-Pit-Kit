@@ -80,14 +80,7 @@ printf '\n\n'
 
 # <── Channel Strings (Robust) ──> #
 DELIM=$'\x1f'
-FMT=$'%(playlist_title)s\x1f'\
-'%(title)s\x1f'\
-'%(uploader)s\x1f'\
-'%(channel_follower_count)s\x1f'\
-'%(like_count)s\x1f'\
-'%(upload_date)s\x1f'\
-'%(width)s\x1f'\
-'%(height)s'
+FMT=$'%(playlist_title)s\x1f%(title)s\x1f%(uploader)s\x1f%(channel_follower_count)s\x1f%(like_count)s\x1f%(upload_date)s\x1f%(width)s\x1f%(height)s'
 
 if ! IFS=$DELIM read -r PTITLE TITLE CHANNEL SUBS LIKES UPLOAD_DATE QLTYW QLTYH < <(
   yt-dlp -q --cookies "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/Cookies/cookies.txt" --no-warnings --print "$FMT" "$URL"
@@ -97,9 +90,7 @@ if ! IFS=$DELIM read -r PTITLE TITLE CHANNEL SUBS LIKES UPLOAD_DATE QLTYW QLTYH 
 fi
 
 if [[ "$UPLOAD_DATE" =~ ^[0-9]{8}$ ]]; then
-  UPLOAD_DATE_FMT="${BCYN}${UPLOAD_DATE:4:2}${BMGT}"\
-"-${BCYN}${UPLOAD_DATE:6:2}${BMGT}"\
-"-${BCYN}${UPLOAD_DATE:0:4}${RESET}"
+  UPLOAD_DATE_FMT="${BCYN}${UPLOAD_DATE:4:2}${BMGT}-${BCYN}${UPLOAD_DATE:6:2}${BMGT}-${BCYN}${UPLOAD_DATE:0:4}${RESET}"
 else
   UPLOAD_DATE_FMT="${UPLOAD_DATE}${RESET}"
 fi
@@ -124,10 +115,7 @@ OPT_BMKV_CMD=(
     --embed-thumbnail
     --embed-chapters
     --merge-output-format mkv
-    --progress-template \
-    "download: ${VBLU}DL${BCYN}:%(progress._percent_str)s "\
-    "${BMGT}ETA${BCYN}: %(progress._eta_str)s "\
-    "${VBLU}Speed${BCYN}:%(progress._speed_str)s"
+    --progress-template "download: ${VBLU}DL${BCYN}:%(progress._percent_str)s ${BMGT}ETA${BCYN}: %(progress._eta_str)s ${VBLU}Speed${BCYN}:%(progress._speed_str)s"
     "$URL"
 )
 
@@ -151,10 +139,7 @@ OPT_2K_CAP_CMD=(
     --embed-thumbnail
     --embed-chapters
     --merge-output-format mkv
-    --progress-template \
-    "download: ${VBLU}DL${BCYN}:%(progress._percent_str)s "\
-    "${BMGT}ETA${BCYN}: %(progress._eta_str)s "\
-    "${VBLU}Speed${BCYN}:%(progress._speed_str)s"
+    --progress-template "download: ${VBLU}DL${BCYN}:%(progress._percent_str)s ${BMGT}ETA${BCYN}: %(progress._eta_str)s ${VBLU}Speed${BCYN}:%(progress._speed_str)s"
     "$URL"
 )
 
@@ -178,10 +163,7 @@ OPT_1080p_CAP_CMD=(
     --embed-thumbnail
     --embed-chapters
     --merge-output-format mkv
-    --progress-template \
-    "download: ${VBLU}DL${BCYN}:%(progress._percent_str)s "\
-    "${BMGT}ETA${BCYN}: %(progress._eta_str)s "\
-    "${VBLU}Speed${BCYN}:%(progress._speed_str)s"
+    --progress-template "download: ${VBLU}DL${BCYN}:%(progress._percent_str)s ${BMGT}ETA${BCYN}: %(progress._eta_str)s ${VBLU}Speed${BCYN}:%(progress._speed_str)s"
     "$URL"
 )
 
@@ -199,10 +181,7 @@ OPT_BMP3_CMD=(
     --no-check-formats
     --no-warnings
     --ignore-errors
-    --progress-template \
-    "download: ${VBLU}DL${BCYN}:%(progress._percent_str)s "\
-    "${BMGT}ETA${BCYN}: %(progress._eta_str)s "\
-    "${VBLU}Speed${BCYN}:%(progress._speed_str)s"
+    --progress-template "download: ${VBLU}DL${BCYN}:%(progress._percent_str)s ${BMGT}ETA${BCYN}: %(progress._eta_str)s ${VBLU}Speed${BCYN}:%(progress._speed_str)s"
     "$URL"
 )
 
