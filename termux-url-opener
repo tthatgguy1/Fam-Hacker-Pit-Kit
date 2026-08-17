@@ -122,11 +122,11 @@ else
 fi
 
 # <── Progress Template Setup ──> #
-PROGRESS_TEMPLATE=$'\033[2K'"${VBLU}        ┌               DL${BCYN}:       %(progress._percent_str)s"$'\n'
-PROGRESS_TEMPLATE+=$'\033[2K'"${BCYN}       ├────────────────────────────────────────"$'\n'
-PROGRESS_TEMPLATE+=$'\033[2K'"${BMGT}       |               ETA${BCYN}:        %(progress._eta_str)s"$'\n'
-PROGRESS_TEMPLATE+=$'\033[2K'"${BCYN}       ├────────────────────────────────────────"$'\n'
-PROGRESS_TEMPLATE+=$'\033[2K'"${VBLU}       └             Speed${BCYN}:     %(progress._speed_str)s"$'\033[4A\r'
+PROGRESS_TEMPLATE=$'\033[2K'"${BCYN}           ┌               ${BMGT}DL${BCYN}:       %(progress._percent_str)s"$'\n'
+PROGRESS_TEMPLATE+=$'\033[2K'"${BCYN}           ├────────────────────────────────────────"$'\n'
+PROGRESS_TEMPLATE+=$'\033[2K'"${BCYN}           |               ${BMGT}ETA${BCYN}:        %(progress._eta_str)s"$'\n'
+PROGRESS_TEMPLATE+=$'\033[2K'"${BCYN}           ├────────────────────────────────────────"$'\n'
+PROGRESS_TEMPLATE+=$'\033[2K'"${BCYN}           └             ${BMGT}Speed${BCYN}:     %(progress._speed_str)s"$'\033[4A\r'
 
 # <── Highest Quality Available ──> #
 OPT_BMKV_CMD=(
@@ -311,7 +311,7 @@ case "${DECISION}" in
     printf "    ${VBLU}└───────────────────────────────────────────────────────────────┘\n\n"
 
     printf "            ${VBLU}┌───────────────────────────────────────────────┐\n"
-    printf "    ${BCYN}<${VBLU}───────┤ ${BMGT}[${BCYN}Running${BMGT}]${ACID}: ${NGRN}──${ACID}> ${BMGT}Highest Quality Video Download ${VBLU}├───────${BCYN}>${RESET}\n"
+    printf "    ${BCYN}<${VBLU}───────┤ ${BMGT}[${BCYN}Running${BMGT}]${ACID}: ${NGRN}──${ACID}> ${BWHT}Highest Quality Video Download ${VBLU}├───────${BCYN}>${RESET}\n"
     printf "            ${VBLU}└───────────────────────────────────────────────┘\n"
     sleep 1.0
 
