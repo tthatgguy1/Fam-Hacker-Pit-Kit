@@ -122,7 +122,7 @@ else
 fi
 
 # <── Progress Template Setup ──> #
-PROGRESS_TEMPLATE=$'\033[2K'"${BCYN}            ┌               ${BMGT}DL${BCYN}:       %(progress._percent_str)s"$'\n'
+PROGRESS_TEMPLATE=$'\033[2K'"${BCYN}            ┌                ${BMGT}DL${BCYN}:       %(progress._percent_str)s"$'\n'
 PROGRESS_TEMPLATE+=$'\033[2K'"${BCYN}            ├────────────────────────────────────────"$'\n'
 PROGRESS_TEMPLATE+=$'\033[2K'"${BCYN}            |               ${BMGT}ETA${BCYN}:        %(progress._eta_str)s"$'\n'
 PROGRESS_TEMPLATE+=$'\033[2K'"${BCYN}            ├────────────────────────────────────────"$'\n'
