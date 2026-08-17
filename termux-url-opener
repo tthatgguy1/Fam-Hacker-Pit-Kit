@@ -202,6 +202,29 @@
       "$URL"
   )
 
+# <── Full Playlist (Highest Quality)──> #
+  OPT_PLST_CMD=(
+    yt-dlp
+      -f "bv*+ba/b"
+      -o "$VIDEO_OUT/%(uploader)s/%(playlist_title,replace="/","﹨")s/%(uploader)s - %(title)s [%(height)sp].mkv"
+      --progress
+      --quiet
+      --yes-playlist
+      --cookies "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/Cookies/cookies.txt"
+      --console-title
+      --no-check-formats
+      --no-warnings
+      --ignore-errors
+      --write-subs
+      --embed-subs
+      --sub-format srt
+      --convert-subs srt
+      --embed-thumbnail
+      --embed-chapters
+      --merge-output-format mkv
+      --progress-template "$PROGRESS_TEMPLATE"
+      "$URL"
+  )
 # <── Best Audio → MP3 ──> #
   OPT_BMP3_CMD=(
     yt-dlp
@@ -239,6 +262,13 @@
     ${BCYN}1080p${RESET} \
     ${VBLU}Resolution${RESET}"
 
+  OPTION_PLST="${VBLU}Download${RESET} \
+    ${BCYN}Video${RESET} \
+    ${VBLU}Playlist${RESET} \
+    ${BCYN}In${RESET} \
+    ${VBLU}Highest${RESET} \
+    ${VBLU}Resolution${RESET}"
+
   OPTION_B3="${VBLU}Download An${RESET} \
     ${BCYN}MP3${RESET} \
     ${VBLU}File${RESET}"
@@ -271,7 +301,9 @@
   printf "  ${VBLU}├───────────────────────────────────────────────────────────┤\n"
   printf "  ${VBLU}│ ${BMGT}[${BCYN}3${BMGT}] %s        ${VBLU}│\n" "$OPTION_1080p_CAP"
   printf "  ${VBLU}├───────────────────────────────────────────────────────────┤\n"
-  printf "  ${VBLU}│ ${BMGT}[${BCYN}4${BMGT}] %s        ${VBLU}│\n" "$OPTION_B3"
+  printf "  ${VBLU}│ ${BMGT}[${BCYN}4${BMGT}] %s        ${VBLU}│\n" "$OPTION_PLST"
+  printf "  ${VBLU}├───────────────────────────────────────────────────────────┤\n"
+  printf "  ${VBLU}│ ${BMGT}[${BCYN}5${BMGT}] %s        ${VBLU}│\n" "$OPTION_B3"
   printf "  ${VBLU}├───────────────────────────────────────────────────────────┤\n"
   printf "  ${VBLU}│ ${BWHT}[${NONG}E${BWHT}] ${BCYN}Press ${BWHT}[${NONG}Enter${BWHT}] ${BCYN}For ${BMGT}Default ${BCYN}Option [%d] ${VBLU}│\n" "$DEFAULT"
   printf "  ${VBLU}└───────────────────────────────────────────────────────────┘${RESET}\n\n"
@@ -373,7 +405,7 @@
 
     sleep 1.0
 
-    "${OPT_1080p_CAP_CMD[@]}" 2>>"$LOG_FILE"
+    "${OPT_1440p_CAP_CMD[@]}" 2>>"$LOG_FILE"
     rc=$?
 
     if [ "$rc" -eq 0 ]; then
@@ -424,7 +456,58 @@
     printf "           ${VBLU}└───────────────────────────────────────────────┘\n"
     sleep 1.0
 
-    "${OPT_BMKV_CMD[@]}" 2>>"$LOG_FILE"
+    "${OPT_1080p_CAP_CMD[@]}" 2>>"$LOG_FILE"
+    rc=$?
+
+    if [ "$rc" -eq 0 ]; then
+      mpv "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/c.mp3" >/dev/null 2>&1
+      mpv "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/FHS.mp3" >/dev/null 2>&1
+      cowsay -r "Your MKV File Has Downloaded Successfully" | lolcat
+      mpv "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/TXS.mp3" >/dev/null 2>&1
+      sleep 2.0
+      clear
+    else
+      mpv "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/MFGTA.mp3" >/dev/null 2>&1
+      clear
+    fi
+  ;;
+
+# <── String Display for Full Playlist (Highest Quality) ──> #
+  4)
+    clear
+    OUT_TPL='%(playlist_title,replace="/","﹨")s/%(title)s - %(uploader)s.%(ext)s'
+    LOG_FILE="$LOG_DIR/Best_Quality_Via_Share_$(date +%m-%d-%Y_%H%M).log"
+    echo '
+   ─███████╗╔█████╗─███╗───███╗─██╗──██╗╔█████╗─╔██████╗██╗──██╗██████╗─
+   ─██╔════╝██╔══██╗████╗─████║─██║──██║██╔══██╗██╔════╝██║─██╔╝██╔══██╗
+   ─█████╗──███████║██╔████╔██║─███████║███████║██║─────█████╔╝─██████╔╝
+   ─██╔══╝──██╔══██║██║╚██╔╝██║─██╔══██║██╔══██║██║─────██╔═██╗─██╔══██╗
+   ─██║─────██║──██║██║─╚═╝─██║─██║──██║██║──██║╚██████╗██║──██╗██║──██║
+   ─╚═╝─────╚═╝──╚═╝╚═╝─────╚═╝─╚═╝──╚═╝╚═╝──╚═╝─╚═════╝╚═╝──╚═╝╚═╝──╚═╝
+   ──────────╔██████╗██╗─────██╗███████╗███╗───██╗████████╗─────────────
+   ──────────██╔════╝██║─────██║██╔════╝████╗──██║╚══██╔══╝─────────────
+   ──────────██║─────██║─────██║█████╗──██╔██╗─██║───██║────────────────
+   ──────────██║─────██║─────██║██╔══╝──██║╚██╗██║───██║────────────────
+   ──────────╚██████╗███████╗██║███████╗██║─╚████║───██║────────────────
+   ───────────╚═════╝╚══════╝╚═╝╚══════╝╚═╝──╚═══╝───╚═╝────────────────
+   ------------------------[Nah-Fam_Studios]---------------------------- ' | lolcat --seed 75
+    printf "\n"
+    printf "    ${VBLU}┌───────────────────────────────────────────────────────────────┐${RESET}\n"
+    printf "    ${VBLU}├─────────────────────👽─${BMGT}[${BCYN}Nah${VBLU}─${BCYN}Fam${VBLU}─${BCYN}Studios${BMGT}]${VBLU}─👽───────────────────┤${RESET}\n"
+    printf "    ${VBLU}├───────────────────────────────────────────────────────────────┘\n"
+    printf "    ${VBLU}│  ${NONG}───${BWHT}>  📺   ${NGRN}Chl${ACID}:    ${BMGT}[${BCYN}%s${BMGT}]${RESET}\n" "$CHANNEL"
+    printf "    ${VBLU}│  ${NONG}───${BWHT}>  🙋   ${NGRN}Sbs${ACID}:    ${BMGT}[${BCYN}%s${BMGT}]${RESET}\n" "$SUBS"
+    printf "    ${VBLU}│  ${NONG}───${BWHT}>  👍   ${NGRN}Lks${ACID}:    ${BMGT}[${BCYN}%s${BMGT}]${RESET}\n" "$LIKES"
+    printf "    ${VBLU}│  ${NONG}───${BWHT}>  📹   ${NGRN}Res${ACID}:    ${BMGT}[${BCYN}%s${BMGT}x${BCYN}%s${BMGT}]${RESET}\n" "$QLTYW" "$QLTYH"
+    printf "    ${VBLU}│  ${NONG}───${BWHT}>  📆   ${NGRN}Upd${ACID}:    ${BMGT}[${BCYN}%s${BMGT}]${RESET}\n" "$UPLOAD_DATE_FMT"
+    printf "    ${VBLU}└───────────────────────────────────────────────────────────────┘\n\n"
+
+    printf "           ${VBLU}┌───────────────────────────────────────────────┐\n"
+    printf "   ${BCYN}<${VBLU}───────┤ ${BMGT}[${BCYN}Running${BMGT}]${ACID}: ${NGRN}──${ACID}> ${BMGT}Full Playlist ${BCYN}& ${BMGT}Best Audio ${VBLU}├───────${BCYN}>${RESET}\n"
+    printf "           ${VBLU}└───────────────────────────────────────────────┘\n"
+    sleep 1.0
+
+    "${OPT_PLST_CMD[@]}" 2>>"$LOG_FILE"
     rc=$?
 
     if [ "$rc" -eq 0 ]; then
@@ -441,7 +524,7 @@
   ;;
 
 # <── String Display for Best Audio MP3 ──> #
-  4)
+  5)
     clear
     OUT_TPL='%(playlist_title,replace="/","﹨")s/%(title)s - %(uploader)s.%(ext)s'
     LOG_FILE="$LOG_DIR/Best_Audio_Via_Share_$(date +%m-%d-%Y_%H%M).log"
