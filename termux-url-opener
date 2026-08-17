@@ -95,6 +95,11 @@ else
   UPLOAD_DATE_FMT="${UPLOAD_DATE}${RESET}"
 fi
 
+# <── Progress Template Setup ──> #
+PROGRESS_TEMPLATE="download: ${VBLU}DL${BCYN}: %(progress._percent_str)s"$'\n'
+PROGRESS_TEMPLATE+="${BMGT}ETA${BCYN}: %(progress._eta_str)s"$'\n'
+PROGRESS_TEMPLATE+="${VBLU}Speed${BCYN}: %(progress._speed_str)s"
+
 # <── Highest Available (With Fallback) ──> #
 OPT_BMKV_CMD=(
   yt-dlp
@@ -115,7 +120,7 @@ OPT_BMKV_CMD=(
     --embed-thumbnail
     --embed-chapters
     --merge-output-format mkv
-    --progress-template "download: ${VBLU}DL${BCYN}:%(progress._percent_str)s ${BMGT}ETA${BCYN}: %(progress._eta_str)s ${VBLU}Speed${BCYN}:%(progress._speed_str)s"
+    --progress-template "$PROGRESS_TEMPLATE"
     "$URL"
 )
 
@@ -139,7 +144,7 @@ OPT_2K_CAP_CMD=(
     --embed-thumbnail
     --embed-chapters
     --merge-output-format mkv
-    --progress-template "download: ${VBLU}DL${BCYN}:%(progress._percent_str)s ${BMGT}ETA${BCYN}: %(progress._eta_str)s ${VBLU}Speed${BCYN}:%(progress._speed_str)s"
+    --progress-template "$PROGRESS_TEMPLATE"
     "$URL"
 )
 
@@ -163,7 +168,7 @@ OPT_1080p_CAP_CMD=(
     --embed-thumbnail
     --embed-chapters
     --merge-output-format mkv
-    --progress-template "download: ${VBLU}DL${BCYN}:%(progress._percent_str)s ${BMGT}ETA${BCYN}: %(progress._eta_str)s ${VBLU}Speed${BCYN}:%(progress._speed_str)s"
+    --progress-template "$PROGRESS_TEMPLATE"
     "$URL"
 )
 
@@ -181,7 +186,7 @@ OPT_BMP3_CMD=(
     --no-check-formats
     --no-warnings
     --ignore-errors
-    --progress-template "download: ${VBLU}DL${BCYN}:%(progress._percent_str)s ${BMGT}ETA${BCYN}: %(progress._eta_str)s ${VBLU}Speed${BCYN}:%(progress._speed_str)s"
+    --progress-template "$PROGRESS_TEMPLATE"
     "$URL"
 )
 
