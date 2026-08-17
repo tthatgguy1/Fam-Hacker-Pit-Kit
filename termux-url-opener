@@ -336,7 +336,7 @@ case "${DECISION}" in
     printf "   ${VBLU}│  ${NGRN}───${ACID}>  📆   ${NGRN}Upd${ACID}:  ${BMGT}[${BCYN}%s${BMGT}]${RESET}\n" "$UPLOAD_DATE_FMT"
     printf "   ${VBLU}└───────────────────────────────────────────────────────────────┘${RESET}\n"
     printf "                   ${VBLU}┌───────────────────────────┐${RESET}\n"
-    printf "    ${BCYN}<${VBLU}──────────────┤ ${BMGT}[${BCYN}Running${BMGT}]${NPPL}: ${BMGT}Best Audio FMT ${VBLU}├─────────────────${BCYN}>${RESET}\n"
+    printf "    ${BCYN}<${VBLU}──────────────┤ ${BMGT}[${BCYN}Running${BMGT}]${ACID}: ${BMGT}Best Audio FMT ${VBLU}├─────────────────${BCYN}>${RESET}\n"
     printf "                   ${VBLU}└───────────────────────────┘${RESET}\n"
     printf "\n"
 
