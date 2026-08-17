@@ -102,9 +102,11 @@
     < <(
     yt-dlp \
     -q \
+    --playlist-items 1 \
     --cookies "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/Cookies/cookies.txt" \
     --no-warnings \
-    --print "$FMT" "$URL"
+    --print "$FMT" \
+    "$URL"
 
   ); then
     echo "Failed to fetch metadata from yt-dlp for: $URL"
@@ -503,7 +505,7 @@
     printf "    ${VBLU}└───────────────────────────────────────────────────────────────┘\n\n"
 
     printf "           ${VBLU}┌───────────────────────────────────────────────┐\n"
-    printf "   ${BCYN}<${VBLU}───────┤ ${BMGT}[${BCYN}Running${BMGT}]${ACID}: ${NGRN}──${ACID}> ${BMGT}Full Playlist ${BCYN}& ${BMGT}Best Audio ${VBLU}├───────${BCYN}>${RESET}\n"
+    printf "   ${BCYN}<${VBLU}───────┤ ${BMGT}[${BCYN}Running${BMGT}]${ACID}: ${NGRN}──${ACID}> ${BMGT}Full Playlist ${BCYN}& ${BMGT}Best Quality  ${VBLU}├───────${BCYN}>${RESET}\n"
     printf "           ${VBLU}└───────────────────────────────────────────────┘\n"
     sleep 1.0
 
