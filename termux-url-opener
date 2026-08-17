@@ -122,11 +122,11 @@ else
 fi
 
 # <── Progress Template Setup ──> #
-PROGRESS_TEMPLATE=$'\033[2K'"${VBLU}            DL${BCYN}:   %(progress._percent_str)s"$'\n'
-PROGRESS_TEMPLATE+=$'\033[2K'"${BCYN}          ───────────────────────────"$'\n'
-PROGRESS_TEMPLATE+=$'\033[2K'"${BMGT}       ETA${BCYN}:    %(progress._eta_str)s"$'\n'
-PROGRESS_TEMPLATE+=$'\033[2K'"${BCYN}          ───────────────────────────"$'\n'
-PROGRESS_TEMPLATE+=$'\033[2K'"${VBLU}         Speed${BCYN}:  %(progress._speed_str)s"$'\033[4A\r'
+PROGRESS_TEMPLATE=$'\033[2K'"${VBLU}                         DL${BCYN}:   %(progress._percent_str)s"$'\n'
+PROGRESS_TEMPLATE+=$'\033[2K'"${BCYN}                    ───────────────────────────"$'\n'
+PROGRESS_TEMPLATE+=$'\033[2K'"${BMGT}                      ETA${BCYN}:    %(progress._eta_str)s"$'\n'
+PROGRESS_TEMPLATE+=$'\033[2K'"${BCYN}                    ───────────────────────────"$'\n'
+PROGRESS_TEMPLATE+=$'\033[2K'"${VBLU}                    Speed${BCYN}:  %(progress._speed_str)s"$'\033[4A\r'
 
 # <── Highest Quality Available ──> #
 OPT_BMKV_CMD=(
