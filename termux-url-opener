@@ -80,25 +80,51 @@ printf '\n\n'
 
 # <── Channel Strings (Robust) ──> #
 DELIM=$'\x1f'
-FMT=$'%(playlist_title)s\x1f%(title)s\x1f%(uploader)s\x1f%(channel_follower_count)s\x1f%(like_count)s\x1f%(upload_date)s\x1f%(width)s\x1f%(height)s'
+FMT=$'%(title)s\x1f'
+FMT+=$'%(playlist_title)s\x1f'
+FMT+=$'%(uploader)s\x1f'
+FMT+=$'%(channel_follower_count)s\x1f'
+FMT+=$'%(like_count)s\x1f'
+FMT+=$'%(upload_date)s\x1f'
+FMT+=$'%(width)s\x1f'
+FMT+=$'%(height)s'
 
-if ! IFS=$DELIM read -r PTITLE TITLE CHANNEL SUBS LIKES UPLOAD_DATE QLTYW QLTYH < <(
-  yt-dlp -q --cookies "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/Cookies/cookies.txt" --no-warnings --print "$FMT" "$URL"
+if ! IFS=$DELIM read -r \
+  TITLE \
+  PTITLE \
+  CHANNEL \
+  SUBS \
+  LIKES \
+  UPLOAD_DATE \
+  QLTYW \
+  QLTYH \
+  < <(
+  yt-dlp \
+  -q \
+  --cookies "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/Cookies/cookies.txt" \
+  --no-warnings \
+  --print "$FMT" "$URL"
+  
 ); then
   echo "Failed to fetch metadata from yt-dlp for: $URL"
   exit 1
 fi
 
 if [[ "$UPLOAD_DATE" =~ ^[0-9]{8}$ ]]; then
-  UPLOAD_DATE_FMT="${BCYN}${UPLOAD_DATE:4:2}${BMGT}-${BCYN}${UPLOAD_DATE:6:2}${BMGT}-${BCYN}${UPLOAD_DATE:0:4}${RESET}"
+  UPLOAD_DATE_FMT="${BCYN}${UPLOAD_DATE:4:2}"
+  UPLOAD_DATE_FMT+="${BMGT}-"
+  UPLOAD_DATE_FMT+="${BCYN}${UPLOAD_DATE:6:2}"
+  UPLOAD_DATE_FMT+="${BMGT}-"
+  UPLOAD_DATE_FMT+="${BCYN}${UPLOAD_DATE:0:4}"
+  UPLOAD_DATE_FMT+="${RESET}"
 else
   UPLOAD_DATE_FMT="${UPLOAD_DATE}${RESET}"
 fi
 
 # <── Progress Template Setup ──> #
-PROGRESS_TEMPLATE="download: ${VBLU}DL${BCYN}: %(progress._percent_str)s"
-PROGRESS_TEMPLATE+="${BMGT}ETA${BCYN}: %(progress._eta_str)s"
-PROGRESS_TEMPLATE+="${VBLU}Speed${BCYN}: %(progress._speed_str)s"
+PROGRESS_TEMPLATE=$'\033[2K'"${VBLU}DL${BCYN}: %(progress._percent_str)s"$'\n'
+PROGRESS_TEMPLATE+=$'\033[2K'"${BMGT}ETA${BCYN}: %(progress._eta_str)s"$'\n'
+PROGRESS_TEMPLATE+=$'\033[2K'"${VBLU}Speed${BCYN}: %(progress._speed_str)s"$'\033[2A\r'
 
 # <── Highest Available (With Fallback) ──> #
 OPT_BMKV_CMD=(
