@@ -504,9 +504,9 @@
     printf "    ${VBLU}│  ${NONG}───${BWHT}>  📆   ${NGRN}Upd${ACID}:    ${BMGT}[${BCYN}%s${BMGT}]${RESET}\n" "$UPLOAD_DATE_FMT"
     printf "    ${VBLU}└───────────────────────────────────────────────────────────────┘\n\n"
 
-    printf "           ${VBLU}┌───────────────────────────────────────────────┐\n"
-    printf "   ${BCYN}<${VBLU}───────┤ ${BMGT}[${BCYN}Running${BMGT}]${ACID}: ${NGRN}──${ACID}> ${BMGT}Full Playlist ${BCYN}& ${BMGT}Best Quality  ${VBLU}├───────${BCYN}>${RESET}\n"
-    printf "           ${VBLU}└───────────────────────────────────────────────┘\n"
+    printf "            ${VBLU}┌───────────────────────────────────────────────┐\n"
+    printf "    ${BCYN}<${VBLU}───────┤ ${BMGT}[${BCYN}Running${BMGT}]${ACID}: ${NGRN}──${ACID}> ${BMGT}Full Playlist ${BCYN}& ${BMGT}Best Quality   ${VBLU}├───────${BCYN}>${RESET}\n"
+    printf "            ${VBLU}└───────────────────────────────────────────────┘\n"
     sleep 1.0
 
     "${OPT_PLST_CMD[@]}" 2>>"$LOG_FILE"
