@@ -13,27 +13,6 @@
   BWHT="${ESC}[38;2;255;255;255m"    # ${BWHT}        #BWHT      - Bright White
   RESET="${ESC}[0m"                  # ${RESET}       $RESET     - Color Reset
 
-# <── Terminal Width Check With Failsafe ──> #
-  MIN_WIDTH=72
-   CURRENT_WIDTH="$(tput cols 2>/dev/null || echo 0)"
-    if [[ ! "$CURRENT_WIDTH" =~ ^[0-9]+$ ]] || (( CURRENT_WIDTH <= 0 )); then
-      echo "${VBLU}Unable to detect ${BMGT}terminal ${VBLU}width${BMGT}.${RESET}"
-      printf "${BCYN}┌──${BPNK}Press${BCYN}─${BPNK}Any${BCYN}─${BPNK}Button${BCYN}─To${BCYN}─Move${BCYN}─On${BCYN}──┐${RESET}\n"
-      printf "${BCYN}└──${BPNK}>${RESET}"
-      read -r -n1 -t5
-      exit 1
-    fi
-
-    if (( CURRENT_WIDTH < MIN_WIDTH )); then
-      echo "${VBLU}Terminal is too ${BMGT}narrow${BCYN}.${RESET}"
-      echo "${VBLU}Minimum width${BCYN}: ${BMGT}${MIN_WIDTH}${RESET}"
-      echo "${VBLU}Current width${BCYN}: ${BMGT}${CURRENT_WIDTH}${RESET}"
-      printf "${BCYN}┌──${BPNK}Press${BCYN}─${BPNK}Any${BCYN}─${BPNK}Button${BCYN}─To${BCYN}─Move${BCYN}─On${BCYN}──┐${RESET}\n"
-      printf "${BCYN}└──${BPNK}>${RESET}"
-      read -r -n1 -t5
-      exit 1
-    fi
-
 # <── URL Share ──> #
   URL="${1:-}"
   set -euo pipefail
