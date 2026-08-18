@@ -34,32 +34,32 @@
      #       ╚======================================================Menu===========================================================╝
 # <───── Color Setup ─────> #
 	ESC=$'\e'
-		#BLK="${ESC}[38;2;0;0;0m"          # ${BLK}   $BLK   - Black
-		#GRN="${ESC}[38;2;51;255;0m"       # ${GRN}   $GRN   - Lime Green
-		#BLU="${ESC}[38;2;0;102;255m"      # ${BLU}   $BLU   - Medium Blue
-		#GRY="${ESC}[38;2;208;208;208m"    # ${GRY}   $GRY   - Gray
+		BLK="${ESC}[38;2;0;0;0m"           # ${BLK}   $BLK   - Black
+		GRN="${ESC}[38;2;51;255;0m"        # ${GRN}   $GRN   - Lime Green
+		BLU="${ESC}[38;2;0;102;255m"       # ${BLU}   $BLU   - Medium Blue
+		GRY="${ESC}[38;2;208;208;208m"     # ${GRY}   $GRY   - Gray
 
-		#MBLU="${ESC}[38;2;25;25;112m"     # ${VBLU}  $VBLU  - Midnight Blue
-		#BONG="${ESC}[38;2;255;140;0m"     # ${BONG}  $BONG  - Pumpkin Orange
+		MBLU="${ESC}[38;2;25;25;112m"      # ${VBLU}  $VBLU  - Midnight Blue
+		BONG="${ESC}[38;2;255;140;0m"      # ${BONG}  $BONG  - Pumpkin Orange
 
 		NONG="${ESC}[38;2;255;95;0m"       # ${NONG}  $NONG  - Neon Orange
-		#BBLK="${ESC}[38;2;128;128;128m"   # ${BBLK}  $BBLK  - Bright Black
-		#NYLW="${ESC}[38;2;255;255;0m"     # ${NYLW}  $NYLW  - Neon Yellow
-		#BYLW="${ESC}[38;2;255;255;51m"    # ${BYLW}  $BYLW  - Bright Yellow
+		BBLK="${ESC}[38;2;128;128;128m"    # ${BBLK}  $BBLK  - Bright Black
+		NYLW="${ESC}[38;2;255;255;0m"      # ${NYLW}  $NYLW  - Neon Yellow
+		BYLW="${ESC}[38;2;255;255;51m"     # ${BYLW}  $BYLW  - Bright Yellow
 		BCYN="${ESC}[38;2;0;255;255m"      # ${BCYN}  $BCYN  - Cyan
 		BGRN="${ESC}[38;2;0;255;0m"        # ${BGRN}  $BGRN  - Bright Green
 		ACID="${ESC}[38;2;204;255;0m"      # ${ACID}  $ACID  - Acid Green
-		#IBLU="${ESC}[38;2;75;0;130m"      # ${IBLU}  $IBLU  - Indigo Blue
+		IBLU="${ESC}[38;2;75;0;130m"       # ${IBLU}  $IBLU  - Indigo Blue
 		VBLU="${ESC}[38;2;138;43;226m"     # ${VBLU}  $VBLU  - Violet Blue
 		NPPL="${ESC}[38;2;188;19;254m"     # ${NPPL}  $NPPL  - Neon Purple
-		BPNK="${ESC}[38;2;255;16;240m"     # ${BPNK}  $BPNK   - Bright Magenta
+		BPNK="${ESC}[38;2;255;16;240m"     # ${BPNK}  $BPNK  - Bright Magenta
 		BWHT="${ESC}[38;2;255;255;255m"    # ${BWHT}  $BWHT  - Bright White
-		RESET="${ESC}[0m"		   # ${RESET} $RESET - Resets The Color
+		RESET="${ESC}[0m"		   		   # ${RESET} $RESET - Resets The Color
 
 # <───── Update Packages ─────> #
  echo
  printf "${VBLU}Updating ${BCYN}Default ${VBLU}Packages${RESET}\n\n"
- read -r -n1 -t5
+ read -r -n1 -t3
  "pkg" update -y && pkg upgrade -y && pkg update -y && pkg upgrade -y
  "pkg" install ruby -y
  "gem" install lolcat
@@ -70,9 +70,9 @@
  "pkg" install yt-dlp -y | lolcat
  "pkg" install toilet -y | lolcat
  printf "\n"
- printf "┌──Press─Any─Button─To─Move─On──┐\n"
- printf "└──>"
- read -r -n1 -t4
+ printf "${BCYN}┌──${BPNK}Press${BCYN}─${BPNK}Any${BCYN}─${BPNK}Button${BCYN}─To${BCYN}─Move${BCYN}─On${BCYN}──┐\n"
+ printf "${BCYN}└──>"
+ read -r -n1 -t3
  clear
 # <───── Fam-Hacker Banner ─────> #
  printf "\n"
@@ -105,8 +105,8 @@
  date +"%l:%M:%S %p" | lolcat
  echo " "
  printf "You Will Need To Give Termux Permission To Access Your Storage.\n\n"
- printf "┌──Press─Any─Button─To─Move─On──┐\n"
- printf "└──>"
+ printf "${BCYN}┌──${BPNK}Press${BCYN}─${BPNK}Any${BCYN}─${BPNK}Button${BCYN}─To${BCYN}─Move${BCYN}─On${BCYN}──┐\n"
+ printf "${BCYN}└──>"
  read -r -n1 -t5
  termux-setup-storage | lolcat
  clear
@@ -161,38 +161,38 @@
 
 # <───── Create Termux-Playlist─URL─Script─────> #
  echo
- printf "Now Creating termux-playlist-url.sh\n"
+ printf "${VBLU}Now Creating ${BPNK}termux${BCYN}-${BPNK}playlist${BCYN}-${BPNK}url${BCYN}.${BPNK}sh\n"
  sleep 2.0
  chmod +x termux-playlist-url.sh
  mv termux-playlist-url.sh ~/bin/
  printf "\n"
- printf "┌──Press─Any─Button─To─Move─On──┐\n"
- printf "└──>"
- read -r -n1 -t4
+ printf "${BCYN}┌──${BPNK}Press${BCYN}─${BPNK}Any${BCYN}─${BPNK}Button${BCYN}─To${BCYN}─Move${BCYN}─On${BCYN}──┐\n"
+ printf "${BCYN}└──>"
+ read -r -n1 -t3
  clear
 
 # <───── Create Termux-Playlist─URL─MKV─Script─────> #
  echo
- printf "Now Creating termux-playlist-url-mkv.sh\n"
+ printf "${VBLU}Now Creating ${BPNK}termux${BCYN}-${BPNK}playlist${BCYN}-${BPNK}url${BCYN}-${BPNK}mkv${BCYN}.${BPNK}sh\n"
  sleep 2.0
  chmod +x termux-playlist-url-mkv.sh
  mv termux-playlist-url-mkv.sh ~/bin/
  printf "\n"
- printf "┌──Press─Any─Button─To─Move─On──┐\n"
- printf "└──>"
- read -r -n1 -t4
+ printf "${BCYN}┌──${BPNK}Press${BCYN}─${BPNK}Any${BCYN}─${BPNK}Button${BCYN}─To${BCYN}─Move${BCYN}─On${BCYN}──┐\n"
+ printf "${BCYN}└──>"
+ read -r -n1 -t3
  clear
 
 # <───── Create Termux-File-Editor Script─────> #
  echo
- printf "Now Creating termux-file-editor\n"
+ printf "${VBLU}Now Creating ${BPNK}termux${BCYN}-${BPNK}file${BCYN}-${BPNK}editor\n"
  sleep 2.0
  chmod +x termux-file-editor
  mv termux-file-editor ~/bin/
  printf "\n"
- printf "┌──Press─Any─Button─To─Move─On──┐\n"
- printf "└──>"
- read -r -n1 -t4
+ printf "${BCYN}┌──${BPNK}Press${BCYN}─${BPNK}Any${BCYN}─${BPNK}Button${BCYN}─To${BCYN}─Move${BCYN}─On${BCYN}──┐\n"
+ printf "${BCYN}└──>"
+ read -r -n1 -t3
  clear
 
 # <───── Create Termux-URL-Opener Script─────> #
@@ -202,21 +202,21 @@
  chmod +x termux-url-opener
  mv termux-url-opener ~/bin/
  printf "\n"
- printf "┌──Press─Any─Button─To─Move─On──┐\n"
- printf "└──>"
- read -r -n1 -t4
+ printf "${BCYN}┌──${BPNK}Press${BCYN}─${BPNK}Any${BCYN}─${BPNK}Button${BCYN}─To${BCYN}─Move${BCYN}─On${BCYN}──┐\n"
+ printf "${BCYN}└──>"
+ read -r -n1 -t3
  clear
 
 # <───── Create Termux─URL─Bash─Script─────> #
  echo
- printf "Now Creating termux-url-opener.sh\n"
+ printf "${VBLU}Now Creating ${BPNK}termux${BCYN}-${BPNK}url${BCYN}-${BPNK}opener${BCYN}.${BPNK}sh\n"
  sleep 2.0
  chmod +x termux-url-opener.sh
  mv termux-url-opener.sh ~/bin/
  printf "\n"
- printf "┌──Press─Any─Button─To─Move─On──┐\n"
- printf "└──>"
- read -r -n1 -t4
+ printf "${BCYN}┌──${BPNK}Press${BCYN}─${BPNK}Any${BCYN}─${BPNK}Button${BCYN}─To${BCYN}─Move${BCYN}─On${BCYN}──┐\n"
+ printf "${BCYN}└──>"
+ read -r -n1 -t3
  clear
 
 # <───── Outro ─────> #
@@ -224,7 +224,8 @@
  echo " "
  cowsay -r "You Can Now Download Any YouTube Video To A .MKV File by Sharing Any URL to Termux from YouTube, As Well As Download Torrent Files by Clicking Edit When Opening Through Termux." | lolcat
  echo " "
- printf "┌──Please─Press─Any─Button─To─Continue──┐\n└─>: "
+ printf "${BCYN}┌──${BPNK}Press${BCYN}─${BPNK}Any${BCYN}─${BPNK}Button${BCYN}─To${BCYN}─Move${BCYN}─On${BCYN}──┐\n"
+ printf "${BCYN}└──>"
  read -n1 -r -t3
  clear
  exit

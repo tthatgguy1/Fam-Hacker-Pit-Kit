@@ -1,32 +1,38 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
-# <── Manual URL Entry (Not in Use) ──> #
-  #printf '%b\n' "${VBLU}┌──${BCYN}Enter${VBLU}─${BCYN}Any${VBLU}─${BCYN}YouTube${VBLU}─${BMGT}URL${VBLU}─${BCYN}Here${VBLU}──┐${RESET}"
-  #printf '%b'   "${VBLU}└──${BCYN}>${BMGT}:${ACID} "
-  #IFS= read -r URL
-  #URL="${URL#"${URL%%[![:space:]]*}"}"; URL="${URL%"${URL##*[![:space:]]}"}"  # trim
-  #
-  #if [[ -z "$URL" ]]; then
-  #  printf '%b\n' "${BWHT}No ${NONG}URL ${BWHT}entered. Exiting.${RESET}"
-  #  exit 2
-  #fi
-  #clear
-  #
-  # <── Nah-Fam_Studies ──> #
-  #echo '
-  #   ─███████╗╔█████╗─███╗───███╗─██╗──██╗╔█████╗─╔██████╗██╗──██╗██████╗─
-  #   ─██╔════╝██╔══██╗████╗─████║─██║──██║██╔══██╗██╔════╝██║─██╔╝██╔══██╗
-  #   ─█████╗──███████║██╔████╔██║─███████║███████║██║─────█████╔╝─██████╔╝
-  #   ─██╔══╝──██╔══██║██║╚██╔╝██║─██╔══██║██╔══██║██║─────██╔═██╗─██╔══██╗
-  #   ─██║─────██║──██║██║─╚═╝─██║─██║──██║██║──██║╚██████╗██║──██╗██║──██║
-  #   ─╚═╝─────╚═╝──╚═╝╚═╝─────╚═╝─╚═╝──╚═╝╚═╝──╚═╝─╚═════╝╚═╝──╚═╝╚═╝──╚═╝
-  #   ──────────╔██████╗██╗─────██╗███████╗███╗───██╗████████╗─────────────
-  #   ──────────██╔════╝██║─────██║██╔════╝████╗──██║╚══██╔══╝─────────────
-  #   ──────────██║─────██║─────██║█████╗──██╔██╗─██║───██║────────────────
-  #   ──────────██║─────██║─────██║██╔══╝──██║╚██╗██║───██║────────────────
-  #   ──────────╚██████╗███████╗██║███████╗██║─╚████║───██║────────────────
-  #   ───────────╚═════╝╚══════╝╚═╝╚══════╝╚═╝──╚═══╝───╚═╝────────────────
-  #   ------------------------[Nah-Fam_Studios]----------------------------' | lolcat --seed 94
+# <── Colors ──> #
+  ESC=$'\e'
+  NGRN="${ESC}[38;2;51;255;0m"       # ${NGRN}        $NGRN      - Lime Green
+  BMGT="${ESC}[38;2;255;16;240m"     # ${BMGT}        $BMGT      - Bright Magenta
+  NONG="${ESC}[38;2;255;95;0m"       # ${NONG}        $NONG      - Neon Orange
+  BCYN="${ESC}[38;2;0;255;255m"      # ${BCYN}        $BCYN      - Cyan
+  ACID="${ESC}[38;2;204;255;0m"      # ${ACID}        $ACID      - Acid Green
+  VBLU="${ESC}[38;2;138;43;226m"     # ${VBLU}        $VBLU      - Violet Blue
+  MMDB="${ESC}[38;2;25;25;112m"      # ${MMDB}        $MMDB      - Midnight Blue
+  NPPL="${ESC}[38;2;188;19;254m"     # ${NPPL}        $NPPL      - Neon Purple
+  BWHT="${ESC}[38;2;255;255;255m"    # ${BWHT}        #BWHT      - Bright White
+  RESET="${ESC}[0m"                  # ${RESET}       $RESET     - Color Reset
+
+# <── Terminal Width Check With Failsafe ──> #
+  MIN_WIDTH=72
+   CURRENT_WIDTH="$(tput cols 2>/dev/null || echo 0)"
+    if [[ ! "$CURRENT_WIDTH" =~ ^[0-9]+$ ]] || (( CURRENT_WIDTH <= 0 )); then
+      echo "${VBLU}Unable to detect ${BMGT}terminal ${VBLU}width${BMGT}.${RESET}"
+      printf "${BCYN}┌──${BPNK}Press${BCYN}─${BPNK}Any${BCYN}─${BPNK}Button${BCYN}─To${BCYN}─Move${BCYN}─On${BCYN}──┐${RESET}\n"
+      printf "${BCYN}└──${BPNK}>${RESET}"
+      read -r -n1 -t5
+      exit 1
+    fi
+
+    if (( CURRENT_WIDTH < MIN_WIDTH )); then
+      echo "${VBLU}Terminal is too ${BMGT}narrow${BCYN}.${RESET}"
+      echo "${VBLU}Minimum width${BCYN}: ${BMGT}${MIN_WIDTH}${RESET}"
+      echo "${VBLU}Current width${BCYN}: ${BMGT}${CURRENT_WIDTH}${RESET}"
+      printf "${BCYN}┌──${BPNK}Press${BCYN}─${BPNK}Any${BCYN}─${BPNK}Button${BCYN}─To${BCYN}─Move${BCYN}─On${BCYN}──┐${RESET}\n"
+      printf "${BCYN}└──${BPNK}>${RESET}"
+      read -r -n1 -t5
+      exit 1
+    fi
 
 # <── URL Share ──> #
   URL="${1:-}"
@@ -41,21 +47,8 @@
 # <── Make Necessary Paths ──> #
   mkdir -p "$VIDEO_OUT" "$LOG_DIR"
   mkdir -p "$AUDIO_OUT" "$LOG_DIR"
-
-# <── Colors ──> #
-  ESC=$'\e'
-  NGRN="${ESC}[38;2;51;255;0m"       # ${NGRN}        $NGRN      - Lime Green
-  BMGT="${ESC}[38;2;255;16;240m"     # ${BMGT}        $BMGT      - Bright Magenta
-  NONG="${ESC}[38;2;255;95;0m"       # ${NONG}        $NONG      - Neon Orange
-  BCYN="${ESC}[38;2;0;255;255m"      # ${BCYN}        $BCYN      - Cyan
-  ACID="${ESC}[38;2;204;255;0m"      # ${ACID}        $ACID      - Acid Green
-  VBLU="${ESC}[38;2;138;43;226m"     # ${VBLU}        $VBLU      - Violet Blue
-  MMDB="${ESC}[38;2;25;25;112m"      # ${MMDB}        $MMDB      - Midnight Blue
-  NPPL="${ESC}[38;2;188;19;254m"     # ${NPPL}        $NPPL      - Neon Purple
-  BWHT="${ESC}[38;2;255;255;255m"    # ${BWHT}        #BWHT      - Bright White
-  RESET="${ESC}[0m"                  # ${RESET}       $RESET     - Color Reset
-
   clear
+
 # <── Nah-Fam_Studies ──> #
   echo '
    ─███████╗╔█████╗─███╗───███╗─██╗──██╗╔█████╗─╔██████╗██╗──██╗██████╗─
@@ -265,11 +258,10 @@
     ${VBLU}Resolution${RESET}"
 
   OPTION_PLST="${VBLU}Download${RESET} \
-    ${BCYN}Video${RESET} \
     ${VBLU}Playlist${RESET} \
     ${BCYN}In${RESET} \
     ${VBLU}Highest${RESET} \
-    ${VBLU}Resolution${RESET}"
+    ${VBLU}Res${RESET}"
 
   OPTION_B3="${VBLU}Download An${RESET} \
     ${BCYN}MP3${RESET} \
