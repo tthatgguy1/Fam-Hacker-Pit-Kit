@@ -1,9 +1,9 @@
 #!/data/data/com.termux/files/usr/bin/bash
-	# Project name : Fam-Hacker-Pit-Kit
-	# Coded by: tthatgguy1 (You dont become a coder by just changing the credits
-	# Github: https://github.com/tthatgguy1/Fam-Hacker-Pit-Kit
-	# Date : 12/04/2024
-	# Updated 09/09/2025
+  # Project name: Fam-Hacker-Pit-Kit
+  # Coded by: tthatgguy1 (You dont become a coder by just changing the credits)
+  # Github: https://github.com/tthatgguy1/Fam-Hacker-Pit-Kit
+  # Date: 12/04/2024
+  # Updated 08/21/2026
 
 # <───── Rare Logo ─────> #
 	 clear
@@ -69,9 +69,9 @@
  "pkg" install python ffmpeg -y | lolcat
  "pkg" install yt-dlp -y | lolcat
  "pkg" install toilet -y | lolcat
- printf "\n"
- printf "${BCYN}┌──${BPNK}Press${BCYN}─${BPNK}Any${BCYN}─${BPNK}Button${BCYN}─To${BCYN}─Move${BCYN}─On${BCYN}──┐\n"
- printf "${BCYN}└──>"
+ printf "\n\n"
+ printf "${BCYN}┌──${BPNK}Press${BCYN}─${BPNK}Any${BCYN}─${BPNK}Button${BCYN}─${BPNK}To${BCYN}─${BPNK}Move${BCYN}─${BPNK}On${BCYN}──┐\n"
+ printf "${BCYN}└──${BPNK}>${BCYN}"
  read -r -n1 -t3
  clear
 # <───── Fam-Hacker Banner ─────> #
@@ -95,19 +95,20 @@
  clear
 
 # <───── Date & Time With Cowsay ─────> #
- printf "┌──Press─Any─Button─To─Move─On──┐\n"
- printf "└──>"
- read -r -n1 -t5
+ printf "\n\n"
+ printf "${BCYN}┌──${BPNK}Press${BCYN}─${BPNK}Any${BCYN}─${BPNK}Button${BCYN}─${BPNK}To${BCYN}─${BPNK}Move${BCYN}─${BPNK}On${BCYN}──┐\n"
+ printf "${BCYN}└──${BPNK}>${BCYN}"
+ read -r -n1 -t3
  clear
 
 # <───── Ternux Storage Setup ─────> #
- echo " "
+ printf "\n"
  date +"%l:%M:%S %p" | lolcat
- echo " "
+ printf "\n\n"
  printf "You Will Need To Give Termux Permission To Access Your Storage.\n\n"
- printf "${BCYN}┌──${BPNK}Press${BCYN}─${BPNK}Any${BCYN}─${BPNK}Button${BCYN}─To${BCYN}─Move${BCYN}─On${BCYN}──┐\n"
- printf "${BCYN}└──>"
- read -r -n1 -t5
+ printf "${BCYN}┌──${BPNK}Press${BCYN}─${BPNK}Any${BCYN}─${BPNK}Button${BCYN}─${BPNK}To${BCYN}─${BPNK}Move${BCYN}─${BPNK}On${BCYN}──┐\n"
+ printf "${BCYN}└──${BPNK}>${BCYN}"
+ read -r -n1 -t3
  termux-setup-storage | lolcat
  clear
 
@@ -145,8 +146,10 @@
 
 # <───── Create Cookies ─────> #
  mkdir ~/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/Cookies
- printf "${VBLU}Created ${BPNK}Cookies\n"
- sleep 2.0
+ printf "${VBLU}Created ${BPNK}Cookies\n\n"
+ printf "${BCYN}┌──${BPNK}Press${BCYN}─${BPNK}Any${BCYN}─${BPNK}Button${BCYN}─${BPNK}To${BCYN}─${BPNK}Move${BCYN}─${BPNK}On${BCYN}──┐\n"
+ printf "${BCYN}└──${BPNK}>${BCYN}"
+ read -r -n1 -t6
  clear
 
 # <───── Move Sound Effects ─────> #
@@ -165,9 +168,9 @@
  sleep 2.0
  chmod +x termux-playlist-url.sh
  mv termux-playlist-url.sh ~/bin/
- printf "\n"
- printf "${BCYN}┌──${BPNK}Press${BCYN}─${BPNK}Any${BCYN}─${BPNK}Button${BCYN}─To${BCYN}─Move${BCYN}─On${BCYN}──┐\n"
- printf "${BCYN}└──>"
+ printf "\n\n"
+ printf "${BCYN}┌──${BPNK}Press${BCYN}─${BPNK}Any${BCYN}─${BPNK}Button${BCYN}─${BPNK}To${BCYN}─${BPNK}Move${BCYN}─${BPNK}On${BCYN}──┐\n"
+ printf "${BCYN}└──${BPNK}>${BCYN}"
  read -r -n1 -t3
  clear
 
@@ -177,9 +180,9 @@
  sleep 2.0
  chmod +x termux-playlist-url-mkv.sh
  mv termux-playlist-url-mkv.sh ~/bin/
- printf "\n"
- printf "${BCYN}┌──${BPNK}Press${BCYN}─${BPNK}Any${BCYN}─${BPNK}Button${BCYN}─To${BCYN}─Move${BCYN}─On${BCYN}──┐\n"
- printf "${BCYN}└──>"
+ printf "\n\n"
+ printf "${BCYN}┌──${BPNK}Press${BCYN}─${BPNK}Any${BCYN}─${BPNK}Button${BCYN}─${BPNK}To${BCYN}─${BPNK}Move${BCYN}─${BPNK}On${BCYN}──┐\n"
+ printf "${BCYN}└──${BPNK}>${BCYN}"
  read -r -n1 -t3
  clear
 
@@ -189,9 +192,9 @@
  sleep 2.0
  chmod +x termux-file-editor
  mv termux-file-editor ~/bin/
- printf "\n"
- printf "${BCYN}┌──${BPNK}Press${BCYN}─${BPNK}Any${BCYN}─${BPNK}Button${BCYN}─To${BCYN}─Move${BCYN}─On${BCYN}──┐\n"
- printf "${BCYN}└──>"
+ printf "\n\n"
+ printf "${BCYN}┌──${BPNK}Press${BCYN}─${BPNK}Any${BCYN}─${BPNK}Button${BCYN}─${BPNK}To${BCYN}─${BPNK}Move${BCYN}─${BPNK}On${BCYN}──┐\n"
+ printf "${BCYN}└──${BPNK}>${BCYN}"
  read -r -n1 -t3
  clear
 
@@ -201,9 +204,9 @@
  sleep 2.0
  chmod +x termux-url-opener
  mv termux-url-opener ~/bin/
- printf "\n"
- printf "${BCYN}┌──${BPNK}Press${BCYN}─${BPNK}Any${BCYN}─${BPNK}Button${BCYN}─To${BCYN}─Move${BCYN}─On${BCYN}──┐\n"
- printf "${BCYN}└──>"
+ printf "\n\n"
+ printf "${BCYN}┌──${BPNK}Press${BCYN}─${BPNK}Any${BCYN}─${BPNK}Button${BCYN}─${BPNK}To${BCYN}─${BPNK}Move${BCYN}─${BPNK}On${BCYN}──┐\n"
+ printf "${BCYN}└──${BPNK}>${BCYN}"
  read -r -n1 -t3
  clear
 
@@ -213,19 +216,19 @@
  sleep 2.0
  chmod +x termux-url-opener.sh
  mv termux-url-opener.sh ~/bin/
- printf "\n"
- printf "${BCYN}┌──${BPNK}Press${BCYN}─${BPNK}Any${BCYN}─${BPNK}Button${BCYN}─To${BCYN}─Move${BCYN}─On${BCYN}──┐\n"
- printf "${BCYN}└──>"
+ printf "\n\n"
+ printf "${BCYN}┌──${BPNK}Press${BCYN}─${BPNK}Any${BCYN}─${BPNK}Button${BCYN}─${BPNK}To${BCYN}─${BPNK}Move${BCYN}─${BPNK}On${BCYN}──┐\n"
+ printf "${BCYN}└──${BPNK}>${BCYN}"
  read -r -n1 -t3
  clear
 
 # <───── Outro ─────> #
  echo " "
  echo " "
- cowsay -r "You Can Now Download Any YouTube Video To A .MKV File by Sharing Any URL to Termux from YouTube, As Well As Download Torrent Files by Clicking Edit When Opening Through Termux." | lolcat
- echo " "
- printf "${BCYN}┌──${BPNK}Press${BCYN}─${BPNK}Any${BCYN}─${BPNK}Button${BCYN}─To${BCYN}─Move${BCYN}─On${BCYN}──┐\n"
- printf "${BCYN}└──>"
- read -n1 -r -t3
+ cowsay -r "You Can Now Download Any YouTube Video To A .MKV File by Sharing Any URL to Termux from YouTube, As Well As Download Torrent Files by Clicking Edit When Opening Through Termux." | lolcat --seed 75
+ printf "\n\n"
+ printf "${BCYN}┌──${BPNK}Press${BCYN}─${BPNK}Any${BCYN}─${BPNK}Button${BCYN}─${BPNK}To${BCYN}─${BPNK}Move${BCYN}─${BPNK}On${BCYN}──┐\n"
+ printf "${BCYN}└──${BPNK}>${BCYN}"
+ read -r -n1 -t3
  clear
  exit

@@ -1,4 +1,9 @@
 #!/data/data/com.termux/files/usr/bin/bash
+  # Project name: Fam-Hacker-Pit-Kit
+  # Coded by: tthatgguy1 (You dont become a coder by just changing the credits)
+  # Github: https://github.com/tthatgguy1/Fam-Hacker-Pit-Kit
+  # Date: 12/04/2024
+  # Updated 08/21/2026
 
 # <── Colors ──> #
   ESC=$'\e'
@@ -17,11 +22,27 @@
   URL="${1:-}"
   set -euo pipefail
 
-# <── Set Paths ──> #
+# <── Set Paths and Cookies File ──> #
   VIDEO_OUT="$HOME/storage/shared/Fam-Hacker-Pit-Kit/YouTube-Video-Pit"
   AUDIO_OUT="$HOME/storage/shared/Fam-Hacker-Pit-Kit/YouTube-Audio-Pit"
-  COOKIES_FILE="$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/Cookies"
   LOG_DIR="$HOME/storage/shared/Fam-Hacker-Pit-Kit/.cache/YouTube_Single-Downloads"
+  COOKIES_FILE="$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/Cookies/cookies.txt"
+
+# <───── Sound Effects Setup ─────> #
+  MDLD="mpv $HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/MDLD.mp3"
+  DLCOMPLT="mpv $HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/c.mp3"
+  ECHOSOUND="mpv $HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/FHS.mp3"
+  TXS="mpv $HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/TXS.mp3"
+  DEATH="mpv $HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/MFGTA.mp3"
+  SKULL="mpv $HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/SKL.mp3"
+  DTCL="mpv $HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/MDATA.mp3"
+
+# <── Cookies Check ──>
+  if [[ ! -f "$COOKIES_FILE" ]]; then
+    printf '%s\n' "Cookies file not found:"
+    printf '%s\n' "$COOKIES_FILE"
+    exit 1
+  fi
 
 # <── Make Necessary Paths ──> #
   mkdir -p "$VIDEO_OUT" "$LOG_DIR"
@@ -47,8 +68,8 @@
   printf '\n\n'
 
 # <── Intro Sounds (Nah-Fam_Studios) ──> #
-  mpv "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/SKL.mp3" >/dev/null 2>&1 || true
-  mpv "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/MDATA.mp3" >/dev/null 2>&1 || true
+  ${SKULL} > /dev/null 2>&1 || true
+  ${DTCL} >/dev/null 2>&1 || true
   printf '\n\n'
 
 # <── Channel Strings (Robust) ──> #
@@ -75,7 +96,7 @@
     yt-dlp \
     -q \
     --playlist-items 1 \
-    --cookies "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/Cookies/cookies.txt" \
+    --cookies "$COOKIES_FILE" \
     --no-warnings \
     --print "$FMT" \
     "$URL"
@@ -108,7 +129,9 @@
   OPT_BMKV_CMD=(
     yt-dlp
       -f "bv*+ba/b"
-      -o "$VIDEO_OUT/%(uploader)s/%(uploader)s - %(title)s [%(height)sp].mkv"
+      --replace-in-metadata "uploader" "/" "﹨"
+      --replace-in-metadata "title" ":\s*" " - "
+      -o "$VIDEO_OUT/%(uploader)s/%(uploader)s - %(title)s [%(height)sp].%(ext)s"
       --progress
       --quiet
       --no-playlist
@@ -124,6 +147,7 @@
       --embed-thumbnail
       --embed-chapters
       --merge-output-format mkv
+      --remux-video mkv
       --progress-template "$PROGRESS_TEMPLATE"
       "$URL"
   )
@@ -132,11 +156,13 @@
   OPT_2K_CAP_CMD=(
     yt-dlp
       -f "bv*[height<=1440]+ba/b[height<=1440]"
-      -o "$VIDEO_OUT/%(uploader)s/%(uploader)s - %(title)s [%(height)sp].mkv"
+      --replace-in-metadata "uploader" "/" "﹨"
+      --replace-in-metadata "title" ":\s*" " - "
+      -o "$VIDEO_OUT/%(uploader)s/%(uploader)s - %(title)s [%(height)sp].%(ext)s"
       --progress
       --quiet
       --no-playlist
-      --cookies "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/Cookies/cookies.txt"
+      --cookies "$COOKIES_FILE"
       --console-title
       --no-check-formats
       --no-warnings
@@ -148,6 +174,7 @@
       --embed-thumbnail
       --embed-chapters
       --merge-output-format mkv
+      --remux-video mkv
       --progress-template "$PROGRESS_TEMPLATE"
       "$URL"
   )
@@ -156,11 +183,13 @@
   OPT_1080p_CAP_CMD=(
     yt-dlp
       -f "bv*[height<=1080]+ba/b[height<=1080]"
-      -o "$VIDEO_OUT/%(uploader)s/%(uploader)s - %(title)s [%(height)sp].mkv"
+      --replace-in-metadata "uploader" "/" "﹨"
+      --replace-in-metadata "title" ":\s*" " - "
+      -o "$VIDEO_OUT/%(uploader)s/%(uploader)s - %(title)s [%(height)sp].%(ext)s"
       --progress
       --quiet
       --no-playlist
-      --cookies "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/Cookies/cookies.txt"
+      --cookies "$COOKIES_FILE"
       --console-title
       --no-check-formats
       --no-warnings
@@ -172,6 +201,7 @@
       --embed-thumbnail
       --embed-chapters
       --merge-output-format mkv
+      --remux-video mkv
       --progress-template "$PROGRESS_TEMPLATE"
       "$URL"
   )
@@ -180,11 +210,14 @@
   OPT_PLST_CMD=(
     yt-dlp
       -f "bv*+ba/b"
-      -o "$VIDEO_OUT/%(uploader)s/%(playlist_title,replace="/","﹨")s/%(uploader)s - %(title)s [%(height)sp].mkv"
+      --replace-in-metadata "uploader" "/" "﹨"
+      --replace-in-metadata "playlist_title" "/" "﹨"
+      --replace-in-metadata "title" ":\s*" " - "
+      -o "$VIDEO_OUT/%(uploader)s/%(playlist_title)s/%(uploader)s - %(title)s [%(height)sp].%(ext)s"
       --progress
       --quiet
       --yes-playlist
-      --cookies "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/Cookies/cookies.txt"
+      --cookies "$COOKIES_FILE"
       --console-title
       --no-check-formats
       --no-warnings
@@ -196,6 +229,7 @@
       --embed-thumbnail
       --embed-chapters
       --merge-output-format mkv
+      --remux-video mkv
       --progress-template "$PROGRESS_TEMPLATE"
       "$URL"
   )
@@ -207,7 +241,7 @@
       -o "$AUDIO_OUT/%(uploader)s/%(uploader)s - %(title)s.mp3"
       --quiet
       --progress
-      --cookies "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/Cookies/cookies.txt"
+      --cookies "$COOKIES_FILE"
       --no-playlist
       --console-title
       --no-check-formats
@@ -265,7 +299,7 @@
    ───────────╚═════╝╚══════╝╚═╝╚══════╝╚═╝──╚═══╝───╚═╝────────────────
    ------------------------[Nah-Fam_Studios]----------------------------' | lolcat --seed 92
 
-# <── Menue Select ──> #
+# <── Menu Select ──> #
   printf "\n\n"
   printf "  ${VBLU}┌───────────────────────────────────────────────────────────┐\n"
   printf "  ${VBLU}│ ${BMGT}[${BCYN}1${BMGT}] %s  ${VBLU}│\n" "$OPTION_BMKV"
@@ -278,7 +312,7 @@
   printf "  ${VBLU}├───────────────────────────────────────────────────────────┤\n"
   printf "  ${VBLU}│ ${BMGT}[${BCYN}5${BMGT}] %s                            ${VBLU}│\n" "$OPTION_B3"
   printf "  ${VBLU}├───────────────────────────────────────────────────────────┤\n"
-  printf "  ${VBLU}│ ${BWHT}[${NONG}E${BWHT}] ${BCYN}Press ${BWHT}[${NONG}Enter${BWHT}] ${BCYN}For ${BMGT}Default ${BCYN}Option [%d] ${VBLU}│\n" "$DEFAULT"
+  printf "  ${VBLU}│ ${BWHT}[${NONG}E${BWHT}] ${BCYN}Press ${BWHT}[${NONG}Enter${BWHT}] ${BCYN}For ${BMGT}Default ${BCYN}Option [%d]                   ${VBLU}│\n" "$DEFAULT"
   printf "  ${VBLU}└───────────────────────────────────────────────────────────┘${RESET}\n\n"
 
   printf "  ${VBLU}┌──${BCYN}Press${VBLU}─${BCYN}Any${VBLU}─${BCYN}Button${VBLU}─${BCYN}To${VBLU}─${BCYN}Choose${VBLU}──┐${RESET}\n"
@@ -323,20 +357,26 @@
     printf "            ${VBLU}┌───────────────────────────────────────────────┐\n"
     printf "    ${BCYN}<${VBLU}───────┤ ${BMGT}[${BCYN}Running${BMGT}]${ACID}: ${NGRN}──${ACID}> ${BWHT}Highest Quality Video Download ${VBLU}├───────${BCYN}>${RESET}\n"
     printf "            ${VBLU}└───────────────────────────────────────────────┘\n"
+
+    ${MDLD} > /dev/null 2>&1 || true
     sleep 1.0
 
     "${OPT_BMKV_CMD[@]}" 2>>"$LOG_FILE"
     rc=$?
 
     if [ "$rc" -eq 0 ]; then
-      mpv "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/c.mp3" >/dev/null 2>&1
-      mpv "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/FHS.mp3" >/dev/null 2>&1
+      ${DLCOMPLT} > /dev/null 2>&1 || true
+      ${ECHOSOUND} > /dev/null 2>&1 || true
       cowsay -r "Your MKV File Has Downloaded Successfully" | lolcat
-      mpv "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/TXS.mp3" >/dev/null 2>&1
+      ${TXS} > /dev/null 2>&1 || true
       sleep 2.0
       clear
     else
-      mpv "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/MFGTA.mp3" >/dev/null 2>&1
+      ${DEATH} > /dev/null 2>&1 || true
+      printf "Your MKV file has failed to download!\n\n"
+      printf "${VBLU}┌──${BCYN}Press${VBLU}─${BCYN}Any${VBLU}─${BCYN}Button${VBLU}─${BCYN}To${VBLU}─${BCYN}Move${VBLU}─${BCYN}On${VBLU}──┐${RESET}\n"
+      printf "${VBLU}└──${BCYN}>${BMGT}:${ACID}"
+      read -r -n1 -t3
       clear
     fi
   ;;
@@ -376,20 +416,25 @@
     printf "    ${BCYN}<${VBLU}──────┤  ${BMGT}[${BCYN}Running${BMGT}]${ACID}: ${NGRN}──${ACID}>  ${BMGT}1440p Quality ${BCYN}& ${BMGT}Best Audio   ${VBLU}├────────${BCYN}>\n"
     printf "           ${VBLU}└───────────────────────────────────────────────┘${RESET}\n"
 
+    ${MDLD} > /dev/null 2>&1 || true
     sleep 1.0
 
     "${OPT_1440p_CAP_CMD[@]}" 2>>"$LOG_FILE"
     rc=$?
 
     if [ "$rc" -eq 0 ]; then
-      mpv "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/c.mp3" >/dev/null 2>&1
-      mpv "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/FHS.mp3" >/dev/null 2>&1
+      ${DLCOMPLT} > /dev/null 2>&1 || true
+      ${ECHOSOUND} > /dev/null 2>&1 || true
       cowsay -r "Your MKV File Has Downloaded Successfully" | lolcat
-      mpv "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/TXS.mp3" >/dev/null 2>&1
+      ${TXS} > /dev/null 2>&1 || true
       sleep 2.0
       clear
     else
-      mpv "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/MFGTA.mp3" >/dev/null 2>&1
+      ${DEATH} > /dev/null 2>&1 || true
+      printf "Your MKV file has failed to download!\n\n"
+      printf "${VBLU}┌──${BCYN}Press${VBLU}─${BCYN}Any${VBLU}─${BCYN}Button${VBLU}─${BCYN}To${VBLU}─${BCYN}Move${VBLU}─${BCYN}On${VBLU}──┐${RESET}\n"
+      printf "${VBLU}└──${BCYN}>${BMGT}:${ACID}"
+      read -r -n1 -t3
       clear
     fi
   ;;
@@ -427,20 +472,26 @@
     printf "           ${VBLU}┌───────────────────────────────────────────────┐\n"
     printf "   ${BCYN}<${VBLU}───────┤ ${BMGT}[${BCYN}Running${BMGT}]${ACID}: ${NGRN}──${ACID}> ${BMGT}1080p Quality ${BCYN}& ${BMGT}Best Audio ${VBLU}├───────${BCYN}>${RESET}\n"
     printf "           ${VBLU}└───────────────────────────────────────────────┘\n"
+
+    ${MDLD} > /dev/null 2>&1 || true
     sleep 1.0
 
     "${OPT_1080p_CAP_CMD[@]}" 2>>"$LOG_FILE"
     rc=$?
 
     if [ "$rc" -eq 0 ]; then
-      mpv "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/c.mp3" >/dev/null 2>&1
-      mpv "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/FHS.mp3" >/dev/null 2>&1
+      ${DLCOMPLT} > /dev/null 2>&1 || true
+      ${ECHOSOUND} > /dev/null 2>&1 || true
       cowsay -r "Your MKV File Has Downloaded Successfully" | lolcat
-      mpv "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/TXS.mp3" >/dev/null 2>&1
+      ${TXS} > /dev/null 2>&1 || true
       sleep 2.0
       clear
     else
-      mpv "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/MFGTA.mp3" >/dev/null 2>&1
+      ${DEATH} > /dev/null 2>&1 || true
+      printf "Your MKV file has failed to download!\n\n"
+      printf "${VBLU}┌──${BCYN}Press${VBLU}─${BCYN}Any${VBLU}─${BCYN}Button${VBLU}─${BCYN}To${VBLU}─${BCYN}Move${VBLU}─${BCYN}On${VBLU}──┐${RESET}\n"
+      printf "${VBLU}└──${BCYN}>${BMGT}:${ACID}"
+      read -r -n1 -t3
       clear
     fi
   ;;
@@ -478,20 +529,26 @@
     printf "            ${VBLU}┌───────────────────────────────────────────────┐\n"
     printf "    ${BCYN}<${VBLU}───────┤ ${BMGT}[${BCYN}Running${BMGT}]${ACID}: ${NGRN}──${ACID}> ${BMGT}Full Playlist ${BCYN}& ${BMGT}Best Quality   ${VBLU}├───────${BCYN}>${RESET}\n"
     printf "            ${VBLU}└───────────────────────────────────────────────┘\n"
+
+    ${MDLD} > /dev/null 2>&1 || true
     sleep 1.0
 
     "${OPT_PLST_CMD[@]}" 2>>"$LOG_FILE"
     rc=$?
 
     if [ "$rc" -eq 0 ]; then
-      mpv "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/c.mp3" >/dev/null 2>&1
-      mpv "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/FHS.mp3" >/dev/null 2>&1
-      cowsay -r "Your MKV File Has Downloaded Successfully" | lolcat
-      mpv "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/TXS.mp3" >/dev/null 2>&1
+      ${DLCOMPLT} > /dev/null 2>&1 || true
+      ${ECHOSOUND} > /dev/null 2>&1 || true
+      cowsay -r "Your MKV file Playlist Has Downloaded Successfully" | lolcat
+      ${TXS} > /dev/null 2>&1 || true
       sleep 2.0
       clear
     else
-      mpv "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/MFGTA.mp3" >/dev/null 2>&1
+      ${DEATH} > /dev/null 2>&1 || true
+      printf "Your MKV file Playlist has failed to download!\n\n"
+      printf "${VBLU}┌──${BCYN}Press${VBLU}─${BCYN}Any${VBLU}─${BCYN}Button${VBLU}─${BCYN}To${VBLU}─${BCYN}Move${VBLU}─${BCYN}On${VBLU}──┐${RESET}\n"
+      printf "${VBLU}└──${BCYN}>${BMGT}:${ACID}"
+      read -r -n1 -t3
       clear
     fi
   ;;
@@ -527,24 +584,26 @@
     printf "                   ${VBLU}┌───────────────────────────┐${RESET}\n"
     printf "    ${BCYN}<${VBLU}──────────────┤ ${BMGT}[${BCYN}Running${BMGT}]${ACID}: ${BMGT}Best Audio FMT ${VBLU}├─────────────────${BCYN}>${RESET}\n"
     printf "                   ${VBLU}└───────────────────────────┘${RESET}\n"
-    printf "\n"
 
+    ${MDLD} > /dev/null 2>&1 || true
     sleep 1.0
+
     "${OPT_BMP3_CMD[@]}" 2>>"$LOG_FILE"
     rc=$?
+
     if [ "$rc" -eq 0 ]; then
-      mpv "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/c.mp3" >/dev/null 2>&1
-      mpv "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/FHS.mp3" >/dev/null 2>&1
-      cowsay -r "Your MP3 File Has Downloaded Successfully!"
+      ${DLCOMPLT} > /dev/null 2>&1 || true
+      ${ECHOSOUND} > /dev/null 2>&1 || true
+      cowsay -r "Audio Extration Has Completed Successfully!"
       sleep 2.0
-      mpv "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/TXS.mp3" >/dev/null 2>&1
+      ${TXS} > /dev/null 2>&1
       clear
     else
-      mpv "$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/MFGTA.mp3" >/dev/null 2>&1
-      printf "Your Audio File Extract Has Failed, Please Try Again\n\n"
+      ${DEATH} > /dev/null 2>&1
+      printf "Audio File Extract Has Failed, Please Try Again\n\n"
       printf "${VBLU}┌──${BCYN}Press${VBLU}─${BCYN}Any${VBLU}─${BCYN}Button${VBLU}─${BCYN}To${VBLU}─${BCYN}Move${VBLU}─${BCYN}On${VBLU}──┐${RESET}\n"
-      printf "${VBLU}└──${BCYN}>${BMGT}:${ACID} "
-      read -r -n1
+      printf "${VBLU}└──${BCYN}>${BMGT}:${ACID}"
+      read -r -n1 -t3
       clear
     fi
   ;;
@@ -552,7 +611,7 @@
 # <── End ──> #
   *)
     rc=2
-    printf "┌──Press─Any─Button─To─Move─On──┐\n"
-    printf "└──>"
-    read -r -n1
+    printf "${VBLU}┌──${BCYN}Press${VBLU}─${BCYN}Any${VBLU}─${BCYN}Button${VBLU}─${BCYN}To${VBLU}─${BCYN}Move${VBLU}─${BCYN}On${VBLU}──┐${RESET}\n"
+    printf "${VBLU}└──${BCYN}>${BMGT}:${ACID}"
+    read -r -n1 -t3
   esac

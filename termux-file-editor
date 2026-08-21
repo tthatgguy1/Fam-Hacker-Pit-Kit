@@ -1,44 +1,52 @@
 #!/data/data/com.termux/files/usr/bin/bash
-# Project name : Fam-Hacker_Client
-# Coded by: tthatgguy1 (You dont become a coder by just changing the credits)
-# Github: https://github.com/tthatgguy1/Fam-Hacker_Client
-# Date : 12/04/2024
-# Updated 09/01/2025
-ESC=$'\e'                       # ${ESC} $ESC
+  # Project name: Fam-Hacker-Pit-Kit
+  # Coded by: tthatgguy1 (You dont become a coder by just changing the credits)
+  # Github: https://github.com/tthatgguy1/Fam-Hacker-Pit-Kit
+  # Date: 12/04/2024
+  # Updated 08/21/2026
 
-BLK="${ESC}[38;2;0;0;0m"        # ${BLK}   $BLK - Black
-GRN="${ESC}[38;2;51;255;0m"     # ${GRN}   $GRN - Lime Green
-PNK="${ESC}[38;2;255;16;240m"   # ${PNK}   $PNK - Bright Magenta
-BLU="${ESC}[38;2;0;102;255m"    # ${BLU}   $BLU - Medium Blue
-MDB="${ESC}[38;2;25;25;112m"    # ${MDB}   $MDB - Midnight Blue
-GRY="${ESC}[38;2;208;208;208m"  # ${GRY}   $GRY - Gray
+# <───── Color Setup ─────> #
+	ESC=$'\e'
+		BLK="${ESC}[38;2;0;0;0m"           # ${BLK}   $BLK   - Black
+		GRN="${ESC}[38;2;51;255;0m"        # ${GRN}   $GRN   - Lime Green
+		BLU="${ESC}[38;2;0;102;255m"       # ${BLU}   $BLU   - Medium Blue
+		GRY="${ESC}[38;2;208;208;208m"     # ${GRY}   $GRY   - Gray
 
-BONG="${ESC}[38;2;255;140;0m"   # ${BONG}  $BONG - Pumpkin Orange
-BBLK="${ESC}[38;2;128;128;128m" # ${BBLK}  $BBLK - Bright Black
-NYLW="${ESC}[38;2;255;255;0m"   # ${NYLW}  $NYLW - Neon Yellow
-BYLW="${ESC}[38;2;255;255;51m"  # ${BYLW}  $BYLW - Bright Yellow
-BCYN="${ESC}[38;2;0;255;255m"   # ${BCYN}  $BCYN - Cyan
-BGRN="${ESC}[38;2;0;255;0m"     # ${BGRN}  $BGRN - Bright Green
-ACID="${ESC}[38;2;204;255;0m"   # ${ACID}  $ACID - Acid Green
-IBLU="${ESC}[32;2;75;0;130m"    # ${IBLU}  $IBLU - Indigo Blue
-NPPL="${ESC}[38;2;188;19;254m"  # ${NPPL}  $NPPL - Neon Purple
-BWHT="${ESC}[38;2;255;255;255m" # ${BWHT}  #BWHT - Bright White
-RESET="${ESC}[0m"               # ${RESET} $RESET
+		MBLU="${ESC}[38;2;25;25;112m"      # ${VBLU}  $VBLU  - Midnight Blue
+		BONG="${ESC}[38;2;255;140;0m"      # ${BONG}  $BONG  - Pumpkin Orange
 
-OUT_BASE="$HOME/storage/shared/Fam-Hacker-Pit-Kit/Fam-Hacker-Torrent-Pit"
-LOG_DIR="$HOME/storage/shared/Fam-Hacker-Pit-Kit/.cache/Aria2c_Logs"
-mkdir -p "$OUT_BASE" "$LOG_DIR"
+		NONG="${ESC}[38;2;255;95;0m"       # ${NONG}  $NONG  - Neon Orange
+		BBLK="${ESC}[38;2;128;128;128m"    # ${BBLK}  $BBLK  - Bright Black
+		NYLW="${ESC}[38;2;255;255;0m"      # ${NYLW}  $NYLW  - Neon Yellow
+		BYLW="${ESC}[38;2;255;255;51m"     # ${BYLW}  $BYLW  - Bright Yellow
+		BCYN="${ESC}[38;2;0;255;255m"      # ${BCYN}  $BCYN  - Cyan
+		BGRN="${ESC}[38;2;0;255;0m"        # ${BGRN}  $BGRN  - Bright Green
+		ACID="${ESC}[38;2;204;255;0m"      # ${ACID}  $ACID  - Acid Green
+		IBLU="${ESC}[38;2;75;0;130m"       # ${IBLU}  $IBLU  - Indigo Blue
+		VBLU="${ESC}[38;2;138;43;226m"     # ${VBLU}  $VBLU  - Violet Blue
+		NPPL="${ESC}[38;2;188;19;254m"     # ${NPPL}  $NPPL  - Neon Purple
+		BPNK="${ESC}[38;2;255;16;240m"     # ${BPNK}  $BPNK  - Bright Magenta
+		BWHT="${ESC}[38;2;255;255;255m"    # ${BWHT}  $BWHT  - Bright White
+		RESET="${ESC}[0m"		   		         # ${RESET} $RESET - Resets The Color
 
-TERMUX_DOWN="/data/data/com.termux/files/home/downloads"
-TORPIT="$HOME/storage/shared/Fam-Hacker-Pit-Kit/Fam-Hacker-Torrent-Pit"
+# <───── Directory Setup ─────> #
+ OUT_BASE="$HOME/storage/shared/Fam-Hacker-Pit-Kit/Fam-Hacker-Torrent-Pit"
+ LOG_DIR="$HOME/storage/shared/Fam-Hacker-Pit-Kit/.cache/Aria2c_Logs"
+ TORPIT="$HOME/storage/shared/Fam-Hacker-Pit-Kit/Fam-Hacker-Torrent-Pit"
+ TERMUX_DOWN="$HOME/downloads"
 
-GREAT_COOKING="mpv $HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/Cooking_Great.mp3"
-SECRET_SOUND="mpv $HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/Secret_Sound.mp3"
-TP_HEART="mpv $HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/TLOZ-WW_Heart_Container.mp3"
-MMF="mpv $HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/MMF.mp3"
+# <───── Sound Effects Setup ─────> #
+ GREAT_COOKING="mpv $HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/Cooking_Great.mp3"
+ SECRET_SOUND="mpv $HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/Secret_Sound.mp3"
+ TP_HEART="mpv $HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/TLOZ-WW_Heart_Container.mp3"
+ MMF="mpv $HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/MMF.mp3"
+ MDLD="mpv $HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/MDLD.mp3"
 
-## Torrent Logo & Date
-echo '
+# <───── Directory Creation ─────> #
+ mkdir -p "$OUT_BASE" "$LOG_DIR"
+
+# <───── Fam-Hacker_Logo ─────> #
+ echo '
  ─███████╗╔█████╗─███╗───███╗─██╗──██╗╔█████╗─╔██████╗██╗──██╗██████╗─
  ─██╔════╝██╔══██╗████╗─████║─██║──██║██╔══██╗██╔════╝██║─██╔╝██╔══██╗
  ─█████╗──███████║██╔████╔██║─███████║███████║██║─────█████╔╝─██████╔╝
@@ -59,17 +67,20 @@ echo '
  ───────────╚═════╝╚══════╝╚═╝╚══════╝╚═╝──╚═══╝───╚═╝────────────────
  ---------------------------[Nah-Fam_Studios]------------------------------' | lolcat
 
-##----------------------------------------------------------##
-printf "\n"
-  date +"%l:%M:%S %p" | lolcat --animate -d 15
-printf "\n"
+# <───── Date and Time Format ─────> #
+  printf "\n"
+    date +"%l:%M:%S %p" | lolcat --animate -d 15
+  printf "\n"
 
-## File Info
+# <───── File Info ─────> #
   cd downloads
     newf=$(ls -Art | tail -n1)
     printf "\n"
     cowsay -r "${newf}" | lolcat
   printf "\n"
+
+# <───── Initiate Frowned-Upon Download sound effect ─────> #
+  ${MDLD} > /dev/null 2&>1
 
 ## Aria2 Download
 LOG_FILE="$LOG_DIR/nfs-file-editor_$(date +%Y%m%d-%H%M%S).log"
@@ -80,12 +91,13 @@ LOG_FILE="$LOG_DIR/nfs-file-editor_$(date +%Y%m%d-%H%M%S).log"
   printf "\n"
 
 aria2c \
-  -d "${TORPIT}" "${TERMUX_DOWN}/${newf}" \
+  -d "${TORPIT}" \
+  "${TERMUX_DOWN}/${newf}" \
   --seed-time=0 \
   --summary-interval=0 \
   --console-log-level=warn \
   --show-console-readout=true \
-  --bt-exclude-tracker=*rarbg* \
+  --bt-exclude-tracker="*" \
   --max-connection-per-server=16 \
   --log-level=notice 2>>"$LOG_FILE"
 
