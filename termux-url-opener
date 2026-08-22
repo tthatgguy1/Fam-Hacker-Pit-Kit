@@ -39,8 +39,9 @@
   LOVELY="mpv $HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/NFS-WELCOME.mp3"
 
 # <── FFmpeg Set ──>
-  X265_CRF="23"
+  X265_CRF="21.5"
   X265_PRESET="slower"
+  AUDIO_BITRATE="640k"
 
 # <── Cookies Check ──>
   if [[ ! -f "$COOKIES_FILE" ]]; then
