@@ -54,7 +54,8 @@
     local padding
     local indent
 
-    cols="${COLUMNS:-80}"
+    cols="$(tput cols 2>/dev/null)"
+    [[ "$cols" =~ ^[0-9]+$ ]] || cols=80
 
     cow="$(cowsay -r "$message")" || return 1
 
