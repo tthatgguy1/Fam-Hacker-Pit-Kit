@@ -127,7 +127,7 @@
   PROGRESS_TEMPLATE+=$'\033[2K'"${BCYN}            ├───────────────────────────────────────────────┤"$'\n'
   PROGRESS_TEMPLATE+=$'\033[2K'"${BCYN}            └            ${BMGT}Speed${BCYN}:       %(progress._speed_str)s"$'\033[4A\r'
 
-# <── Highest Quality Available ──> #
+# <── Cap At Highest Quality Available ──> #
   OPT_BMKV_CMD=(
     yt-dlp
       -f "bv*+ba/b"
@@ -232,7 +232,7 @@
       "$URL"
   )
 
-# <── Full Playlist (Highest Quality) ──> #
+# <── Cap Full Playlist (Highest Quality) ──> #
   OPT_PLST_CMD=(
     yt-dlp
       -f "bv*+ba/b"
@@ -271,7 +271,7 @@
       --progress-template "$PROGRESS_TEMPLATE"
       "$URL"
   )
-# <── Best Audio → MP3 ──> #
+# <── Cap Best Audio → MP3 ──> #
   OPT_BMP3_CMD=(
     yt-dlp
       -x --audio-format mp3
