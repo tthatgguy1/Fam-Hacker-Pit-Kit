@@ -45,29 +45,37 @@
     exit 1
   fi
 
-# <── Center Cowsay In Terminal ──> #
+# <── Center Cowsay In Termux ──> #
   center_cowsay() {
     local message="$1"
-    local cow_output
-    local term_width
-    local cow_width
+    local cols
+    local cow
+    local width
     local padding
+    local indent
 
-    cow_output="$(cowsay -r "$message")"
-    term_width="$(tput cols)"
+    cols="${COLUMNS:-80}"
 
-    cow_width="$(
-      printf '%s\n' "$cow_output" |
-      awk '{ if (length > max) max = length } END { print max }'
+    cow="$(cowsay -r "$message")" || return 1
+
+    width="$(
+      awk '
+        length($0) > max { max = length($0) }
+        END { print max + 0 }
+      ' <<< "$cow"
     )"
 
-    padding=$(( (term_width - cow_width) / 2 ))
-    (( padding < 0 )) && padding=0
+    padding=$(( (cols - width) / 2 ))
 
-    printf '%s\n' "$cow_output" |
-    while IFS= read -r line; do
-      printf '%*s%s\n' "$padding" '' "$line"
-    done
+    if (( padding < 0 )); then
+      padding=0
+    fi
+
+    printf -v indent '%*s' "$padding" ''
+
+    while IFS= read -r line || [[ -n "$line" ]]; do
+      printf '%s%s\n' "$indent" "$line"
+    done <<< "$cow"
   }
 
 # <── Make Necessary Paths ──> #
