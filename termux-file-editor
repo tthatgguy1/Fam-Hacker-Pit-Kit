@@ -79,63 +79,69 @@
     cowsay -r "${newf}" | lolcat
   printf "\n"
 
-# <───── Initiate Frowned-Upon Download sound effect ─────> #
+# <───── Initiate Frowned-Upon Download Sound Effect ─────> #
   ${MDLD} > /dev/null 2&>1
 
-## Aria2 Download
-LOG_FILE="$LOG_DIR/nfs-file-editor_$(date +%Y%m%d-%H%M%S).log"
-  printf "\n"
+# <───── Log File Setup ─────> #
+  LOG_FILE="$LOG_DIR/nfs-file-editor_$(date +%Y%m%d-%H%M%S).log"
+
+# <───── Quit Tutorial ─────> #
+    printf "\n"
     printf "To Quit, Press ctrl + c Together And Press Enter\n"
     printf "\n"
+
+# <───── Cooking Bitch ─────> #
     ${GREAT_COOKING} > /dev/null 2&>1
-  printf "\n"
+    printf "\n"
 
-aria2c \
-  -d "${TORPIT}" \
-  "${TERMUX_DOWN}/${newf}" \
-  --seed-time=0 \
-  --summary-interval=0 \
-  --console-log-level=warn \
-  --show-console-readout=true \
-  --bt-exclude-tracker="*" \
-  --max-connection-per-server=16 \
-  --log-level=notice 2>>"$LOG_FILE"
+# <───── Aria2 Download ─────> #
+  aria2c \
+    -d "${TORPIT}" \
+    "${TERMUX_DOWN}/${newf}" \
+    --seed-time=0 \
+    --summary-interval=0 \
+    --console-log-level=warn \
+    --show-console-readout=true \
+    --bt-exclude-tracker="*" \
+    --max-connection-per-server=16 \
+    --log-level=notice 2>>"$LOG_FILE"
 
-## Sound 2
+# <───── Mail Motherfucker ─────> #
   printf "\n"
-    ${MMF} >/dev/null 2>&1
+  ${MMF} >/dev/null 2>&1
+
+# <───── Heart Container ─────> #
   ${TP_HEART} >/dev/null 2&>1
-sleep 1.0
+  sleep 1.0
 
-## Termux Move
+# <───── Termux Move ─────> #
   printf '\n'
-    sleep 2.0
-    printf "Press Any Button To Continue."
-    read -p
+  sleep 2.0
+  printf "Press Any Button To Continue."
+  read -p
   printf "\n"
-clear
+  clear
 
-## Move Completed File
+# <───── Move Completed File ─────> #
   echo "${PNK}"
-    printf "\n"
-    printf "Fam-Hacker_Client Is Ready To Move The Completed Download\n"
-    read -p ">"
   printf "\n"
-clear
+  printf "Fam-Hacker_Client Is Ready To Move The Completed Download\n"
+  read -p ">"
   printf "\n"
-shopt -s extglob
-## --- Moves Completed Download To Mother Folder --- ##
+  clear
+  printf "\n"
+  shopt -s extglob
   mv "$(ls -t -- * | head -n1)" "${TORPIT}"
-    printf "\n"
-    printf "The Completed Download Has Been Moved Successfully\n" | lolcat --animate -d 75
-  ${SECRET_SOUND} > /dev/null 2>&1
-sleep 1.0
-
-## Removing Files in /data/data/com.termux/files/home/downloads
-  echo "${ACID}"
-    rm -rf ${TERMUX_DOWN}/* > /dev/null 2&>1
-    printf "Press Any Key To Quit The Program"
-    read -p ">"
   printf "\n"
-sleep 4.0
+  printf "The Completed Download Has Been Moved Successfully\n" | lolcat --animate -d 75
+  ${SECRET_SOUND} > /dev/null 2>&1
+  sleep 1.0
+
+# <───── Remove Torrent File in Termux Down ─────> #
+  echo "${ACID}"
+  rm -rf ${TERMUX_DOWN}/* > /dev/null 2&>1
+  printf "Press Any Key To Quit The Program"
+  read -p ">"
+  printf "\n"
+  sleep 2.0
 
