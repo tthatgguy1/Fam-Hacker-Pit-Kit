@@ -35,7 +35,12 @@
   TXS="mpv $HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/TXS.mp3"
   DEATH="mpv $HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/MFGTA.mp3"
   SKULL="mpv $HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/SKL.mp3"
-  DTCL="mpv $HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/MDATA.mp3"
+  DATCLT="mpv $HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/MDATA.mp3"
+  LOVELY="mpv $HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/NFS-WELCOME.mp3"
+
+# <── FFmpeg Set ──>
+  X265_CRF="23"
+  X265_PRESET="slower"
 
 # <── Cookies Check ──>
   if [[ ! -f "$COOKIES_FILE" ]]; then
@@ -68,8 +73,9 @@
   printf '\n\n'
 
 # <── Intro Sounds (Nah-Fam_Studios) ──> #
+  ${LOVELY} > /dev/null 2>&1 || true
   ${SKULL} > /dev/null 2>&1 || true
-  ${DTCL} >/dev/null 2>&1 || true
+  ${DATCLT} > /dev/null 2>&1 || true
   printf '\n\n'
 
 # <── Channel Strings (Robust) ──> #
@@ -131,7 +137,7 @@
       -f "bv*+ba/b"
       --replace-in-metadata "uploader" "/" "﹨"
       --replace-in-metadata "title" ":\s*" " - "
-      -o "$VIDEO_OUT/%(uploader)s/%(uploader)s - %(title)s [%(height)sp].%(ext)s"
+      -o "$VIDEO_OUT/%(uploader)s/%(uploader)s - %(title)s_%(height)sp.%(ext)s"
       --progress
       --quiet
       --no-playlist
@@ -149,7 +155,7 @@
       --merge-output-format mkv
       --remux-video mkv
       --progress-template "$PROGRESS_TEMPLATE"
-      "$URL"
+    "$URL"
   )
 
 # <── Cap At 2560p (2K-UHD) ──> #
@@ -179,31 +185,51 @@
       "$URL"
   )
 
-# <── Cap At 1080p (Full HD)──> #
-  OPT_1080p_CAP_CMD=(
+# <── Cap At 1080p (Full HD) ──> #
+OPT_1080p_CAP_CMD=(
     yt-dlp
-      -f "bv*[height<=1080]+ba/b[height<=1080]"
-      --replace-in-metadata "uploader" "/" "﹨"
-      --replace-in-metadata "title" ":\s*" " - "
-      -o "$VIDEO_OUT/%(uploader)s/%(uploader)s - %(title)s [%(height)sp].%(ext)s"
-      --progress
-      --quiet
-      --no-playlist
-      --cookies "$COOKIES_FILE"
-      --console-title
-      --no-check-formats
-      --no-warnings
-      --ignore-errors
-      --write-subs
-      --embed-subs
-      --sub-format srt
-      --convert-subs srt
-      --embed-thumbnail
-      --embed-chapters
-      --merge-output-format mkv
-      --remux-video mkv
-      --progress-template "$PROGRESS_TEMPLATE"
-      "$URL"
+        -f "bv*[height<=1080]+ba/b[height<=1080]"
+        --replace-in-metadata "uploader" "/" "﹨"
+        --replace-in-metadata "title" ":\s*" " - "
+        -o "$VIDEO_OUT/%(uploader)s/%(uploader)s - %(title)s [%(height)sp].%(ext)s"
+        --progress
+        --quiet
+        --no-playlist
+        --cookies "$COOKIES_FILE"
+        --console-title
+        --no-check-formats
+        --no-warnings
+        --ignore-errors
+        --write-subs
+        --embed-subs
+        --sub-format srt
+        --convert-subs srt
+        --embed-thumbnail
+        --embed-chapters
+        --merge-output-format mkv
+        --remux-video mkv
+        --progress-template "$PROGRESS_TEMPLATE"
+        --exec "after_move:sh -c '
+            input=\$1
+            temp=\"\${input%.*}.x265-temp.mkv\"
+
+            ffmpeg -y \
+                -i \"\$input\" \
+                -map 0 \
+                -map_metadata 0 \
+                -map_chapters 0 \
+                -c copy \
+                -c:v:0 libx265 \
+                -preset \"$X265_PRESET\" \
+                -crf \"$X265_CRF\" \
+                -pix_fmt yuv420p10le \
+                -filter:a:0 \"pan=5.1|FL=FL|FR=FR|FC=0.5*FL+0.5*FR|LFE=0.25*FL+0.25*FR|BL=0.5*FL|BR=0.5*FR\" \
+                -c:a:0 ac3 \
+                -b:a:0 \"$AUDIO_BITRATE\" \
+                \"\$temp\" \
+            && mv -f -- \"\$temp\" \"\$input\"
+        ' sh %(filepath)q"
+        "$URL"
   )
 
 # <── Full Playlist (Highest Quality)──> #
@@ -306,13 +332,13 @@
   printf "  ${VBLU}├───────────────────────────────────────────────────────────┤\n"
   printf "  ${VBLU}│ ${BMGT}[${BCYN}2${BMGT}] %s       ${VBLU}│\n" "$OPTION_2K_CAP"
   printf "  ${VBLU}├───────────────────────────────────────────────────────────┤\n"
-  printf "  ${VBLU}│ ${BMGT}[${BCYN}3${BMGT}] %s     ${VBLU}│\n" "$OPTION_1080p_CAP"
+  printf "  ${VBLU}│ ${BMGT}[${BCYN}3${BMGT}] %s    ${VBLU}│\n" "$OPTION_1080p_CAP"
   printf "  ${VBLU}├───────────────────────────────────────────────────────────┤\n"
   printf "  ${VBLU}│ ${BMGT}[${BCYN}4${BMGT}] %s      ${VBLU}│\n" "$OPTION_PLST"
   printf "  ${VBLU}├───────────────────────────────────────────────────────────┤\n"
-  printf "  ${VBLU}│ ${BMGT}[${BCYN}5${BMGT}] %s                            ${VBLU}│\n" "$OPTION_B3"
+  printf "  ${VBLU}│ ${BMGT}[${BCYN}5${BMGT}] %s                             ${VBLU}│\n" "$OPTION_B3"
   printf "  ${VBLU}├───────────────────────────────────────────────────────────┤\n"
-  printf "  ${VBLU}│ ${BWHT}[${NONG}E${BWHT}] ${BCYN}Press ${BWHT}[${NONG}Enter${BWHT}] ${BCYN}For ${BMGT}Default ${BCYN}Option [%d]                   ${VBLU}│\n" "$DEFAULT"
+  printf "  ${VBLU}│ ${BWHT}[${NONG}E${BWHT}] ${BCYN}Press ${BWHT}[${NONG}Enter${BWHT}] ${BCYN}For ${BMGT}Default ${BCYN}Option [${BMGT}%d${BCYN}]${RESET}                  ${VBLU}│\n" "$DEFAULT"
   printf "  ${VBLU}└───────────────────────────────────────────────────────────┘${RESET}\n\n"
 
   printf "  ${VBLU}┌──${BCYN}Press${VBLU}─${BCYN}Any${VBLU}─${BCYN}Button${VBLU}─${BCYN}To${VBLU}─${BCYN}Choose${VBLU}──┐${RESET}\n"
