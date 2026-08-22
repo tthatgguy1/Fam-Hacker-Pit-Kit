@@ -222,6 +222,63 @@
  read -r -n1 -t3
  clear
 
+# <── Create Bashrc ──> #
+cat > "$HOME/.bashrc" <<'EOF'
+# <── Termux Bashrc ──> #
+
+export EDITOR=nano
+export VISUAL=nano
+
+alias backhak="pkg uninstall aria2 && rm -rf storage && rm -rf Fam-Hacker-Pit-Kit && rm -rf bin && rm -rf downloads"
+alias backlol="pkg uninstall aria2 && rm -rf storage && rm -rf Fam-Hacker-Pit-Kit && rm -rf bin && rm -rf downloads | lolcat"
+alias fam500="echo Fam-Hacker King | lolcat --animate -d 500"
+alias fwd="git clone https://github.com/tthatgguy1/Fam-Hacker-Pit-Kit.git && cd Fam-Hacker-Pit-Kit && bash install.sh"
+alias fwdcat="git clone https://github.com/tthatgguy1/Fam-Hacker-Pit-Kit.git && cd Fam-Hacker-Pit-Kit && bash install.sh | lolcat"
+alias nanload="nano /data/data/com.termux/files/usr/etc/bash.bashrc"
+alias cls="clear"
+alias catlsa="ls -a | lolcat"
+alias catls="ls | lolcat"
+alias cdh="cd \$HOME"
+alias cdb="cd .."
+alias upkitty="pkg update && pkg upgrade -y"
+alias upkitty2="pkg update && pkg upgrade -y && clear"
+alias cprop="nano ~/.termux/colors.properties"
+
+printf "\n\n\n\n"
+
+echo '
+                                ┳
+            ──▄────▄▄▄▄▄▄▄────▄─┃
+            ─▀▀▄─▄█████████▄─▄▀▀┃
+            ─────██─▀███▀─██────┃
+            ───▄─▀████▀████▀─▄──┃
+            ─▀█────██▀█▀██────█▀┃
+                                ┃
+                                ┃
+                                ┃
+                                ┃
+                                ┻' | lolcat -a
+
+printf "\n\n\n\n"
+
+sleep 1.0
+clear
+cowsay -f milk 'Load Complete' | lolcat
+toilet -f small -F border -F metal 'Start Hacking'
+printf "\n\n\n\n"
+date | lolcat
+printf "\n\n"
+echo '⚡ Nah-Fam Studios ⚡' | lolcat
+printf "\n\n\n\n"
+clear
+EOF
+
+printf "${VBLU}bashrc created ${BPNK}successfully${VBLU}!${RESET}\n"
+printf "\n\n"
+printf "${BCYN}┌──${BPNK}Press${BCYN}─${BPNK}Any${BCYN}─${BPNK}Button${BCYN}─${BPNK}To${BCYN}─${BPNK}Move${BCYN}─${BPNK}On${BCYN}──┐\n"
+printf "${BCYN}└──${BPNK}>${BCYN}"
+read -r -n1 -t3
+
 # <───── Outro ─────> #
  echo " "
  echo " "
