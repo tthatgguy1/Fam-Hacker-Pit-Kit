@@ -28,7 +28,7 @@
   LOG_DIR="$HOME/storage/shared/Fam-Hacker-Pit-Kit/.cache/YouTube_Single-Downloads"
   COOKIES_FILE="$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/Cookies/cookies.txt"
 
-# <───── Sound Effects Setup ─────> #
+# <── Sound Effects Setup ──> #
   MDLD="mpv $HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/MDLD.mp3"
   DLCOMPLT="mpv $HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/c.mp3"
   ECHOSOUND="mpv $HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/sfx/FHS.mp3"
@@ -126,56 +126,74 @@
   fi
 
 # <── Progress Template Setup ──> #
-  PROGRESS_TEMPLATE=$'\033[2K'"${BCYN}            ┌               ${BMGT}DL${BCYN}:        %(progress._percent_str)s"$'\n'
-  PROGRESS_TEMPLATE+=$'\033[2K'"${BCYN}            ├───────────────────────────────────────────────┤"$'\n'
-  PROGRESS_TEMPLATE+=$'\033[2K'"${BCYN}            |              ${BMGT}ETA${BCYN}:         %(progress._eta_str)s"$'\n'
-  PROGRESS_TEMPLATE+=$'\033[2K'"${BCYN}            ├───────────────────────────────────────────────┤"$'\n'
-  PROGRESS_TEMPLATE+=$'\033[2K'"${BCYN}            └            ${BMGT}Speed${BCYN}:       %(progress._speed_str)s"$'\033[4A\r'
+  PROGRESS_TEMPLATE=$'\033[2K'"${BCYN}           ┌               ${BMGT}DL${BCYN}:        %(progress._percent_str)s"$'\n'
+  PROGRESS_TEMPLATE+=$'\033[2K'"${BCYN}           ├───────────────────────────────────────────────┤"$'\n'
+  PROGRESS_TEMPLATE+=$'\033[2K'"${BCYN}           |              ${BMGT}ETA${BCYN}:         %(progress._eta_str)s"$'\n'
+  PROGRESS_TEMPLATE+=$'\033[2K'"${BCYN}           ├───────────────────────────────────────────────┤"$'\n'
+  PROGRESS_TEMPLATE+=$'\033[2K'"${BCYN}           └            ${BMGT}Speed${BCYN}:       %(progress._speed_str)s"$'\033[4A\r'
 
 # <── FFmpeg Template Setup ──> #
-  FFMPEG_TEMPLATE=$'\033[2K'"${BCYN}            ┌              ${BMGT}ENC${BCYN}:        %s"$'\n'
-  FFMPEG_TEMPLATE+=$'\033[2K'"${BCYN}            ├───────────────────────────────────────────────┤"$'\n'
-  FFMPEG_TEMPLATE+=$'\033[2K'"${BCYN}            |              ${BMGT}ETA${BCYN}:         %s"$'\n'
-  FFMPEG_TEMPLATE+=$'\033[2K'"${BCYN}            ├───────────────────────────────────────────────┤"$'\n'
-  FFMPEG_TEMPLATE+=$'\033[2K'"${BCYN}            └            ${BMGT}Speed${BCYN}:       %s"$'\033[4A\r'
+  FFMPEG_TEMPLATE=$'\033[2K'"${BCYN}           ┌              ${BMGT}ENC${BCYN}:        %s"$'\n'
+  FFMPEG_TEMPLATE+=$'\033[2K'"${BCYN}           ├───────────────────────────────────────────────┤"$'\n'
+  FFMPEG_TEMPLATE+=$'\033[2K'"${BCYN}           |              ${BMGT}ETA${BCYN}:         %s"$'\n'
+  FFMPEG_TEMPLATE+=$'\033[2K'"${BCYN}           ├───────────────────────────────────────────────┤"$'\n'
+  FFMPEG_TEMPLATE+=$'\033[2K'"${BCYN}           └            ${BMGT}Speed${BCYN}:       %s"$'\033[4A\r'
 
-# <── FFmpeg Progress / x265 Function ──> #
-  ffmpeg_x265_encode() {
-    local input="${1:-}"
-    local temp
-    local duration
-    local key
-    local value
-    local out_time_us="0"
-    local speed="N/A"
-    local speed_num="0"
-    local percent="  0.0%"
-    local eta="Calculating"
-    local eta_seconds="-1"
-    local hours="0"
-    local minutes="0"
-    local seconds="0"
-    local progress_state=""
-    local ffmpeg_rc="0"
+# <── FFmpeg Progress / x265 Helper ──> #
+  FFMPEG_HELPER="${TMPDIR:-${PREFIX:-/data/data/com.termux/files/usr}/tmp}/fam-hacker-ffmpeg-x265.sh"
+
+  cat > "$FFMPEG_HELPER" <<'FFMPEG_HELPER_EOF'
+    #!/data/data/com.termux/files/usr/bin/bash
+    set -uo pipefail
+
+    input="${1:-}"
+    temp=""
+    duration=""
+    key=""
+    value=""
+    out_time_us="0"
+    speed="N/A"
+    speed_num="0"
+    percent="  0.0%"
+    eta="Calculating"
+    eta_seconds="-1"
+    hours="0"
+    minutes="0"
+    seconds="0"
+    progress_state=""
+    ffmpeg_rc="0"
 
     if [[ -z "$input" || ! -f "$input" ]]; then
       printf '%s\n' "FFmpeg input file not found: $input" >&2
-      return 1
+      exit 1
+    fi
+
+    if ! command -v ffmpeg >/dev/null 2>&1; then
+      printf '%s\n' "FFmpeg was not found in PATH." >&2
+      exit 1
+    fi
+
+    if ! command -v ffprobe >/dev/null 2>&1; then
+      printf '%s\n' "ffprobe was not found in PATH." >&2
+      exit 1
     fi
 
     temp="${input%.*}.x265-temp.mkv"
 
-    duration="$(
+    if ! duration="$(
       ffprobe \
         -v error \
         -show_entries format=duration \
         -of default=noprint_wrappers=1:nokey=1 \
         "$input"
-    )"
+    )"; then
+      printf '%s\n' "FFmpeg could not determine duration: $input" >&2
+      exit 1
+    fi
 
     if [[ -z "$duration" ]]; then
       printf '%s\n' "FFmpeg could not determine duration: $input" >&2
-      return 1
+      exit 1
     fi
 
     printf "$FFMPEG_TEMPLATE" \
@@ -213,79 +231,80 @@
           fi
         ;;
         speed)
-          speed="${value:-N/A}"
+        speed="${value:-N/A}"
 
-          if [[ "$speed" =~ ^([0-9]+([.][0-9]+)?)x$ ]]; then
-            speed_num="${BASH_REMATCH[1]}"
-          else
-            speed_num="0"
-          fi
-        ;;
-        progress)
-          progress_state="${value:-continue}"
+      if [[ "$speed" =~ ^([0-9]+([.][0-9]+)?)x$ ]]; then
+        speed_num="${BASH_REMATCH[1]}"
+      else
+        speed_num="0"
+      fi
+    ;;
+    progress)
+      progress_state="${value:-continue}"
 
-          read -r percent eta_seconds < <(
-            awk \
-              -v us="$out_time_us" \
-              -v total="$duration" \
-              -v rate="$speed_num" \
-              -v state="$progress_state" \
-              'BEGIN {
-                current = us / 1000000
-                pct = (total > 0) ? (current / total) * 100 : 0
+      read -r percent eta_seconds < <(
+        awk \
+          -v us="$out_time_us" \
+          -v total="$duration" \
+          -v rate="$speed_num" \
+          -v state="$progress_state" \
+          'BEGIN {
+            current = us / 1000000
+            pct = (total > 0) ? (current / total) * 100 : 0
 
-                if (state == "end") pct = 100
-                if (pct < 0) pct = 0
-                if (pct > 100) pct = 100
+            if (state == "end") pct = 100
+            if (pct < 0) pct = 0
+            if (pct > 100) pct = 100
 
-                eta = -1
+            eta = -1
 
-                if (state == "end") {
-                  eta = 0
-                } else if (rate > 0 && total > current) {
-                  eta = int(((total - current) / rate) + 0.5)
-                }
+            if (state == "end") {
+              eta = 0
+            } else if (rate > 0 && total > current) {
+              eta = int(((total - current) / rate) + 0.5)
+            }
 
-                printf "%5.1f%% %d\n", pct, eta
-              }'
-          )
+            printf "%5.1f%% %d\n", pct, eta
+          }'
+      )
 
-          if (( eta_seconds >= 0 )); then
-            hours=$((eta_seconds / 3600))
-            minutes=$(((eta_seconds % 3600) / 60))
-            seconds=$((eta_seconds % 60))
+      if (( eta_seconds >= 0 )); then
+        hours=$((eta_seconds / 3600))
+        minutes=$(((eta_seconds % 3600) / 60))
+        seconds=$((eta_seconds % 60))
 
-            if (( hours > 0 )); then
-              printf -v eta '%02d:%02d:%02d' "$hours" "$minutes" "$seconds"
-            else
-              printf -v eta '%02d:%02d' "$minutes" "$seconds"
-            fi
-          else
-            eta="Calculating"
-          fi
+        if (( hours > 0 )); then
+          printf -v eta '%02d:%02d:%02d' "$hours" "$minutes" "$seconds"
+        else
+          printf -v eta '%02d:%02d' "$minutes" "$seconds"
+        fi
+      else
+        eta="Calculating"
+      fi
 
-          printf "$FFMPEG_TEMPLATE" \
-            "$percent" \
-            "$eta" \
-            "$speed"
-        ;;
-      esac
-    done
+      printf "$FFMPEG_TEMPLATE" \
+        "$percent" \
+        "$eta" \
+        "$speed"
+      ;;
+    esac
+  done
 
-    ffmpeg_rc="${PIPESTATUS[0]}"
-    printf '\033[4B\r\n'
+  ffmpeg_rc="${PIPESTATUS[0]}"
+  printf '\033[4B\r\n'
 
-    if (( ffmpeg_rc != 0 )); then
-      rm -f -- "$temp"
-      return "$ffmpeg_rc"
-    fi
+  if (( ffmpeg_rc != 0 )); then
+    rm -f -- "$temp"
+    exit "$ffmpeg_rc"
+  fi
 
-    mv -f -- "$temp" "$input"
-   }
+  mv -f -- "$temp" "$input"
+FFMPEG_HELPER_EOF
 
-   export FFMPEG_TEMPLATE
-   export X265_CRF X265_PRESET AUDIO_BITRATE
-   export -f ffmpeg_x265_encode
+  chmod 700 "$FFMPEG_HELPER"
+
+  export FFMPEG_TEMPLATE
+  export X265_CRF X265_PRESET AUDIO_BITRATE
 
 # <── Highest Quality Available ──> #
   OPT_BMKV_CMD=(
@@ -365,11 +384,11 @@
         --merge-output-format mkv
         --remux-video mkv
         --progress-template "$PROGRESS_TEMPLATE"
-        --exec "after_move:bash -c 'ffmpeg_x265_encode \"\$1\"' bash %(filepath)q"
+        --exec "after_move:\"$FFMPEG_HELPER\" %(filepath)q"
         "$URL"
   )
 
-# <── Full Playlist (Highest Quality)──> #
+# <── Full Playlist (Highest Quality) ──> #
   OPT_PLST_CMD=(
     yt-dlp
       -f "bv*+ba/b"
@@ -633,7 +652,7 @@
     printf "    ${VBLU}└───────────────────────────────────────────────────────────────┘\n\n"
 
     printf "           ${VBLU}┌───────────────────────────────────────────────┐\n"
-    printf "   ${BCYN}<${VBLU}───────┤ ${BMGT}[${BCYN}Running${BMGT}]${ACID}: ${NGRN}──${ACID}> ${BMGT}1080p Quality ${BCYN}& ${BMGT}Best Audio     ${VBLU}├───────${BCYN}>${RESET}\n"
+    printf "   ${BCYN}<${VBLU}───────┤ ${BMGT}[${BCYN}Running${BMGT}]${ACID}: ${NGRN}──${ACID}> ${BMGT}1080p Quality ${BCYN}& ${BMGT}Best Audio ${VBLU}├───────${BCYN}>${RESET}\n"
     printf "           ${VBLU}└───────────────────────────────────────────────┘\n"
 
     ${MDLD} > /dev/null 2>&1 || true
