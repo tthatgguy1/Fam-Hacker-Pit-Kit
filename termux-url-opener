@@ -131,10 +131,16 @@
   OPT_BMKV_CMD=(
     yt-dlp
       -f "bv*+ba/b"
+      --replace-in-metadata "uploader" ":\s*" " - "
+      --replace-in-metadata "uploader" "!" ""
       --replace-in-metadata "uploader" "/" "﹨"
       --replace-in-metadata "uploader" "['’‘]" ""
+      --replace-in-metadata "uploader" '\s*\+\s*' ' Plus '
       --replace-in-metadata "title" ":\s*" " - "
+      --replace-in-metadata "title" "!" ""
+      --replace-in-metadata "title" "/" "﹨"
       --replace-in-metadata "title" "['’‘]" ""
+      --replace-in-metadata "title" '\s*\+\s*' ' Plus '
       -o "$VIDEO_OUT/%(uploader)s/%(uploader)s - %(title)s_%(height)sp.%(ext)s"
       --progress
       --quiet
@@ -160,10 +166,16 @@
   OPT_2K_CAP_CMD=(
     yt-dlp
       -f "bv*[height<=1440]+ba/b[height<=1440]"
+      --replace-in-metadata "uploader" ":\s*" " - "
+      --replace-in-metadata "uploader" "!" ""
       --replace-in-metadata "uploader" "/" "﹨"
       --replace-in-metadata "uploader" "['’‘]" ""
+      --replace-in-metadata "uploader" '\s*\+\s*' ' Plus '
       --replace-in-metadata "title" ":\s*" " - "
+      --replace-in-metadata "title" "!" ""
+      --replace-in-metadata "title" "/" "﹨"
       --replace-in-metadata "title" "['’‘]" ""
+      --replace-in-metadata "title" '\s*\+\s*' ' Plus '
       -o "$VIDEO_OUT/%(uploader)s/%(uploader)s - %(title)s_%(height)sp.%(ext)s"
       --progress
       --quiet
@@ -189,10 +201,16 @@
   OPT_1080p_CAP_CMD=(
     yt-dlp
       -f "bv*[height<=1080]+ba/b[height<=1080]"
+      --replace-in-metadata "uploader" ":\s*" " - "
+      --replace-in-metadata "uploader" "!" ""
       --replace-in-metadata "uploader" "/" "﹨"
       --replace-in-metadata "uploader" "['’‘]" ""
+      --replace-in-metadata "uploader" '\s*\+\s*' ' Plus '
       --replace-in-metadata "title" ":\s*" " - "
+      --replace-in-metadata "title" "!" ""
+      --replace-in-metadata "title" "/" "﹨"
       --replace-in-metadata "title" "['’‘]" ""
+      --replace-in-metadata "title" '\s*\+\s*' ' Plus '
       -o "$VIDEO_OUT/%(uploader)s/%(uploader)s - %(title)s_%(height)sp.%(ext)s"
       --progress
       --quiet
@@ -218,12 +236,21 @@
   OPT_PLST_CMD=(
     yt-dlp
       -f "bv*+ba/b"
+      --replace-in-metadata "uploader" ":\s*" " - "
+      --replace-in-metadata "uploader" "!" ""
       --replace-in-metadata "uploader" "/" "﹨"
       --replace-in-metadata "uploader" "['’‘]" ""
+      --replace-in-metadata "uploader" '\s*\+\s*' ' Plus '
+      --replace-in-metadata "title" ":\s*" " - "
+      --replace-in-metadata "title" "!" ""
+      --replace-in-metadata "title" "/" "﹨"
+      --replace-in-metadata "title" "['’‘]" ""
+      --replace-in-metadata "title" '\s*\+\s*' ' Plus '
+      --replace-in-metadata "playlist_title" ":\s*" " - "
+      --replace-in-metadata "playlist_title" "!" ""
       --replace-in-metadata "playlist_title" "/" "﹨"
       --replace-in-metadata "playlist_title" "['’‘]" ""
-      --replace-in-metadata "title" ":\s*" " - "
-      --replace-in-metadata "title" "['’‘]" ""
+      --replace-in-metadata "playlist_title" '\s*\+\s*' ' Plus '
       -o "$VIDEO_OUT/%(uploader)s/%(playlist_title)s/%(uploader)s - %(title)s_%(height)sp.%(ext)s"
       --progress
       --quiet
@@ -249,6 +276,16 @@
     yt-dlp
       -x --audio-format mp3
       -f "ba"
+      --replace-in-metadata "uploader" ":\s*" " - "
+      --replace-in-metadata "uploader" "!" ""
+      --replace-in-metadata "uploader" "/" "﹨"
+      --replace-in-metadata "uploader" "['’‘]" ""
+      --replace-in-metadata "uploader" '\s*\+\s*' ' Plus '
+      --replace-in-metadata "title" ":\s*" " - "
+      --replace-in-metadata "title" "!" ""
+      --replace-in-metadata "title" "/" "﹨"
+      --replace-in-metadata "title" "['’‘]" ""
+      --replace-in-metadata "title" '\s*\+\s*' ' Plus '
       -o "$AUDIO_OUT/%(uploader)s/%(uploader)s - %(title)s.mp3"
       --quiet
       --progress
