@@ -205,7 +205,6 @@
         --merge-output-format mkv
         --remux-video mkv
         --progress-template "$PROGRESS_TEMPLATE"
-        --exec "after_move:\"$FFMPEG_HELPER\" %(filepath)q"
         "$URL"
   )
 
