@@ -40,7 +40,7 @@
 
 # <── Cookies Check ──>
   if [[ ! -f "$COOKIES_FILE" ]]; then
-    printf '%s\n' "Cookies file not found:"
+    printf '%s\n' "${VBLU}Cookies file ${BMGT}not ${VBLU}found${BMGT}:${RESET}"
     printf '%s\n' "$COOKIES_FILE"
     exit 1
   fi
@@ -132,7 +132,9 @@
     yt-dlp
       -f "bv*+ba/b"
       --replace-in-metadata "uploader" "/" "﹨"
+      --replace-in-metadata "uploader" "['’‘]" ""
       --replace-in-metadata "title" ":\s*" " - "
+      --replace-in-metadata "title" "['’‘]" ""
       -o "$VIDEO_OUT/%(uploader)s/%(uploader)s - %(title)s_%(height)sp.%(ext)s"
       --progress
       --quiet
@@ -159,7 +161,9 @@
     yt-dlp
       -f "bv*[height<=1440]+ba/b[height<=1440]"
       --replace-in-metadata "uploader" "/" "﹨"
+      --replace-in-metadata "uploader" "['’‘]" ""
       --replace-in-metadata "title" ":\s*" " - "
+      --replace-in-metadata "title" "['’‘]" ""
       -o "$VIDEO_OUT/%(uploader)s/%(uploader)s - %(title)s_%(height)sp.%(ext)s"
       --progress
       --quiet
@@ -184,28 +188,30 @@
 # <── Cap At 1080p (Full HD) ──> #
   OPT_1080p_CAP_CMD=(
     yt-dlp
-        -f "bv*[height<=1080]+ba/b[height<=1080]"
-        --replace-in-metadata "uploader" "/" "﹨"
-        --replace-in-metadata "title" ":\s*" " - "
-        -o "$VIDEO_OUT/%(uploader)s/%(uploader)s - %(title)s_%(height)sp.%(ext)s"
-        --progress
-        --quiet
-        --no-playlist
-        --cookies "$COOKIES_FILE"
-        --console-title
-        --no-check-formats
-        --no-warnings
-        --ignore-errors
-        --write-subs
-        --embed-subs
-        --sub-format srt
-        --convert-subs srt
-        --embed-thumbnail
-        --embed-chapters
-        --merge-output-format mkv
-        --remux-video mkv
-        --progress-template "$PROGRESS_TEMPLATE"
-        "$URL"
+      -f "bv*[height<=1080]+ba/b[height<=1080]"
+      --replace-in-metadata "uploader" "/" "﹨"
+      --replace-in-metadata "uploader" "['’‘]" ""
+      --replace-in-metadata "title" ":\s*" " - "
+      --replace-in-metadata "title" "['’‘]" ""
+      -o "$VIDEO_OUT/%(uploader)s/%(uploader)s - %(title)s_%(height)sp.%(ext)s"
+      --progress
+      --quiet
+      --no-playlist
+      --cookies "$COOKIES_FILE"
+      --console-title
+      --no-check-formats
+      --no-warnings
+      --ignore-errors
+      --write-subs
+      --embed-subs
+      --sub-format srt
+      --convert-subs srt
+      --embed-thumbnail
+      --embed-chapters
+      --merge-output-format mkv
+      --remux-video mkv
+      --progress-template "$PROGRESS_TEMPLATE"
+      "$URL"
   )
 
 # <── Full Playlist (Highest Quality) ──> #
@@ -213,8 +219,11 @@
     yt-dlp
       -f "bv*+ba/b"
       --replace-in-metadata "uploader" "/" "﹨"
+      --replace-in-metadata "uploader" "['’‘]" ""
       --replace-in-metadata "playlist_title" "/" "﹨"
+      --replace-in-metadata "playlist_title" "['’‘]" ""
       --replace-in-metadata "title" ":\s*" " - "
+      --replace-in-metadata "title" "['’‘]" ""
       -o "$VIDEO_OUT/%(uploader)s/%(playlist_title)s/%(uploader)s - %(title)s_%(height)sp.%(ext)s"
       --progress
       --quiet
@@ -366,6 +375,9 @@
     rc=0
     "${OPT_BMKV_CMD[@]}" 2>>"$LOG_FILE" || rc=$?
 
+  # <── Move Curser Below Progress Template ──> #
+    printf '\033[4B\r\n'
+
     if [ "$rc" -eq 0 ]; then
       ${DLCOMPLT} > /dev/null 2>&1 || true
       ${ECHOSOUND} > /dev/null 2>&1 || true
@@ -424,6 +436,9 @@
     rc=0
     "${OPT_2K_CAP_CMD[@]}" 2>>"$LOG_FILE" || rc=$?
 
+  # <── Move Curser Below Progress Template ──> #
+    printf '\033[4B\r\n'
+
     if [ "$rc" -eq 0 ]; then
       ${DLCOMPLT} > /dev/null 2>&1 || true
       ${ECHOSOUND} > /dev/null 2>&1 || true
@@ -480,6 +495,9 @@
 
     rc=0
     "${OPT_1080p_CAP_CMD[@]}" 2>>"$LOG_FILE" || rc=$?
+
+  # <── Move Curser Below Progress Template ──> #
+    printf '\033[4B\r\n'
 
     if [ "$rc" -eq 0 ]; then
       ${DLCOMPLT} > /dev/null 2>&1 || true
@@ -538,6 +556,9 @@
     rc=0
     "${OPT_PLST_CMD[@]}" 2>>"$LOG_FILE" || rc=$?
 
+  # <── Move Curser Below Progress Template ──> #
+    printf '\033[4B\r\n'
+
     if [ "$rc" -eq 0 ]; then
       ${DLCOMPLT} > /dev/null 2>&1 || true
       ${ECHOSOUND} > /dev/null 2>&1 || true
@@ -592,6 +613,9 @@
 
     rc=0
     "${OPT_BMP3_CMD[@]}" 2>>"$LOG_FILE" || rc=$?
+
+  # <── Move Curser Below Progress Template ──> #
+    printf '\033[4B\r\n'
 
     if [ "$rc" -eq 0 ]; then
       ${DLCOMPLT} > /dev/null 2>&1 || true
