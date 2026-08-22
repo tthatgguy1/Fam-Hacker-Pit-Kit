@@ -246,6 +246,16 @@ alias cprop="nano ~/.termux/colors.properties"
 
 printf "\n\n\n\n"
 
+cowsay -f cheese 'Welcome to Termux' | lolcat
+toilet -f small 'Get Fucked' -F border -F metal
+sleep 3.0
+PS1='\033[1;35m╔═╣\033[0m\033[1;33m\d\033[0m\033[1;35m╠══╣\033[0m\033[1;34mFam\033[0m\033[1;32m-\033[0m\033[1;34mHacker\033[0m\033[1;35m╠══╣\033[0m\033[1;32m\T\033[0m\033[1;35m╠══\033[0m\033[1;36m⦃\033[0m\033[1;32m\w\033[0m\033[1;36m⦄\033[0m
+\033[1;35m╟─────────────\033[0m\033[1;36m⦓\033[0m\#\033[1;36m⦔\033[0m
+\033[1;35m╚═\033[0m\033[1;36m{\033[0m👽\033[1;36m}\033[0m\033[1;35m═≽\033[0m\033[1;36m'
+clear
+
+printf "\n\n\n\n"
+
 echo '
                                 ┳
             ──▄────▄▄▄▄▄▄▄────▄─┃
@@ -257,7 +267,7 @@ echo '
                                 ┃
                                 ┃
                                 ┃
-                                ┻' | lolcat -a
+                                ┻' | lolcat \-a
 
 printf "\n\n\n\n"
 
