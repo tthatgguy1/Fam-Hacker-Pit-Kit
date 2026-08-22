@@ -132,11 +132,13 @@
     yt-dlp
       -f "bv*+ba/b"
       --replace-in-metadata "uploader" ":\s*" " - "
+      --replace-in-metadata "uploader" '[,"“”]' ''
       --replace-in-metadata "uploader" "!" ""
       --replace-in-metadata "uploader" "/" "﹨"
       --replace-in-metadata "uploader" "['’‘]" ""
       --replace-in-metadata "uploader" '\s*\+\s*' ' Plus '
       --replace-in-metadata "title" ":\s*" " - "
+      --replace-in-metadata "title" '[,"“”]' ''
       --replace-in-metadata "title" "!" ""
       --replace-in-metadata "title" "/" "﹨"
       --replace-in-metadata "title" "['’‘]" ""
@@ -167,11 +169,13 @@
     yt-dlp
       -f "bv*[height<=1440]+ba/b[height<=1440]"
       --replace-in-metadata "uploader" ":\s*" " - "
+      --replace-in-metadata "uploader" '[,"“”]' ''
       --replace-in-metadata "uploader" "!" ""
       --replace-in-metadata "uploader" "/" "﹨"
       --replace-in-metadata "uploader" "['’‘]" ""
       --replace-in-metadata "uploader" '\s*\+\s*' ' Plus '
       --replace-in-metadata "title" ":\s*" " - "
+      --replace-in-metadata "title" '[,"“”]' ''
       --replace-in-metadata "title" "!" ""
       --replace-in-metadata "title" "/" "﹨"
       --replace-in-metadata "title" "['’‘]" ""
@@ -202,11 +206,13 @@
     yt-dlp
       -f "bv*[height<=1080]+ba/b[height<=1080]"
       --replace-in-metadata "uploader" ":\s*" " - "
+      --replace-in-metadata "uploader" '[,"“”]' ''
       --replace-in-metadata "uploader" "!" ""
       --replace-in-metadata "uploader" "/" "﹨"
       --replace-in-metadata "uploader" "['’‘]" ""
       --replace-in-metadata "uploader" '\s*\+\s*' ' Plus '
       --replace-in-metadata "title" ":\s*" " - "
+      --replace-in-metadata "title" '[,"“”]' ''
       --replace-in-metadata "title" "!" ""
       --replace-in-metadata "title" "/" "﹨"
       --replace-in-metadata "title" "['’‘]" ""
@@ -237,16 +243,19 @@
     yt-dlp
       -f "bv*+ba/b"
       --replace-in-metadata "uploader" ":\s*" " - "
+      --replace-in-metadata "uploader" '[,"“”]' ''
       --replace-in-metadata "uploader" "!" ""
       --replace-in-metadata "uploader" "/" "﹨"
       --replace-in-metadata "uploader" "['’‘]" ""
       --replace-in-metadata "uploader" '\s*\+\s*' ' Plus '
       --replace-in-metadata "title" ":\s*" " - "
+      --replace-in-metadata "title" '[,"“”]' ''
       --replace-in-metadata "title" "!" ""
       --replace-in-metadata "title" "/" "﹨"
       --replace-in-metadata "title" "['’‘]" ""
       --replace-in-metadata "title" '\s*\+\s*' ' Plus '
       --replace-in-metadata "playlist_title" ":\s*" " - "
+      --replace-in-metadata "playlist_title" '[,"“”]' ''
       --replace-in-metadata "playlist_title" "!" ""
       --replace-in-metadata "playlist_title" "/" "﹨"
       --replace-in-metadata "playlist_title" "['’‘]" ""
@@ -277,11 +286,13 @@
       -x --audio-format mp3
       -f "ba"
       --replace-in-metadata "uploader" ":\s*" " - "
+      --replace-in-metadata "uploader" '[,"“”]' ''
       --replace-in-metadata "uploader" "!" ""
       --replace-in-metadata "uploader" "/" "﹨"
       --replace-in-metadata "uploader" "['’‘]" ""
       --replace-in-metadata "uploader" '\s*\+\s*' ' Plus '
       --replace-in-metadata "title" ":\s*" " - "
+      --replace-in-metadata "title" '[,"“”]' ''
       --replace-in-metadata "title" "!" ""
       --replace-in-metadata "title" "/" "﹨"
       --replace-in-metadata "title" "['’‘]" ""
