@@ -45,6 +45,31 @@
     exit 1
   fi
 
+# <── Center Cowsay In Terminal ──> #
+  center_cowsay() {
+    local message="$1"
+    local cow_output
+    local term_width
+    local cow_width
+    local padding
+
+    cow_output="$(cowsay -r "$message")"
+    term_width="$(tput cols)"
+
+    cow_width="$(
+      printf '%s\n' "$cow_output" |
+      awk '{ if (length > max) max = length } END { print max }'
+    )"
+
+    padding=$(( (term_width - cow_width) / 2 ))
+    (( padding < 0 )) && padding=0
+
+    printf '%s\n' "$cow_output" |
+    while IFS= read -r line; do
+      printf '%*s%s\n' "$padding" '' "$line"
+    done
+  }
+
 # <── Make Necessary Paths ──> #
   mkdir -p "$VIDEO_OUT" "$LOG_DIR"
   mkdir -p "$AUDIO_OUT" "$LOG_DIR"
@@ -381,13 +406,15 @@
     if [ "$rc" -eq 0 ]; then
       ${DLCOMPLT} > /dev/null 2>&1 || true
       ${ECHOSOUND} > /dev/null 2>&1 || true
-      cowsay -r "Your MKV File Has Downloaded Successfully" | lolcat
+      center_cowsay -r "Your MKV File Has Downloaded Successfully" | lolcat --seed 75
       ${TXS} > /dev/null 2>&1 || true
-      sleep 2.0
+      printf "${VBLU}┌──${BCYN}Press${VBLU}─${BCYN}Any${VBLU}─${BCYN}Button${VBLU}─${BCYN}To${VBLU}─${BCYN}Move${VBLU}─${BCYN}On${VBLU}──┐${RESET}\n"
+      printf "${VBLU}└──${BCYN}>${BMGT}:${ACID}"
+      read -r -n1 -t3 || true
       clear
     else
       ${DEATH} > /dev/null 2>&1 || true
-      printf "Your MKV file has failed to download!\n\n"
+      center_cowsay -r "Your MKV file has failed to download!" | lolcat --seed 75
       printf "${VBLU}┌──${BCYN}Press${VBLU}─${BCYN}Any${VBLU}─${BCYN}Button${VBLU}─${BCYN}To${VBLU}─${BCYN}Move${VBLU}─${BCYN}On${VBLU}──┐${RESET}\n"
       printf "${VBLU}└──${BCYN}>${BMGT}:${ACID}"
       read -r -n1 -t3 || true
@@ -442,13 +469,15 @@
     if [ "$rc" -eq 0 ]; then
       ${DLCOMPLT} > /dev/null 2>&1 || true
       ${ECHOSOUND} > /dev/null 2>&1 || true
-      cowsay -r "Your MKV File Has Downloaded Successfully" | lolcat
+      center_cowsay -r "Your MKV File Has Downloaded Successfully" | lolcat --seed 75
       ${TXS} > /dev/null 2>&1 || true
-      sleep 2.0
+      printf "${VBLU}┌──${BCYN}Press${VBLU}─${BCYN}Any${VBLU}─${BCYN}Button${VBLU}─${BCYN}To${VBLU}─${BCYN}Move${VBLU}─${BCYN}On${VBLU}──┐${RESET}\n"
+      printf "${VBLU}└──${BCYN}>${BMGT}:${ACID}"
+      read -r -n1 -t3 || true
       clear
     else
       ${DEATH} > /dev/null 2>&1 || true
-      printf "Your MKV file has failed to download!\n\n"
+      center_cowsay -r "Your MKV file has failed to download!" | lolcat --seed 75
       printf "${VBLU}┌──${BCYN}Press${VBLU}─${BCYN}Any${VBLU}─${BCYN}Button${VBLU}─${BCYN}To${VBLU}─${BCYN}Move${VBLU}─${BCYN}On${VBLU}──┐${RESET}\n"
       printf "${VBLU}└──${BCYN}>${BMGT}:${ACID}"
       read -r -n1 -t3 || true
@@ -502,13 +531,15 @@
     if [ "$rc" -eq 0 ]; then
       ${DLCOMPLT} > /dev/null 2>&1 || true
       ${ECHOSOUND} > /dev/null 2>&1 || true
-      cowsay -r "Your MKV File Has Downloaded Successfully" | lolcat
+      center_cowsay -r "Your MKV File Has Downloaded Successfully" | lolcat --seed 75
       ${TXS} > /dev/null 2>&1 || true
-      sleep 2.0
+      printf "${VBLU}┌──${BCYN}Press${VBLU}─${BCYN}Any${VBLU}─${BCYN}Button${VBLU}─${BCYN}To${VBLU}─${BCYN}Move${VBLU}─${BCYN}On${VBLU}──┐${RESET}\n"
+      printf "${VBLU}└──${BCYN}>${BMGT}:${ACID}"
+      read -r -n1 -t3 || true
       clear
     else
       ${DEATH} > /dev/null 2>&1 || true
-      printf "Your MKV file has failed to download!\n\n"
+      center_cowsay -r "Your MKV file has failed to download!" | lolcat --seed 75
       printf "${VBLU}┌──${BCYN}Press${VBLU}─${BCYN}Any${VBLU}─${BCYN}Button${VBLU}─${BCYN}To${VBLU}─${BCYN}Move${VBLU}─${BCYN}On${VBLU}──┐${RESET}\n"
       printf "${VBLU}└──${BCYN}>${BMGT}:${ACID}"
       read -r -n1 -t3 || true
@@ -562,13 +593,15 @@
     if [ "$rc" -eq 0 ]; then
       ${DLCOMPLT} > /dev/null 2>&1 || true
       ${ECHOSOUND} > /dev/null 2>&1 || true
-      cowsay -r "Your MKV file Playlist Has Downloaded Successfully" | lolcat
+      center_cowsay -r "Your MKV File Playlist Has Downloaded Successfully" | lolcat --seed 75
       ${TXS} > /dev/null 2>&1 || true
-      sleep 2.0
+      printf "${VBLU}┌──${BCYN}Press${VBLU}─${BCYN}Any${VBLU}─${BCYN}Button${VBLU}─${BCYN}To${VBLU}─${BCYN}Move${VBLU}─${BCYN}On${VBLU}──┐${RESET}\n"
+      printf "${VBLU}└──${BCYN}>${BMGT}:${ACID}"
+      read -r -n1 -t3 || true
       clear
     else
       ${DEATH} > /dev/null 2>&1 || true
-      printf "Your MKV file Playlist has failed to download!\n\n"
+      center_cowsay -r "Your MKV file Playlist has failed to download!" | lolcat --seed 75
       printf "${VBLU}┌──${BCYN}Press${VBLU}─${BCYN}Any${VBLU}─${BCYN}Button${VBLU}─${BCYN}To${VBLU}─${BCYN}Move${VBLU}─${BCYN}On${VBLU}──┐${RESET}\n"
       printf "${VBLU}└──${BCYN}>${BMGT}:${ACID}"
       read -r -n1 -t3 || true
@@ -620,13 +653,15 @@
     if [ "$rc" -eq 0 ]; then
       ${DLCOMPLT} > /dev/null 2>&1 || true
       ${ECHOSOUND} > /dev/null 2>&1 || true
-      cowsay -r "Audio Extration Has Completed Successfully!"
-      sleep 2.0
+      center_cowsay -r "Audio File Has Extracted Successfully" | lolcat --seed 75
       ${TXS} > /dev/null 2>&1 || true
+      printf "${VBLU}┌──${BCYN}Press${VBLU}─${BCYN}Any${VBLU}─${BCYN}Button${VBLU}─${BCYN}To${VBLU}─${BCYN}Move${VBLU}─${BCYN}On${VBLU}──┐${RESET}\n"
+      printf "${VBLU}└──${BCYN}>${BMGT}:${ACID}"
+      read -r -n1 -t3 || true
       clear
     else
       ${DEATH} > /dev/null 2>&1 || true
-      printf "Audio File Extract Has Failed, Please Try Again\n\n"
+      center_cowsay -r "Audio File Extraction Has Failed!" | lolcat --seed 75
       printf "${VBLU}┌──${BCYN}Press${VBLU}─${BCYN}Any${VBLU}─${BCYN}Button${VBLU}─${BCYN}To${VBLU}─${BCYN}Move${VBLU}─${BCYN}On${VBLU}──┐${RESET}\n"
       printf "${VBLU}└──${BCYN}>${BMGT}:${ACID}"
       read -r -n1 -t3 || true
