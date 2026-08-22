@@ -160,7 +160,7 @@
       -f "bv*[height<=1440]+ba/b[height<=1440]"
       --replace-in-metadata "uploader" "/" "﹨"
       --replace-in-metadata "title" ":\s*" " - "
-      -o "$VIDEO_OUT/%(uploader)s/%(uploader)s - %(title)s [%(height)sp].%(ext)s"
+      -o "$VIDEO_OUT/%(uploader)s/%(uploader)s - %(title)s_%(height)sp.%(ext)s"
       --progress
       --quiet
       --no-playlist
@@ -187,7 +187,7 @@
         -f "bv*[height<=1080]+ba/b[height<=1080]"
         --replace-in-metadata "uploader" "/" "﹨"
         --replace-in-metadata "title" ":\s*" " - "
-        -o "$VIDEO_OUT/%(uploader)s/%(uploader)s - %(title)s [%(height)sp].%(ext)s"
+        -o "$VIDEO_OUT/%(uploader)s/%(uploader)s - %(title)s_%(height)sp.%(ext)s"
         --progress
         --quiet
         --no-playlist
@@ -216,7 +216,7 @@
       --replace-in-metadata "uploader" "/" "﹨"
       --replace-in-metadata "playlist_title" "/" "﹨"
       --replace-in-metadata "title" ":\s*" " - "
-      -o "$VIDEO_OUT/%(uploader)s/%(playlist_title)s/%(uploader)s - %(title)s [%(height)sp].%(ext)s"
+      -o "$VIDEO_OUT/%(uploader)s/%(playlist_title)s/%(uploader)s - %(title)s_%(height)sp.%(ext)s"
       --progress
       --quiet
       --yes-playlist
