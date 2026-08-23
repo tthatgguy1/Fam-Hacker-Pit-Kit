@@ -562,6 +562,12 @@
     printf '\033[4B\r\n'
 
     if [ "$rc" -eq 0 ]; then
+      find "$VIDEO_OUT" \
+        -type f \
+        -name '*.srt' \
+        -newer "$SRT_MARKER" \
+        -delete
+      rm -f "$SRT_MARKER"
       ${DLCOMPLT} > /dev/null 2>&1 || true
       ${ECHOSOUND} > /dev/null 2>&1 || true
       cowsay -r "Your MKV File Has Downloaded Successfully" | lolcat --seed 75
@@ -569,10 +575,12 @@
       printf '\n'
       printf "${VBLU}┌──${BCYN}Press${VBLU}─${BCYN}Any${VBLU}─${BCYN}Button${VBLU}─${BCYN}To${VBLU}─${BCYN}Move${VBLU}─${BCYN}On${VBLU}──┐${RESET}\n"
       printf "${VBLU}└──${BCYN}>${BMGT}:${ACID}"
+      read -r -n1 -t3 || true
       clear
     else
+      rm -f "$SRT_MARKER"
       ${DEATH} > /dev/null 2>&1 || true
-      cowsay -r "Your MKV file has failed to download!" | lolcat --seed 75
+      cowsay -r "Your MKV File has failed to download!" | lolcat --seed 75
       printf '\n'
       printf "${VBLU}┌──${BCYN}Press${VBLU}─${BCYN}Any${VBLU}─${BCYN}Button${VBLU}─${BCYN}To${VBLU}─${BCYN}Move${VBLU}─${BCYN}On${VBLU}──┐${RESET}\n"
       printf "${VBLU}└──${BCYN}>${BMGT}:${ACID}"
@@ -626,6 +634,12 @@
     printf '\033[4B\r\n'
 
     if [ "$rc" -eq 0 ]; then
+      find "$VIDEO_OUT" \
+        -type f \
+        -name '*.srt' \
+        -newer "$SRT_MARKER" \
+        -delete
+      rm -f "$SRT_MARKER"
       ${DLCOMPLT} > /dev/null 2>&1 || true
       ${ECHOSOUND} > /dev/null 2>&1 || true
       cowsay -r "Your MKV File Has Downloaded Successfully" | lolcat --seed 75
@@ -633,10 +647,12 @@
       printf '\n'
       printf "${VBLU}┌──${BCYN}Press${VBLU}─${BCYN}Any${VBLU}─${BCYN}Button${VBLU}─${BCYN}To${VBLU}─${BCYN}Move${VBLU}─${BCYN}On${VBLU}──┐${RESET}\n"
       printf "${VBLU}└──${BCYN}>${BMGT}:${ACID}"
+      read -r -n1 -t3 || true
       clear
     else
+      rm -f "$SRT_MARKER"
       ${DEATH} > /dev/null 2>&1 || true
-      cowsay -r "Your MKV file has failed to download!" | lolcat --seed 75
+      cowsay -r "Your MKV File has failed to download!" | lolcat --seed 75
       printf '\n'
       printf "${VBLU}┌──${BCYN}Press${VBLU}─${BCYN}Any${VBLU}─${BCYN}Button${VBLU}─${BCYN}To${VBLU}─${BCYN}Move${VBLU}─${BCYN}On${VBLU}──┐${RESET}\n"
       printf "${VBLU}└──${BCYN}>${BMGT}:${ACID}"
@@ -689,6 +705,12 @@
     printf '\033[4B\r\n'
 
     if [ "$rc" -eq 0 ]; then
+      find "$VIDEO_OUT" \
+        -type f \
+        -name '*.srt' \
+        -newer "$SRT_MARKER" \
+        -delete
+      rm -f "$SRT_MARKER"
       ${DLCOMPLT} > /dev/null 2>&1 || true
       ${ECHOSOUND} > /dev/null 2>&1 || true
       cowsay -r "Your MKV File Has Downloaded Successfully" | lolcat --seed 75
@@ -696,10 +718,12 @@
       printf '\n'
       printf "${VBLU}┌──${BCYN}Press${VBLU}─${BCYN}Any${VBLU}─${BCYN}Button${VBLU}─${BCYN}To${VBLU}─${BCYN}Move${VBLU}─${BCYN}On${VBLU}──┐${RESET}\n"
       printf "${VBLU}└──${BCYN}>${BMGT}:${ACID}"
+      read -r -n1 -t3 || true
       clear
     else
+      rm -f "$SRT_MARKER"
       ${DEATH} > /dev/null 2>&1 || true
-      cowsay -r "Your MKV file has failed to download!" | lolcat --seed 75
+      cowsay -r "Your MKV File has failed to download!" | lolcat --seed 75
       printf '\n'
       printf "${VBLU}┌──${BCYN}Press${VBLU}─${BCYN}Any${VBLU}─${BCYN}Button${VBLU}─${BCYN}To${VBLU}─${BCYN}Move${VBLU}─${BCYN}On${VBLU}──┐${RESET}\n"
       printf "${VBLU}└──${BCYN}>${BMGT}:${ACID}"
@@ -752,6 +776,12 @@
     printf '\033[4B\r\n'
 
     if [ "$rc" -eq 0 ]; then
+      find "$VIDEO_OUT" \
+        -type f \
+        -name '*.srt' \
+        -newer "$SRT_MARKER" \
+        -delete
+      rm -f "$SRT_MARKER"
       ${DLCOMPLT} > /dev/null 2>&1 || true
       ${ECHOSOUND} > /dev/null 2>&1 || true
       cowsay -r "Your MKV Playlist Has Downloaded Successfully" | lolcat --seed 75
@@ -759,8 +789,10 @@
       printf '\n'
       printf "${VBLU}┌──${BCYN}Press${VBLU}─${BCYN}Any${VBLU}─${BCYN}Button${VBLU}─${BCYN}To${VBLU}─${BCYN}Move${VBLU}─${BCYN}On${VBLU}──┐${RESET}\n"
       printf "${VBLU}└──${BCYN}>${BMGT}:${ACID}"
+      read -r -n1 -t3 || true
       clear
     else
+      rm -f "$SRT_MARKER"
       ${DEATH} > /dev/null 2>&1 || true
       cowsay -r "Your MKV Playlist has failed to download!" | lolcat --seed 75
       printf '\n'
@@ -820,6 +852,7 @@
       printf '\n'
       printf "${VBLU}┌──${BCYN}Press${VBLU}─${BCYN}Any${VBLU}─${BCYN}Button${VBLU}─${BCYN}To${VBLU}─${BCYN}Move${VBLU}─${BCYN}On${VBLU}──┐${RESET}\n"
       printf "${VBLU}└──${BCYN}>${BMGT}:${ACID}"
+      read -r -n1 -t3 || true
       clear
     else
       ${DEATH} > /dev/null 2>&1 || true
