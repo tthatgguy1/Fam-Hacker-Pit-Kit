@@ -555,6 +555,9 @@
     ${MDLD} > /dev/null 2>&1 || true
     sleep 1.0
 
+    SRT_MARKER="$(mktemp)"
+    touch "$SRT_MARKER"
+
     rc=0
     "${OPT_BMKV_CMD[@]}" 2>>"$LOG_FILE" || rc=$?
 
@@ -627,6 +630,9 @@
     ${MDLD} > /dev/null 2>&1 || true
     sleep 1.0
 
+    SRT_MARKER="$(mktemp)"
+    touch "$SRT_MARKER"
+
     rc=0
     "${OPT_2K_CAP_CMD[@]}" 2>>"$LOG_FILE" || rc=$?
 
@@ -698,6 +704,9 @@
     ${MDLD} > /dev/null 2>&1 || true
     sleep 1.0
 
+    SRT_MARKER="$(mktemp)"
+    touch "$SRT_MARKER"
+
     rc=0
     "${OPT_1080p_CAP_CMD[@]}" 2>>"$LOG_FILE" || rc=$?
 
@@ -768,6 +777,9 @@
 
     ${MDLD} > /dev/null 2>&1 || true
     sleep 1.0
+
+    SRT_MARKER="$(mktemp)"
+    touch "$SRT_MARKER"
 
     rc=0
     "${OPT_PLST_CMD[@]}" 2>>"$LOG_FILE" || rc=$?
