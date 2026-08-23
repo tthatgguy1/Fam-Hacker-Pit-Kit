@@ -191,7 +191,7 @@
     "$URL"
   )
 
-# <── Cap At 2560p (2K-UHD) ──> #
+# <── Cap At 2560p (2K-QHD) ──> #
   OPT_2K_CAP_CMD=(
     yt-dlp
       -f "bv*[height<=1440]+ba/b[height<=1440]"
