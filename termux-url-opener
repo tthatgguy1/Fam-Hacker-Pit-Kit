@@ -149,7 +149,6 @@
       --replace-in-metadata "uploader" '\s*\+\s*' ' Plus '
       --replace-in-metadata "uploader" '[\U0001F000-\U0001FAFF\u2600-\u27BF\uFE0F]' ''
       --replace-in-metadata "uploader" '\s{2,}' ' '
-      --replace-in-metadata "uploader" '^\s+|\s+$' ''
       --replace-in-metadata "title" '\?' ''
       --replace-in-metadata "title" '\*' ''
       --replace-in-metadata "title" '[<>]' ''
@@ -168,7 +167,6 @@
       --replace-in-metadata "title" '\s*\+\s*' ' Plus '
       --replace-in-metadata "title" '[\U0001F000-\U0001FAFF\u2600-\u27BF\uFE0F]' ''
       --replace-in-metadata "title" '\s{2,}' ' '
-      --replace-in-metadata "title" '^\s+|\s+$' ''
       -o "$VIDEO_OUT/%(uploader)s/%(uploader)s - %(title)s_%(height)sp.%(ext)s"
       --progress
       --quiet
@@ -213,7 +211,6 @@
       --replace-in-metadata "uploader" '\s*\+\s*' ' Plus '
       --replace-in-metadata "uploader" '[\U0001F000-\U0001FAFF\u2600-\u27BF\uFE0F]' ''
       --replace-in-metadata "uploader" '\s{2,}' ' '
-      --replace-in-metadata "uploader" '^\s+|\s+$' ''
       --replace-in-metadata "title" '\?' ''
       --replace-in-metadata "title" '\*' ''
       --replace-in-metadata "title" '[<>]' ''
@@ -232,7 +229,6 @@
       --replace-in-metadata "title" '\s*\+\s*' ' Plus '
       --replace-in-metadata "title" '[\U0001F000-\U0001FAFF\u2600-\u27BF\uFE0F]' ''
       --replace-in-metadata "title" '\s{2,}' ' '
-      --replace-in-metadata "title" '^\s+|\s+$' ''
       -o "$VIDEO_OUT/%(uploader)s/%(uploader)s - %(title)s_%(height)sp.%(ext)s"
       --progress
       --quiet
@@ -277,7 +273,6 @@
       --replace-in-metadata "uploader" '\s*\+\s*' ' Plus '
       --replace-in-metadata "uploader" '[\U0001F000-\U0001FAFF\u2600-\u27BF\uFE0F]' ''
       --replace-in-metadata "uploader" '\s{2,}' ' '
-      --replace-in-metadata "uploader" '^\s+|\s+$' ''
       --replace-in-metadata "title" '\?' ''
       --replace-in-metadata "title" '\*' ''
       --replace-in-metadata "title" '[<>]' ''
@@ -296,7 +291,6 @@
       --replace-in-metadata "title" '\s*\+\s*' ' Plus '
       --replace-in-metadata "title" '[\U0001F000-\U0001FAFF\u2600-\u27BF\uFE0F]' ''
       --replace-in-metadata "title" '\s{2,}' ' '
-      --replace-in-metadata "title" '^\s+|\s+$' ''
       -o "$VIDEO_OUT/%(uploader)s/%(uploader)s - %(title)s_%(height)sp.%(ext)s"
       --progress
       --quiet
@@ -341,7 +335,6 @@
       --replace-in-metadata "uploader" '\s*\+\s*' ' Plus '
       --replace-in-metadata "uploader" '[\U0001F000-\U0001FAFF\u2600-\u27BF\uFE0F]' ''
       --replace-in-metadata "uploader" '\s{2,}' ' '
-      --replace-in-metadata "uploader" '^\s+|\s+$' ''
       --replace-in-metadata "title" '\?' ''
       --replace-in-metadata "title" '\*' ''
       --replace-in-metadata "title" '[<>]' ''
@@ -360,7 +353,6 @@
       --replace-in-metadata "title" '\s*\+\s*' ' Plus '
       --replace-in-metadata "title" '[\U0001F000-\U0001FAFF\u2600-\u27BF\uFE0F]' ''
       --replace-in-metadata "title" '\s{2,}' ' '
-      --replace-in-metadata "title" '^\s+|\s+$' ''
       --replace-in-metadata "playlist_title" '\?' ''
       --replace-in-metadata "playlist_title" '\*' ''
       --replace-in-metadata "playlist_title" '[<>]' ''
@@ -379,7 +371,6 @@
       --replace-in-metadata "playlist_title" '\s*\+\s*' ' Plus '
       --replace-in-metadata "playlist_title" '[\U0001F000-\U0001FAFF\u2600-\u27BF\uFE0F]' ''
       --replace-in-metadata "playlist_title" '\s{2,}' ' '
-      --replace-in-metadata "playlist_title" '^\s+|\s+$' ''
       -o "$VIDEO_OUT/%(uploader)s/%(playlist_title)s/%(uploader)s - %(title)s_%(height)sp.%(ext)s"
       --progress
       --quiet
@@ -424,7 +415,6 @@
       --replace-in-metadata "uploader" '\s*\+\s*' ' Plus '
       --replace-in-metadata "uploader" '[\U0001F000-\U0001FAFF\u2600-\u27BF\uFE0F]' ''
       --replace-in-metadata "uploader" '\s{2,}' ' '
-      --replace-in-metadata "uploader" '^\s+|\s+$' ''
       --replace-in-metadata "title" '\?' ''
       --replace-in-metadata "title" '\*' ''
       --replace-in-metadata "title" '[<>]' ''
@@ -443,7 +433,6 @@
       --replace-in-metadata "title" '\s*\+\s*' ' Plus '
       --replace-in-metadata "title" '[\U0001F000-\U0001FAFF\u2600-\u27BF\uFE0F]' ''
       --replace-in-metadata "title" '\s{2,}' ' '
-      --replace-in-metadata "title" '^\s+|\s+$' ''
       -o "$AUDIO_OUT/%(uploader)s/%(uploader)s - %(title)s.mp3"
       --quiet
       --progress
