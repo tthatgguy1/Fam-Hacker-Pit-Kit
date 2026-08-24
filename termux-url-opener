@@ -818,7 +818,7 @@
   5)
     clear
     OUT_TPL='%(playlist_title,replace="/","﹨")s/%(title)s - %(uploader)s.%(ext)s'
-    LOG_FILE="$LOG_DIR/Best_Audio_Via_Share_$(date +%m-%d-%Y_%H%M).log"
+    LOG_FILE="$LOG_DIR/%(uploader)s - Best Audio_$(date +%m-%d-%Y_%H%M).log"
     echo '
      ─███████╗╔█████╗─███╗───███╗─██╗──██╗╔█████╗─╔██████╗██╗──██╗██████╗─
      ─██╔════╝██╔══██╗████╗─████║─██║──██║██╔══██╗██╔════╝██║─██╔╝██╔══██╗
