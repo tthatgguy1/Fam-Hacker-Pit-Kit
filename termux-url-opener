@@ -521,7 +521,7 @@
   1)
     clear
     OUT_TPL='%(playlist_title,replace="/","﹨")s/%(title)s - %(uploader)s.%(ext)s'
-    LOG_FILE="$LOG_DIR/Best_Quality_Via_Share_$(date +%m-%d-%Y_%H%M).log"
+    LOG_FILE="$LOG_DIR/%(uploader)s - Best Quality_$(date +%m-%d-%Y_%H%M).log"
     echo '
    ─███████╗╔█████╗─███╗───███╗─██╗──██╗╔█████╗─╔██████╗██╗──██╗██████╗─
    ─██╔════╝██╔══██╗████╗─████║─██║──██║██╔══██╗██╔════╝██║─██╔╝██╔══██╗
@@ -595,7 +595,7 @@
   2)
     clear
     OUT_TPL='%(playlist_title,replace="/","﹨")s/%(title)s - %(uploader)s.%(ext)s'
-    LOG_FILE="$LOG_DIR/2K_Quality_Via_Share_$(date +%m-%d-%Y_%H%M).log"
+    LOG_FILE="$LOG_DIR/%(uploader)s - 2K Quality Cap_(date +%m-%d-%Y_%H%M).log"
     echo '
    ─███████╗╔█████╗─███╗───███╗─██╗──██╗╔█████╗─╔██████╗██╗──██╗██████╗─
    ─██╔════╝██╔══██╗████╗─████║─██║──██║██╔══██╗██╔════╝██║─██╔╝██╔══██╗
@@ -670,7 +670,7 @@
   3)
     clear
     OUT_TPL='%(playlist_title,replace="/","﹨")s/%(title)s - %(uploader)s.%(ext)s'
-    LOG_FILE="$LOG_DIR/Best_Quality_Via_Share_$(date +%m-%d-%Y_%H%M).log"
+    LOG_FILE="$LOG_DIR/%(uploader)s - 1080p Cap_$(date +%m-%d-%Y_%H%M).log"
     echo '
    ─███████╗╔█████╗─███╗───███╗─██╗──██╗╔█████╗─╔██████╗██╗──██╗██████╗─
    ─██╔════╝██╔══██╗████╗─████║─██║──██║██╔══██╗██╔════╝██║─██╔╝██╔══██╗
@@ -744,7 +744,7 @@
   4)
     clear
     OUT_TPL='%(playlist_title,replace="/","﹨")s/%(title)s - %(uploader)s.%(ext)s'
-    LOG_FILE="$LOG_PLYLST_DIR/Best_Quality_Via_Share_$(date +%m-%d-%Y_%H%M).log"
+    LOG_FILE="$LOG_PLYLST_DIR/%(playlist_title)s - Best Quality_$(date +%m-%d-%Y_%H%M).log"
     echo '
    ─███████╗╔█████╗─███╗───███╗─██╗──██╗╔█████╗─╔██████╗██╗──██╗██████╗─
    ─██╔════╝██╔══██╗████╗─████║─██║──██║██╔══██╗██╔════╝██║─██╔╝██╔══██╗
