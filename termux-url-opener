@@ -26,6 +26,7 @@
   VIDEO_OUT="$HOME/storage/shared/Fam-Hacker-Pit-Kit/YouTube-Video-Pit"
   AUDIO_OUT="$HOME/storage/shared/Fam-Hacker-Pit-Kit/YouTube-Audio-Pit"
   LOG_DIR="$HOME/storage/shared/Fam-Hacker-Pit-Kit/.cache/YouTube_Single-Downloads"
+  LOG_PLYLST_DIR="$HOME/storage/shared/Fam-Hacker-Pit-Kit/.cache/YouTube_Playlist-Downloads"
   COOKIES_FILE="$HOME/storage/shared/Fam-Hacker-Pit-Kit/.NFS-Data/Cookies/cookies.txt"
 
 # <── Sound Effects Setup ──> #
@@ -47,6 +48,7 @@
 
 # <── Make Necessary Paths ──> #
   mkdir -p "$VIDEO_OUT" "$LOG_DIR"
+  mkdir -p "$VIDEO_OUT" "$LOG_PLYLST_DIR"
   mkdir -p "$AUDIO_OUT" "$LOG_DIR"
   clear
 
@@ -742,7 +744,7 @@
   4)
     clear
     OUT_TPL='%(playlist_title,replace="/","﹨")s/%(title)s - %(uploader)s.%(ext)s'
-    LOG_FILE="$LOG_DIR/Best_Quality_Via_Share_$(date +%m-%d-%Y_%H%M).log"
+    LOG_FILE="$LOG_PLYLST_DIR/Best_Quality_Via_Share_$(date +%m-%d-%Y_%H%M).log"
     echo '
    ─███████╗╔█████╗─███╗───███╗─██╗──██╗╔█████╗─╔██████╗██╗──██╗██████╗─
    ─██╔════╝██╔══██╗████╗─████║─██║──██║██╔══██╗██╔════╝██║─██╔╝██╔══██╗
